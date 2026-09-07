@@ -1,0 +1,84 @@
+---
+import AppLayout from '../layouts/AppLayout.astro';
+---
+<AppLayout title="Dashboard">
+
+<!-- DASHBOARD -->
+<div class="view active" id="view-dashboard">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon blue"><i class="fas fa-bus"></i></div></div><div class="stat-value" id="statBuses">5</div><div class="stat-label">Autobusos actius</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon green"><i class="fas fa-route"></i></div></div><div class="stat-value" id="statRoutes">5</div><div class="stat-label">Rutes operatives</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon orange"><i class="fas fa-users"></i></div></div><div class="stat-value">1.284</div><div class="stat-label">Passatgers avui</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon red"><i class="fas fa-exclamation-triangle"></i></div></div><div class="stat-value" id="statAlerts">4</div><div class="stat-label">Alertes actives</div></div>
+  </div>
+  <div class="dashboard-grid">
+    <div class="panel"><div class="panel-header"><h3><i class="fas fa-map-marked-alt" style="color:var(--primary);margin-right:8px"></i>Mapa en viu</h3><button class="btn btn-secondary btn-sm" onclick="switchView('map')">Obrir mapa <i class="fas fa-external-link-alt"></i></button></div><div style="height:360px;position:relative"><div id="dashboardMap" style="width:100%;height:100%"></div></div></div>
+    <div class="panel"><div class="panel-header"><h3><i class="fas fa-clock" style="color:var(--warning);margin-right:8px"></i>Pròximes sortides</h3></div><div class="panel-body" id="upcomingDepartures"></div></div>
+  </div>
+  <div class="panel" style="margin-top:20px"><div class="panel-header"><h3><i class="fas fa-bell" style="color:var(--danger);margin-right:8px"></i>Últimes notificacions</h3><button class="btn btn-secondary btn-sm" onclick="switchView('notifications')">Veure totes</button></div><div class="panel-body"><div class="notif-list" id="dashboardNotifs"></div></div></div>
+</div>
+
+<!-- RUTES -->
+<div class="view" id="view-routes">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary" onclick="openModal('route')"><i class="fas fa-plus"></i> Nova ruta</button></div></div>
+  <div class="panel"><div class="table-container"><table><thead><tr><th>Codi</th><th>Nom</th><th>Conductor</th><th>Estat</th><th>Accions</th></tr></thead><tbody id="routesTable"></tbody></table></div></div>
+</div>
+
+<!-- BUSES -->
+<div class="view" id="view-buses">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary" onclick="openModal('bus')"><i class="fas fa-plus"></i> Nou autobús</button></div></div>
+  <div class="panel"><div class="table-container"><table><thead><tr><th>Número</th><th>Ruta</th><th>Conductor</th><th>Capacitat</th><th>Estat</th><th>Accions</th></tr></thead><tbody id="busesTable"></tbody></table></div></div>
+</div>
+
+<!-- MAPA -->
+<div class="view" id="view-map">
+  <div class="map-container" style="position:relative">
+    <div id="map"></div>
+    <div class="gps-live"><span class="sync-dot"></span><span>GPS en viu · <span id="activeBusesCount">5</span> autobusos</span></div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-color" style="background:#0066cc"></div> Ruta activa</div>
+      <div class="legend-item"><div class="legend-color" style="background:#ff9500"></div> Amb retard</div>
+      <div class="legend-item"><div class="legend-color" style="background:#ff3b30"></div> Aturat</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICACIONS -->
+<div class="view" id="view-notifications">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nova notificació</button></div></div>
+  <div class="notif-list" id="notificationsList"></div>
+</div>
+
+<!-- REPORTES -->
+<div class="view" id="view-reports">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon blue"><i class="fas fa-users"></i></div></div><div class="stat-value">12.847</div><div class="stat-label">Passatgers aquest mes</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div></div><div class="stat-value">94.2%</div><div class="stat-label">Puntualitat</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon orange"><i class="fas fa-road"></i></div></div><div class="stat-value">48.520</div><div class="stat-label">Km recorreguts</div></div>
+    <div class="stat-card"><div class="stat-header"><div class="stat-icon red"><i class="fas fa-gas-pump"></i></div></div><div class="stat-value">3.240 L</div><div class="stat-label">Consum combustible</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-container"><h4><i class="fas fa-chart-bar" style="color:var(--primary);margin-right:8px"></i>Passatgers per ruta</h4><div class="bar-chart" id="passengersChart"></div></div>
+    <div class="chart-container"><h4><i class="fas fa-chart-line" style="color:var(--success);margin-right:8px"></i>Ocupació per ruta</h4><div class="progress-list" id="occupancyChart"></div></div>
+  </div>
+</div>
+
+<!-- PARADES -->
+<div class="view" id="view-stops">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nova parada</button></div></div>
+  <div class="panel"><div class="table-container"><table><thead><tr><th>Nom</th><th>Adreça</th><th>Rutes</th><th>Accions</th></tr></thead><tbody id="stopsTable"></tbody></table></div></div>
+</div>
+
+<!-- HORARIS -->
+<div class="view" id="view-schedules">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nou horari</button></div></div>
+  <div class="panel"><div class="table-container"><table><thead><tr><th>Ruta</th><th>H. sortida</th><th>H. arribada</th><th>Freqüència</th><th>Dies</th><th>Accions</th></tr></thead><tbody id="schedulesTable"></tbody></table></div></div>
+</div>
+
+<!-- CONDUCTORS -->
+<div class="view" id="view-drivers">
+  <div class="toolbar"><div class="toolbar-left"><button class="btn btn-primary"><i class="fas fa-plus"></i> Nou conductor</button></div></div>
+  <div class="panel"><div class="table-container"><table><thead><tr><th>Nom</th><th>Telèfon</th><th>Llicència</th><th>Bus</th><th>Estat</th><th>Accions</th></tr></thead><tbody id="driversTable"></tbody></table></div></div>
+</div>
+
+</AppLayout>

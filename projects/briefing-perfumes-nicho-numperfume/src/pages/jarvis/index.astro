@@ -1,0 +1,54 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="NUM Jarvis" active="jarvis">
+<h1>Módulo: Asistente IA 24/7 — "NUM Jarvis"</h1>
+
+<h2>Arquitectura</h2>
+<pre><code>Frontend (Widget)
+  ↓ API REST / WebSocket
+Backend (Node.js)
+  ↓ Filtrado + Contexto
+OpenAI API (GPT-4o-mini)
+  ↓
+Base de datos de productos (SQLite/PostgreSQL)</code></pre>
+
+<h2>Stack Recomendado</h2>
+<table>
+  <tr><th>Componente</th><th>Tecnología</th><th>Justificación</th></tr>
+  <tr><td>Backend</td><td>Node.js + Express</td><td>Ligero, rápido de desplegar</td></tr>
+  <tr><td>LLM</td><td>OpenAI GPT-4o-mini</td><td>$0.15/1M tokens input</td></tr>
+  <tr><td>Vector DB</td><td>Qdrant Cloud (free tier)</td><td>Búsqueda semántica de productos</td></tr>
+  <tr><td>Hosting</td><td>Railway / Render</td><td>~$5/mes, escalable</td></tr>
+</table>
+
+<h2>System Prompt</h2>
+<pre><code>Eres NUM Assistant, el asesor experto de NUM Perfume.
+Tu misión: ayudar a clientes a encontrar su fragancia ideal 24/7.
+
+Reglas:
+- Responde en español, tono cercano pero profesional
+- Máximo 3 frases por respuesta
+- Si no sabes algo, di "Déjame consultarlo con el equipo"
+- NUNCA inventes productos, precios o stock
+- Siempre sugiere el Discovery Set (29€) si el cliente duda</code></pre>
+
+<h2>Costos Estimados (Mensuales)</h2>
+<table>
+  <tr><th>Concepto</th><th>Costo</th><th>Notas</th></tr>
+  <tr><td>OpenAI (GPT-4o-mini)</td><td>~$15-30</td><td>~1000 conversaciones/día</td></tr>
+  <tr><td>Qdrant Cloud</td><td>$0</td><td>Free tier: 1GB</td></tr>
+  <tr><td>Hosting (Railway)</td><td>$5</td><td>Backend</td></tr>
+  <tr><td><strong>Total</strong></td><td><strong>~$20-35/mes</strong></td><td>Escala con tráfico</td></tr>
+</table>
+
+<h2>Métricas de Éxito (3 meses)</h2>
+<table>
+  <tr><th>KPI</th><th>Objetivo</th></tr>
+  <tr><td>Conversaciones/día</td><td>200+</td></tr>
+  <tr><td>Tasa de resolución (sin humano)</td><td>85%</td></tr>
+  <tr><td>Conversión desde chat</td><td>15%</td></tr>
+  <tr><td>Tiempo medio respuesta</td><td>&lt;3s</td></tr>
+  <tr><td>CSAT (satisfacción)</td><td>&gt;4.5/5</td></tr>
+</table>
+</DocsLayout>

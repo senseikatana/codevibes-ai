@@ -27,9 +27,9 @@ const addToCart = () => {
 
 <template>
   <UContainer v-if="product" class="py-12">
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center">
-        <UIcon name="i-lucide-shopping-bag" class="text-6xl text-gray-600" />
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="aspect-video bg-dark-800 rounded-xl border border-dark-700/50 flex items-center justify-center">
+        <UIcon name="i-lucide-shopping-bag" class="text-6xl text-dark-600" />
       </div>
 
       <div>
@@ -37,21 +37,21 @@ const addToCart = () => {
           {{ product.category }}
         </UBadge>
 
-        <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
+        <h1 class="text-3xl font-bold text-white-50 mb-4">{{ product.name }}</h1>
 
-        <p class="text-gray-300 mb-6">{{ product.description }}</p>
+        <p class="text-white-300 mb-6 leading-relaxed">{{ product.description }}</p>
 
-        <div class="text-4xl font-bold text-primary-400 mb-8">
+        <div class="text-4xl font-bold text-white-50 mb-8">
           ${{ product.price.toFixed(2) }}
         </div>
 
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-3">
           <UButton size="lg" @click="addToCart">
             <UIcon name="i-lucide-shopping-cart" class="mr-2" />
             Add to Cart
           </UButton>
 
-          <UButton size="lg" variant="outline" to="/store">
+          <UButton size="lg" variant="outline" to="/store" class="border-dark-600 text-white-300">
             Back to Store
           </UButton>
         </div>

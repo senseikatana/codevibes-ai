@@ -18,44 +18,56 @@ const handleSubmit = async () => {
 
 <template>
   <UContainer class="py-12">
-    <h1 class="text-3xl font-bold mb-8">Contact</h1>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-white-50 mb-2">Contact</h1>
+      <p class="text-white-400">Have a project in mind? Let's talk.</p>
+    </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <div>
-        <p class="text-gray-300 mb-6">
-          Have a project in mind or want to collaborate? I'd love to hear from you!
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="space-y-8">
+        <p class="text-lg text-white-200 leading-relaxed">
+          Open to freelance work, collaborations, and interesting projects.
+          Drop me a message and I'll get back to you.
         </p>
 
         <div class="space-y-4">
           <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-mail" class="text-primary-400" />
-            <span>sergio@codevibes.dev</span>
+            <div class="w-10 h-10 rounded-lg bg-dark-800 border border-dark-700/50 flex items-center justify-center">
+              <UIcon name="i-lucide-mail" class="text-sky-400" />
+            </div>
+            <span class="text-white-200">sergio@codevibes.dev</span>
           </div>
           <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-map-pin" class="text-primary-400" />
-            <span>Buenos Aires, Argentina</span>
+            <div class="w-10 h-10 rounded-lg bg-dark-800 border border-dark-700/50 flex items-center justify-center">
+              <UIcon name="i-lucide-map-pin" class="text-sky-400" />
+            </div>
+            <span class="text-white-200">Buenos Aires, Argentina</span>
           </div>
         </div>
 
-        <div class="flex gap-4 mt-8">
+        <div class="flex gap-3">
           <UButton
             icon="i-simple-icons-github"
             color="gray"
             variant="outline"
+            size="sm"
             to="https://github.com/senseikatana"
             target="_blank"
+            class="border-dark-600 text-white-300"
           />
           <UButton
             icon="i-simple-icons-linkedin"
             color="gray"
             variant="outline"
+            size="sm"
             to="https://linkedin.com/in/sergioesteban"
             target="_blank"
+            class="border-dark-600 text-white-300"
           />
         </div>
       </div>
 
-      <UCard v-if="!submitted">
+      <UCard v-if="!submitted" class="bg-dark-800/60 border-dark-700/50">
         <UForm :state="form" @submit="handleSubmit">
           <UFormGroup label="Name" name="name" class="mb-4">
             <UInput v-model="form.name" placeholder="Your name" />
@@ -75,10 +87,10 @@ const handleSubmit = async () => {
         </UForm>
       </UCard>
 
-      <UCard v-else class="text-center">
-        <UIcon name="i-lucide-check-circle" class="text-4xl text-green-400 mb-4" />
-        <h3 class="text-xl font-semibold mb-2">Message Sent!</h3>
-        <p class="text-gray-400">I'll get back to you as soon as possible.</p>
+      <UCard v-else class="text-center bg-dark-800/60 border-dark-700/50">
+        <UIcon name="i-lucide-check-circle" class="text-5xl text-emerald-400 mb-4" />
+        <h3 class="text-xl font-semibold text-white-100 mb-2">Message Sent!</h3>
+        <p class="text-white-400">I'll get back to you as soon as possible.</p>
       </UCard>
     </div>
   </UContainer>

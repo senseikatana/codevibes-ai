@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { products, categories } from '~/data/products'
+import { products, categories } from '~~/data/products'
 
 describe('Products Data', () => {
   it('should have products', () => {

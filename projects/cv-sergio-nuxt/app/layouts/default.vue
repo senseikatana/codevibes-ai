@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useCartStore } from '~/stores/cart'
+import { profiles } from '~~/data/profiles'
 
 const cart = useCartStore()
+const resumeSlug = profiles.find(p => p.lang === 'es')?.slug ?? 'fullstack'
 
 const navigation = [
   { label: 'Home', to: '/' },
-  { label: 'Resume', to: '/es/resume/fullstack' },
+  { label: 'Resume', to: `/es/resume/${resumeSlug}` },
   { label: 'Blog', to: '/blog' },
   { label: 'Store', to: '/store' },
   { label: 'Contact', to: '/contact' },
@@ -69,7 +71,7 @@ const socials = [
 
     <UFooter>
       <template #left>
-        <span class="text-sm text-gray-500">
+        <span class="text-sm text-white-500">
           &copy; {{ new Date().getFullYear() }} Sergio Esteban
         </span>
       </template>

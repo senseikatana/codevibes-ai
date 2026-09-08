@@ -11,14 +11,18 @@ const filteredProducts = computed(() => {
 
 <template>
   <UContainer class="py-12">
-    <h1 class="text-3xl font-bold mb-8">Store</h1>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-white-50 mb-2">Store</h1>
+      <p class="text-white-400">Resources, templates, and services</p>
+    </div>
 
-    <div class="flex flex-wrap gap-2 mb-8">
+    <div class="flex flex-wrap gap-2 mb-10">
       <UButton
         v-for="cat in categories"
         :key="cat.id"
         :variant="selectedCategory === cat.id ? 'solid' : 'outline'"
-        color="primary"
+        :color="selectedCategory === cat.id ? 'primary' : 'gray'"
+        size="sm"
         @click="selectedCategory = cat.id"
       >
         {{ cat.label }}
@@ -29,27 +33,27 @@ const filteredProducts = computed(() => {
       <UCard
         v-for="product in filteredProducts"
         :key="product.slug"
-        class="hover:border-primary/50 transition-colors"
+        class="bg-dark-800/60 border-dark-700/50 hover:border-teal-700/40 transition-all duration-300 group"
       >
         <template #header>
-          <div class="aspect-video bg-gray-800 rounded-t-lg flex items-center justify-center">
-            <UIcon name="i-lucide-shopping-bag" class="text-4xl text-gray-600" />
+          <div class="aspect-video bg-dark-900 rounded-t-lg flex items-center justify-center">
+            <UIcon name="i-lucide-shopping-bag" class="text-4xl text-dark-600 group-hover:text-teal-600 transition-colors" />
           </div>
         </template>
 
-        <h2 class="text-xl font-semibold mb-2">
-          <NuxtLink :to="`/store/${product.slug}`" class="hover:text-primary-400">
+        <h2 class="text-xl font-semibold mb-2 text-white-100">
+          <NuxtLink :to="`/store/${product.slug}`" class="hover:text-sky-300 transition-colors">
             {{ product.name }}
           </NuxtLink>
         </h2>
 
-        <p class="text-gray-400 text-sm mb-4 line-clamp-2">{{ product.description }}</p>
+        <p class="text-white-400 text-sm mb-4 line-clamp-2">{{ product.description }}</p>
 
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-bold text-primary-400">
+          <span class="text-2xl font-bold text-white-100">
             ${{ product.price.toFixed(2) }}
           </span>
-          <UBadge v-if="product.featured" color="yellow" variant="soft">
+          <UBadge v-if="product.featured" color="warning" variant="soft">
             Featured
           </UBadge>
         </div>

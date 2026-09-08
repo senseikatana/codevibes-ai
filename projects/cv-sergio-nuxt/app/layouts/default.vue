@@ -4,39 +4,68 @@ import { useCartStore } from '~/stores/cart'
 const cart = useCartStore()
 
 const navigation = [
-  { label: 'Inicio', to: '/' },
-  { label: 'CV', to: '/resume/es/fullstack' },
+  { label: 'Home', to: '/' },
+  { label: 'Resume', to: '/es/resume/fullstack' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Tienda', to: '/store' },
-  { label: 'Contacto', to: '/contact' },
+  { label: 'Store', to: '/store' },
+  { label: 'Contact', to: '/contact' },
+]
+
+const socials = [
+  { icon: 'i-simple-icons-github', to: 'https://github.com/senseikatana', label: 'GitHub' },
+  { icon: 'i-simple-icons-linkedin', to: 'https://linkedin.com/in/sergioesteban', label: 'LinkedIn' },
 ]
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <UHeader :links="navigation">
-      <template #logo>
-        <span class="text-xl font-bold">SE</span>
+    <UHeader>
+      <template #title>
+        <NuxtLink to="/" class="font-bold text-xl tracking-tight">
+          SE
+        </NuxtLink>
       </template>
+
+      <UNavigationMenu :items="navigation" />
 
       <template #right>
         <UButton
           color="gray"
           variant="ghost"
-          icon="i-heroicons-shopping-cart"
+          icon="i-lucide-shopping-cart"
           @click="cart.isOpen = true"
         >
-          <UBadge v-if="cart.totalItems > 0" :label="cart.totalItems" color="primary" size="xs" class="ml-1" />
+          <UBadge
+            v-if="cart.totalItems > 0"
+            :label="cart.totalItems"
+            color="primary"
+            size="xs"
+            class="ml-1"
+          />
         </UButton>
         <UColorModeButton />
+        <UButton
+          v-for="s in socials"
+          :key="s.icon"
+          :icon="s.icon"
+          color="gray"
+          variant="ghost"
+          :to="s.to"
+          target="_blank"
+          :aria-label="s.label"
+        />
+      </template>
+
+      <template #body>
+        <UNavigationMenu :items="navigation" orientation="vertical" />
       </template>
     </UHeader>
 
     <CartSlideover />
 
-    <main class="flex-1">
+    <UMain>
       <slot />
-    </main>
+    </UMain>
 
     <UFooter>
       <template #left>
@@ -46,20 +75,18 @@ const navigation = [
       </template>
 
       <template #right>
-        <UButton
-          icon="i-simple-icons-github"
-          color="gray"
-          variant="ghost"
-          to="https://github.com/senseikatana"
-          target="_blank"
-        />
-        <UButton
-          icon="i-simple-icons-linkedin"
-          color="gray"
-          variant="ghost"
-          to="https://linkedin.com/in/sergioesteban"
-          target="_blank"
-        />
+        <div class="flex gap-2">
+          <UButton
+            v-for="s in socials"
+            :key="s.icon"
+            :icon="s.icon"
+            color="gray"
+            variant="ghost"
+            :to="s.to"
+            target="_blank"
+            :aria-label="s.label"
+          />
+        </div>
       </template>
     </UFooter>
   </div>

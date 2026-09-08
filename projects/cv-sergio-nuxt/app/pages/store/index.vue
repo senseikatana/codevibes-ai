@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products, categories } from '~/data/products'
+import { products, categories } from '~~/data/products'
 
 const selectedCategory = ref('all')
 
@@ -11,7 +11,7 @@ const filteredProducts = computed(() => {
 
 <template>
   <UContainer class="py-12">
-    <h1 class="text-3xl font-bold mb-8">Tienda</h1>
+    <h1 class="text-3xl font-bold mb-8">Store</h1>
 
     <div class="flex flex-wrap gap-2 mb-8">
       <UButton
@@ -28,17 +28,17 @@ const filteredProducts = computed(() => {
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <UCard
         v-for="product in filteredProducts"
-        :key="product.id"
-        class="hover:shadow-lg transition-shadow"
+        :key="product.slug"
+        class="hover:border-primary/50 transition-colors"
       >
         <template #header>
           <div class="aspect-video bg-gray-800 rounded-t-lg flex items-center justify-center">
-            <UIcon name="i-heroicons-shopping-bag" class="text-4xl text-gray-600" />
+            <UIcon name="i-lucide-shopping-bag" class="text-4xl text-gray-600" />
           </div>
         </template>
 
         <h2 class="text-xl font-semibold mb-2">
-          <NuxtLink :to="`/store/${product.id}`" class="hover:text-primary-400">
+          <NuxtLink :to="`/store/${product.slug}`" class="hover:text-primary-400">
             {{ product.name }}
           </NuxtLink>
         </h2>
@@ -50,13 +50,13 @@ const filteredProducts = computed(() => {
             ${{ product.price.toFixed(2) }}
           </span>
           <UBadge v-if="product.featured" color="yellow" variant="soft">
-            Destacado
+            Featured
           </UBadge>
         </div>
 
         <template #footer>
-          <UButton :to="`/store/${product.id}`" block>
-            Ver detalles
+          <UButton :to="`/store/${product.slug}`" block>
+            View Details
           </UButton>
         </template>
       </UCard>

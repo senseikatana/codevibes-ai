@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Product } from '~/data/products'
+import type { Product } from '~~/data/products'
 
 export interface CartItem {
   product: Product
@@ -17,7 +17,7 @@ export const useCartStore = defineStore('cart', () => {
   )
 
   function addItem(product: Product) {
-    const existing = items.value.find(item => item.product.id === product.id)
+    const existing = items.value.find(item => item.product.slug === product.slug)
     if (existing) {
       existing.quantity++
     } else {
@@ -26,15 +26,15 @@ export const useCartStore = defineStore('cart', () => {
     isOpen.value = true
   }
 
-  function removeItem(productId: string) {
-    items.value = items.value.filter(item => item.product.id !== productId)
+  function removeItem(productSlug: string) {
+    items.value = items.value.filter(item => item.product.slug !== productSlug)
   }
 
-  function updateQuantity(productId: string, quantity: number) {
-    const item = items.value.find(item => item.product.id === productId)
+  function updateQuantity(productSlug: string, quantity: number) {
+    const item = items.value.find(item => item.product.slug === productSlug)
     if (item) {
       if (quantity <= 0) {
-        removeItem(productId)
+        removeItem(productSlug)
       } else {
         item.quantity = quantity
       }

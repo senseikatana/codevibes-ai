@@ -8,6 +8,20 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
 
+  css: ['~/assets/css/main.css'],
+
+  ui: {
+    theme: {
+      colors: ['rose', 'teal', 'emerald', 'yellow', 'sky', 'dark', 'white', 'lavender'],
+    },
+  },
+
+  icon: {
+    clientBundle: {
+      scan: true,
+    },
+  },
+
   content: {
     build: {
       markdown: {

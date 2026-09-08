@@ -13,9 +13,17 @@ describe('Products Data', () => {
   it('each product should have required fields', () => {
     products.forEach(product => {
       expect(product.id).toBeDefined()
+      expect(product.slug).toBeDefined()
       expect(product.name).toBeDefined()
       expect(product.price).toBeGreaterThan(0)
       expect(product.stripePriceId).toBeDefined()
+    })
+  })
+
+  it('slugs should be URL-friendly', () => {
+    products.forEach(product => {
+      expect(product.slug).not.toContain(' ')
+      expect(product.slug).toBe(product.slug.toLowerCase())
     })
   })
 })

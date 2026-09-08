@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { products } from '~/data/products'
+import { products } from '~~/data/products'
 import { useCartStore } from '~/stores/cart'
 
 const route = useRoute()
 const cart = useCartStore()
 
-const product = computed(() => products.find(p => p.id === route.params.id))
+const slug = route.params.slug as string
+
+const product = computed(() => products.find(p => p.slug === slug))
 
 if (!product.value) {
-  throw createError({ statusCode: 404, message: 'Producto no encontrado' })
+  throw createError({ statusCode: 404, message: 'Product not found' })
 }
 
 useSeoMeta({
@@ -27,7 +29,7 @@ const addToCart = () => {
   <UContainer v-if="product" class="py-12">
     <div class="grid md:grid-cols-2 gap-8">
       <div class="aspect-video bg-gray-800 rounded-lg flex items-center justify-center">
-        <UIcon name="i-heroicons-shopping-bag" class="text-6xl text-gray-600" />
+        <UIcon name="i-lucide-shopping-bag" class="text-6xl text-gray-600" />
       </div>
 
       <div>
@@ -45,12 +47,12 @@ const addToCart = () => {
 
         <div class="flex gap-4">
           <UButton size="lg" @click="addToCart">
-            <UIcon name="i-heroicons-shopping-cart" class="mr-2" />
-            Agregar al carrito
+            <UIcon name="i-lucide-shopping-cart" class="mr-2" />
+            Add to Cart
           </UButton>
 
           <UButton size="lg" variant="outline" to="/store">
-            Volver a la tienda
+            Back to Store
           </UButton>
         </div>
       </div>

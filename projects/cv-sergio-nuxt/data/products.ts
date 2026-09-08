@@ -1,5 +1,8 @@
+import { useSlugify } from 'katanakit-js'
+
 export interface Product {
   id: string
+  slug: string
   name: string
   description: string
   price: number
@@ -13,6 +16,7 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 'prod-001',
+    slug: useSlugify('Curso Nuxt 4 desde Cero'),
     name: 'Curso Nuxt 4 desde Cero',
     description: 'Aprende Nuxt 4 con las mejores prácticas, Composition API, y deployment en producción. Incluye 40+ horas de contenido.',
     price: 49.99,
@@ -24,6 +28,7 @@ export const products: Product[] = [
   },
   {
     id: 'prod-002',
+    slug: useSlugify('Template SaaS Nuxt'),
     name: 'Template SaaS Nuxt',
     description: 'Starter kit completo para SaaS con autenticación, pagos, dashboard y panel de administración.',
     price: 79.99,
@@ -35,6 +40,7 @@ export const products: Product[] = [
   },
   {
     id: 'prod-003',
+    slug: useSlugify('E-book Arquitectura Limpia'),
     name: 'E-book Arquitectura Limpia',
     description: 'Guía práctica sobre Clean Architecture, Hexagonal Architecture y Domain-Driven Design aplicados a proyectos reales.',
     price: 19.99,
@@ -46,6 +52,7 @@ export const products: Product[] = [
   },
   {
     id: 'prod-004',
+    slug: useSlugify('Componentes UI Premium'),
     name: 'Componentes UI Premium',
     description: 'Librería de 50+ componentes Nuxt UI premium con dark mode, accesibilidad y documentación completa.',
     price: 39.99,
@@ -57,6 +64,7 @@ export const products: Product[] = [
   },
   {
     id: 'prod-005',
+    slug: useSlugify('Mentoría 1:1 (1 hora)'),
     name: 'Mentoría 1:1 (1 hora)',
     description: 'Sesión personalizada de mentoría sobre desarrollo web, arquitectura, o resolución de problemas técnicos.',
     price: 59.99,
@@ -68,6 +76,7 @@ export const products: Product[] = [
   },
   {
     id: 'prod-006',
+    slug: useSlugify('Code Review Profesional'),
     name: 'Code Review Profesional',
     description: 'Revisión detallada de tu código con sugerencias de mejora, mejores prácticas y optimización de rendimiento.',
     price: 29.99,
@@ -80,10 +89,10 @@ export const products: Product[] = [
 ]
 
 export const categories = [
-  { id: 'all', label: 'Todos' },
-  { id: 'cursos', label: 'Cursos' },
+  { id: 'all', label: 'All' },
+  { id: 'cursos', label: 'Courses' },
   { id: 'templates', label: 'Templates' },
   { id: 'ebooks', label: 'E-books' },
-  { id: 'componentes', label: 'Componentes' },
-  { id: 'servicios', label: 'Servicios' },
+  { id: 'componentes', label: 'Components' },
+  { id: 'servicios', label: 'Services' },
 ]

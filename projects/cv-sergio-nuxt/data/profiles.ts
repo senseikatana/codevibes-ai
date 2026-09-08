@@ -1,5 +1,3 @@
-import { useSlugify } from 'katanakit-js'
-
 export interface Experience {
   company: string
   role: string

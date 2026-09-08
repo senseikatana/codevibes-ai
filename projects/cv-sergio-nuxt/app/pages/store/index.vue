@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products, categories } from '~~/data/products'
+import { products, categories, externalPlatformLabel } from '~~/data/products'
 
 const selectedCategory = ref('all')
 
@@ -59,7 +59,16 @@ const filteredProducts = computed(() => {
         </div>
 
         <template #footer>
-          <UButton :to="`/store/${product.slug}`" block>
+          <UButton
+            v-if="product.externalUrl"
+            :to="product.externalUrl"
+            target="_blank"
+            block
+            icon="i-lucide-external-link"
+          >
+            Ver en {{ externalPlatformLabel(product.externalPlatform) }}
+          </UButton>
+          <UButton v-else :to="`/store/${product.slug}`" block>
             View Details
           </UButton>
         </template>

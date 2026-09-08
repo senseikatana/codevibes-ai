@@ -26,4 +26,21 @@ describe('Products Data', () => {
       expect(product.slug).toBe(product.slug.toLowerCase())
     })
   })
+
+  it('external products should have a platform and a valid URL', () => {
+    const external = products.filter(p => p.externalUrl)
+
+    external.forEach(product => {
+      expect(['wallapop', 'vinted']).toContain(product.externalPlatform)
+      expect(product.externalUrl).toMatch(/^https:\/\//)
+    })
+  })
+
+  it('external products should not have a Stripe price ID', () => {
+    const external = products.filter(p => p.externalUrl)
+
+    external.forEach(product => {
+      expect(product.stripePriceId).toBe('')
+    })
+  })
 })

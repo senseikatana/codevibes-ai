@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products } from '~~/data/products'
+import { products, externalPlatformLabel } from '~~/data/products'
 import { useCartStore } from '~/stores/cart'
 
 const route = useRoute()
@@ -46,7 +46,16 @@ const addToCart = () => {
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <UButton size="lg" @click="addToCart">
+          <UButton
+            v-if="product.externalUrl"
+            size="lg"
+            :to="product.externalUrl"
+            target="_blank"
+            icon="i-lucide-external-link"
+          >
+            Comprar en {{ externalPlatformLabel(product.externalPlatform) }}
+          </UButton>
+          <UButton v-else size="lg" @click="addToCart">
             <UIcon name="i-lucide-shopping-cart" class="mr-2" />
             Add to Cart
           </UButton>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { products } from '~~/data/products'
+import { products, externalPlatformLabel } from '~~/data/products'
 import { profiles } from '~~/data/profiles'
 
 const resumeSlug = profiles.find(p => p.lang === 'es')?.slug ?? 'fullstack'
@@ -127,7 +127,19 @@ const featuredProducts = computed(() => products.filter(p => p.featured))
               <span class="text-xl font-bold text-white-100">
                 ${{ product.price.toFixed(2) }}
               </span>
-              <UButton :to="`/store/${product.slug}`" size="sm" color="gray" variant="ghost" class="text-sky-400">
+              <UButton
+                v-if="product.externalUrl"
+                :to="product.externalUrl"
+                target="_blank"
+                size="sm"
+                color="gray"
+                variant="ghost"
+                class="text-sky-400"
+                icon="i-lucide-external-link"
+              >
+                Ver en {{ externalPlatformLabel(product.externalPlatform) }}
+              </UButton>
+              <UButton v-else :to="`/store/${product.slug}`" size="sm" color="gray" variant="ghost" class="text-sky-400">
                 View Details
               </UButton>
             </div>

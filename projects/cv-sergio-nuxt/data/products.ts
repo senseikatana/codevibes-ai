@@ -11,6 +11,9 @@ export interface Product {
   category: string
   stripePriceId: string
   featured: boolean
+  /** Enlace externo de venta (Wallapop, Vinted, etc.). Si está presente, la card enlaza fuera y no usa Stripe. */
+  externalUrl?: string
+  externalPlatform?: 'wallapop' | 'vinted'
 }
 
 export const products: Product[] = [
@@ -86,7 +89,39 @@ export const products: Product[] = [
     stripePriceId: 'price_code_review',
     featured: false,
   },
+  // TODO: reemplazar externalUrl por el enlace real de cada anuncio.
+  {
+    id: 'ext-001',
+    slug: useSlugify('Apple Watch Series 7'),
+    name: 'Apple Watch Series 7',
+    description: 'Reloj usado en excelente estado, poco uso. Venta a través de Wallapop con envío seguro.',
+    price: 199,
+    currency: 'EUR',
+    image: '/images/products/apple-watch.jpg',
+    category: 'segunda-mano',
+    stripePriceId: '',
+    externalUrl: 'https://es.wallapop.com/user/senseikatana',
+    externalPlatform: 'wallapop',
+    featured: false,
+  },
+  {
+    id: 'ext-002',
+    slug: useSlugify('Zapatillas Nike Air Max'),
+    name: 'Zapatillas Nike Air Max',
+    description: 'Zapatillas en muy buen estado, talla 42. Publicadas en Vinted con envío a toda España.',
+    price: 45,
+    currency: 'EUR',
+    image: '/images/products/nike-air-max.jpg',
+    category: 'segunda-mano',
+    stripePriceId: '',
+    externalUrl: 'https://www.vinted.es/member/senseikatana',
+    externalPlatform: 'vinted',
+    featured: false,
+  },
 ]
+
+export const externalPlatformLabel = (platform?: Product['externalPlatform']): string =>
+  platform === 'vinted' ? 'Vinted' : 'Wallapop'
 
 export const categories = [
   { id: 'all', label: 'All' },
@@ -95,4 +130,5 @@ export const categories = [
   { id: 'ebooks', label: 'E-books' },
   { id: 'componentes', label: 'Components' },
   { id: 'servicios', label: 'Services' },
+  { id: 'segunda-mano', label: 'Second Hand' },
 ]

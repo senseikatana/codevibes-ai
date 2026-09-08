@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { profiles } from '~~/data/profiles'
+const resumeSlug = profiles.find(p => p.lang === 'es')?.slug ?? 'fullstack'
+</script>
+
 <template>
   <UContainer class="py-12">
     <div class="mb-10">
@@ -57,8 +62,3 @@
     </div>
   </UContainer>
 </template>
-
-<script setup lang="ts">
-import { profiles } from '~~/data/profiles'
-const resumeSlug = profiles.find(p => p.lang === 'es')?.slug ?? 'fullstack'
-</script>

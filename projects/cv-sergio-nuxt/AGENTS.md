@@ -19,9 +19,25 @@ Portfolio, CV, Blog y Tienda for senseikatana.com (Sergio Esteban).
 ### Data Layer
 
 - Products: `data/products.ts` — keep `id` for Stripe, use `slug` for routes
+- Products can be digital (with `stripePriceId`, sold via Stripe) or external (`externalUrl` + `externalPlatform: 'wallapop' | 'vinted'`, sold off-site). External products must have empty `stripePriceId`
+- Use `externalPlatformLabel(platform)` from `data/products.ts` for the platform display name
 - Profiles: `data/profiles.ts` — flat array with `slug` + `lang` fields
 - Cart: `app/stores/cart.ts` — Pinia store, uses `slug` for all operations
 - Blog: `@nuxt/content` — Markdown files in `content/blog/`
+
+### Stripe
+
+- Checkout (`server/api/checkout.post.ts`): server-side validation only — accepts `priceId` that exist in `data/products.ts` and `quantity` integer 1-10 (`MAX_QUANTITY`). Never trust client-side amounts/prices
+- Webhook (`server/api/webhook.post.ts`): `POST /api/webhook` verifies `stripe-signature` via `stripe.webhooks.constructEvent` on `readRawBody`; handles `checkout.session.completed` and `checkout.session.expired`. Requires `STRIPE_WEBHOOK_SECRET`
+- Seed: `bun run seed:stripe` (idempotent, reuses by `app_id` metadata). `--update` rewrites `stripePriceId` in `data/products.ts`. Ignores external products. Fails with exit 1 if `STRIPE_SECRET_KEY` missing
+
+### Lint
+
+- Flat config in `eslint.config.mjs` (ESLint + typescript-eslint + eslint-plugin-vue)
+- Vue/Nuxt auto-import globals (`ref`, `computed`, `useRoute`, `useAsyncData`, `createError`, `$fetch`, etc.) are set as readonly
+- Ignored: `.nuxt/`, `.output/`, `.data/`, `node_modules/`, `dist/`
+- `vue/multi-word-component-names` is off; TS parser enabled for `.vue` files
+- Run: `bun run lint`
 
 ### CSS / Design Tokens
 

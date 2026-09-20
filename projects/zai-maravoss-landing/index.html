@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARA VOSS — Monograph N°3</title>
+<meta name="description" content="Brand & graphic designer, Oslo. Identity systems, packaging, posters, type design. A print monograph on the web.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F4F0E6'/><circle cx='16' cy='16' r='11' fill='none' stroke='%23EE3A1C' stroke-width='3'/><path d='M6 18q3-4 6 0t6 0 6 0' fill='none' stroke='%2317140E' stroke-width='2.4'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="/styles.css" >
+</head>
+<body data-section="hero">
+
+<canvas id="trail" aria-hidden="true"></canvas>
+<div class="cropmarks" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<header class="masthead">
+  <a class="mh-brand" href="#top">Mara Voss<span class="dot">.</span></a>
+  <span class="mh-mid mono">Monograph N°3 — Selected Work 2016–2025 — Oslo</span>
+  <nav class="mh-nav mono">
+    <a href="#work">Work</a><a href="#type">Type</a><a href="#talks">Talks</a><a href="#contact">Contact</a>
+    <a class="mh-cta" href="mailto:hei@maravoss.no?subject=Commission">Commission ↗</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="top">
+    <div class="hero-head mono">
+      <span>Brand identity · Packaging · Posters · Type design</span>
+      <span>Oslo, Norway — 59.91° N, 10.75° E</span>
+    </div>
+    <h1 class="hero-name" aria-label="Mara Voss">
+      <div class="hline" data-word="MARA">MARA</div>
+      <p class="hero-note">brand &amp; graphic designer — <em>with opinions</em></p>
+      <div class="hline" data-word="VOSS">VOSS</div>
+      <svg class="hero-rosette" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><path id="circ" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
+        <text><textPath href="#circ">MARA VOSS · OSLO · NORWAY · EST. 2016 ·</textPath></text>
+        <circle cx="60" cy="60" r="4" fill="var(--red)"/>
+      </svg>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-blurb mono"><b>Mara Voss</b> draws marks, packs goods, prints posters and cuts type. Since 2016. Loud opinions, set solid, printed on something uncoated. This monograph reads best slowly — the way it was meant to be printed.</p>
+      <nav class="toc" aria-label="Contents">
+        <a href="#work"><span class="t">01</span><span class="l">Selected Work</span><i class="lead"></i><span class="p">p. 005</span></a>
+        <a href="#type"><span class="t">02</span><span class="l">Type Specimens</span><i class="lead"></i><span class="p">p. 015</span></a>
+        <a href="#talks"><span class="t">03</span><span class="l">Lectures &amp; Talks</span><i class="lead"></i><span class="p">p. 019</span></a>
+        <a href="#contact"><span class="t">04</span><span class="l">Contact</span><i class="lead"></i><span class="p">p. 023</span></a>
+      </nav>
+    </div>
+    <p class="hero-cue mono">Turn the page <b>↓</b></p>
+  </section>
+
+  <!-- ================= MARGIN NOTE ================= -->
+  <section class="manifesto" id="manifesto">
+    <p class="mani-line rv">Print is not <em>nostalgia</em><span class="dot">.</span></p>
+    <p class="mani-line rv" style="margin-top:1.1em">It is the sharpest medium we ship — <span class="u">1200&nbsp;dpi of intention</span> — and it still smells like work<span class="dot">.</span></p>
+    <figure class="mani-plate plate rv">
+      <img src="https://picsum.photos/seed/voss-studio/520/380.jpg" alt="Demo plate — studio photograph placeholder" loading="lazy">
+      <figcaption>Plate 00 — the studio, a Tuesday</figcaption>
+    </figure>
+    <p class="mani-src mono rv">— M. Voss, margin note, Easter 2022</p>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section class="work" id="work">
+    <div class="work-sticky">
+
+      <!-- COVER -->
+      <article class="spread spread--cover" data-title="COVER — INDEX">
+        <div class="spread-main">
+          <div class="cover-left">
+            <p class="cover-kick mono">Monograph N°3 — two-colour risograph — 2016–2025</p>
+            <h2 class="disp cover-title">Selected<br>Work<span class="dot">.</span></h2>
+            <p class="cover-note">Four spreads, four ink libraries, one opinionated studio. Scroll — the pages turn themselves.</p>
+          </div>
+          <div class="cover-right">
+            <p class="ci-head mono">Index of spreads</p>
+            <button class="cv-item" data-i="1"><span class="t">01</span><span class="l">Havn — Kulturkai</span><span class="p">p. 007</span></button>
+            <button class="cv-item" data-i="2"><span class="t">02</span><span class="l">Brenna Kaffe</span><span class="p">p. 009</span></button>
+            <button class="cv-item" data-i="3"><span class="t">03</span><span class="l">Oslo Jazzfestival</span><span class="p">p. 011</span></button>
+            <button class="cv-item" data-i="4"><span class="t">04</span><span class="l">Grotesk Nor</span><span class="p">p. 013</span></button>
+            <div class="stamp mono">Two-colour riso<br>PMS Warm Red + 2728 U<br>Approved — M.V.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 01 HAVN -->
+      <article class="spread" id="sp-havn" data-title="HAVN — IDENTITY"
+        data-palette='[{"n":"Fjord","c":"PMS 5463 U","h":"#1F3A3D"},{"n":"Signal","c":"PMS WARM RED U","h":"#EE3A1C"},{"n":"Betong","c":"PMS W.GRAY 4 U","h":"#B9B3A4"},{"n":"Natt","c":"PMS 5395 U","h":"#101D2C"},{"n":"Papir","c":"MUNKEN POLAR","h":"#F4F0E6"}]'>
+        <span class="spread-num" aria-hidden="true">01</span>
+        <div class="spread-main">
+          <div class="spread-visual">
+            <div class="visual-stack">
+              <svg class="mk-svg" viewBox="0 0 420 420" aria-label="Havn mark construction drawing">
+                <g class="mk-guides" stroke="var(--ink)" fill="none">
+                  <line x1="210" y1="20" x2="210" y2="400" stroke-dasharray="3 6" stroke-width="1"/>
+                  <line x1="30" y1="250" x2="390" y2="250" stroke-dasharray="3 6" stroke-width="1"/>
+                  <line x1="40" y1="380" x2="380" y2="120" stroke-dasharray="3 6" stroke-width="1"/>
+                  <circle cx="210" cy="250" r="140" stroke-dasharray="2 7" stroke-width="1"/>
+                </g>
+                <circle class="mk-ring" cx="210" cy="250" r="140" pathLength="1"/>
+                <path class="mk-wave" d="M70 250 Q 122 208 175 250 T 280 250 T 385 250" pathLength="1"/>
+                <g class="mk-sun"><path d="M150 250 A60 60 0 0 1 270 250 Z" fill="var(--red)"/></g>
+                <circle class="mk-dot" cx="210" cy="78" r="5"/>
+                <text class="mk-lab" x="352" y="136">R 140</text>
+                <text class="mk-lab" x="218" y="34">0°</text>
+                <text class="mk-lab" x="330" y="372">45°</text>
+              </svg>
+              <figure class="plate havn-plate">
+                <img src="https://picsum.photos/seed/havn-quay/640/440.jpg" alt="Demo plate — signage photograph placeholder" loading="lazy">
+                <figcaption>Plate 01 — signage, Kai 12</figcaption>
+              </figure>
+            </div>
+            <p class="fig mono">Fig. 01 — mark construction, compass &amp; rule, scale 1:1</p>
+          </div>
+          <div class="gutter" aria-hidden="true"><i class="gd gd-t"></i><span class="gtext">Havn — identity system — 2023</span><i class="gd gd-b"></i></div>
+          <div class="spread-copy">
+            <header class="sp-kicker mono"><span class="no">N°01</span><span>Identity / logo system</span><span>Havn Kulturkai</span><span>2023</span></header>
+            <h3 class="sp-head disp">A mark that takes the tide seriously<span class="dot">.</span></h3>
+            <div class="sp-body">
+              <p>Havn is eleven hectares of working harbour turned cultural quarter, and for thirty years it answered the city with seagull clip-art. The new mark is drawn with a compass and defended with coordinates: one circle for the basin, one wave for the waterline, one disc for the low northern sun. The construction sheet above is not decoration — it is the actual drawing the sign painters work from.</p>
+              <p>The system flexes across nineteen lockups, from a five-metre gate to a twelve-millimetre stamp, without redrawing a single curve. A logo should behave like tide: same water, different level. Eighteen months in, the harbour master still calls it “the stamp.” We have decided to take that as praise.</p>
+            </div>
+            <blockquote class="pull">“An identity is not a sticker. It is a set of promises about behaviour — kept at every scale, from flag to stamp.”</blockquote>
+            <p class="sp-spec mono">Deliverables — mark · 19 lockups · signage programme · flag · wayfaring</p>
+          </div>
+        </div>
+        <div class="filmstrip">
+          <div class="fs-cap mono"><i class="chip"></i><span class="fs-cur">01 — Fjord · PMS 5463 U</span><span class="fs-hint">Drag the strip — scrub the inks</span></div>
+          <div class="fs-vp"><div class="fs-track"></div><div class="fs-ph"></div></div>
+        </div>
+      </article>
+
+      <!-- 02 BRENNA -->
+      <article class="spread" id="sp-brenna" data-title="BRENNA — PACKAGING"
+        data-palette='[{"n":"Espresso","c":"PMS BLACK 4 U","h":"#241A14"},{"n":"Roast","c":"PMS 7412 U","h":"#BE651F"},{"n":"Crema","c":"PMS 7401 U","h":"#E8DCC0"},{"n":"Riso Blå","c":"PMS 2728 U","h":"#1C39BB"},{"n":"Papir","c":"MUNKEN POLAR","h":"#F4F0E6"}]'>
+        <span class="spread-num" aria-hidden="true">02</span>
+        <div class="spread-main">
+          <div class="spread-visual">
+            <div class="visual-stack">
+              <figure class="plate plate--blue brenna-plate">
+                <img src="https://picsum.photos/seed/brenna-roastery/640/460.jpg" alt="Demo plate — roastery photograph placeholder" loading="lazy">
+                <figcaption>Plate 02 — the roastery, Grünerløkka</figcaption>
+              </figure>
+              <svg class="tin-svg" viewBox="0 0 340 470" aria-label="Brenna coffee tin">
+                <defs>
+                  <pattern id="bars" width="6" height="10" patternUnits="userSpaceOnUse"><rect width="2.6" height="10" fill="var(--ink)"/></pattern>
+                  <clipPath id="mqc"><rect x="82" y="120" width="176" height="30"/></clipPath>
+                </defs>
+                <ellipse cx="170" cy="445" rx="105" ry="12" fill="rgba(23,20,14,.1)"/>
+                <g class="tin">
+                  <rect x="70" y="60" width="200" height="372" rx="16" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/>
+                  <ellipse cx="170" cy="60" rx="100" ry="18" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/>
+                  <ellipse cx="170" cy="60" rx="78" ry="12" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+                  <rect x="82" y="120" width="176" height="234" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+                  <rect x="82" y="120" width="176" height="30" fill="var(--ink)"/>
+                  <g clip-path="url(#mqc)">
+                    <g class="tin-mq">
+                      <text x="86" y="141" textLength="240" lengthAdjust="spacingAndGlyphs" class="tin-mono" font-size="12" fill="var(--paper)">BRENNA KAFFE ·</text>
+                      <text x="326" y="141" textLength="240" lengthAdjust="spacingAndGlyphs" class="tin-mono" font-size="12" fill="var(--paper)">BRENNA KAFFE ·</text>
+                    </g>
+                  </g>
+                  <text x="96" y="216" class="tin-word" font-size="36">BRENNA</text>
+                  <text x="97" y="236" class="tin-mono" font-size="8">KAFFEBRENNERI — OSLO</text>
+                  <text x="96" y="298" class="tin-no" font-size="46">N°3</text>
+                  <text x="97" y="316" class="tin-mono" font-size="8">MØRKROAST — 500 G</text>
+                  <path class="tin-rose" d="" fill="var(--red)"/>
+                  <rect x="96" y="326" width="86" height="14" fill="url(#bars)"/>
+                </g>
+              </svg>
+            </div>
+            <p class="fig mono">Fig. 02 — 500 g tin, label at walking pace, rosette in overprint</p>
+          </div>
+          <div class="gutter" aria-hidden="true"><i class="gd gd-t"></i><span class="gtext">Brenna — packaging system — 2024</span><i class="gd gd-b"></i></div>
+          <div class="spread-copy">
+            <header class="sp-kicker mono"><span class="no">N°02</span><span>Packaging</span><span>Brenna Kaffebrenneri</span><span>2024</span></header>
+            <h3 class="sp-head disp">Most packaging shouts. This one makes eye contact<span class="dot">.</span></h3>
+            <div class="sp-body">
+              <p>A shelf of coffee is a shouting match in browns and serif promises about somebody’s grandmother’s farm. Brenna asked for loud; we built quiet with a spine. One grotesque, two weights, no photography of mountains — the label is typeset like a ticket: origin, roast, weight, date. Done.</p>
+              <p>Six roasts, two tin sizes, and a refill bag that costs less than the cappuccino you will spill on it. The rosette stamp does the selling; the second colour does the rest. Sales rose thirty-one per cent, and the founder still sets the type herself, which is the real KPI.</p>
+            </div>
+            <blockquote class="pull">“The shelf is a shouting match. Volume is cheap; eye contact is expensive. We bought eye contact.”</blockquote>
+            <p class="sp-spec mono">System — 6 roasts · 250/500 g tins · refill paper · shelf talkers</p>
+          </div>
+        </div>
+        <div class="filmstrip">
+          <div class="fs-cap mono"><i class="chip"></i><span class="fs-cur">01 — Espresso · PMS Black 4 U</span><span class="fs-hint">Drag the strip — scrub the inks</span></div>
+          <div class="fs-vp"><div class="fs-track"></div><div class="fs-ph"></div></div>
+        </div>
+      </article>
+
+      <!-- 03 OSLO JAZZ -->
+      <article class="spread" id="sp-jazz" data-title="OSLO JAZZ — POSTERS"
+        data-palette='[{"n":"Brann","c":"PMS WARM RED U","h":"#EE3A1C"},{"n":"Klassisk Blå","c":"PMS 2728 U","h":"#1C39BB"},{"n":"Overprint","c":"MIXED ON PRESS","h":"#241E63"},{"n":"Papir","c":"MUNKEN POLAR","h":"#F4F0E6"},{"n":"Sort","c":"PMS BLACK 6 U","h":"#17140E"}]'>
+        <span class="spread-num" aria-hidden="true">03</span>
+        <div class="spread-main">
+          <div class="spread-visual">
+            <div class="visual-stack">
+              <div class="jazz-wall">
+                <figure class="plate plate--blue wall-img">
+                  <img src="https://picsum.photos/seed/jazz-basement/900/620.jpg" alt="Demo plate — venue wall photograph placeholder" loading="lazy">
+                  <figcaption>Plate 03 — scene 2 basement, paste-up wall</figcaption>
+                </figure>
+                <div class="mini mp1"><i class="c"></i><i class="b"></i><span class="mt">Jazz</span><span class="ms">Oslo — 08–17 Aug</span></div>
+                <div class="mini mp2"><i class="c" style="background:var(--blue);left:auto;right:-14%"></i><i class="b" style="background:var(--red);right:auto;left:-10%"></i><span class="mt">Natt</span><span class="ms">Scene 2 — 23:00</span></div>
+                <div class="mini mp3"><i class="c" style="width:54%;left:30%;top:-16%"></i><i class="b" style="height:30%;bottom:20%"></i><span class="mt">Dag</span><span class="ms">Parken — 14:00</span></div>
+              </div>
+            </div>
+            <p class="fig mono">Fig. 03 — two-colour build, stamp by stamp, misregistration on purpose</p>
+          </div>
+          <div class="gutter" aria-hidden="true"><i class="gd gd-t"></i><span class="gtext">Oslo Jazzfestival — poster series — 2024</span><i class="gd gd-b"></i></div>
+          <div class="spread-copy">
+            <header class="sp-kicker mono"><span class="no">N°03</span><span>Poster series</span><span>Oslo Jazzfestival</span><span>2024</span></header>
+            <h3 class="sp-head disp">Jazz, printed at full volume<span class="dot">.</span></h3>
+            <div class="sp-body">
+              <p>Forty-one concerts, two inks, one duplicator with a loose registration that we stopped fighting and started conducting. Every poster in the run of four hundred is misregistered differently — the machine solos, we comp.</p>
+              <p>Where red meets blue, the press mixes a third colour for free; we named it overprint violet, the official shade of the 2 a.m. set. Type sits on top so the instruments stay behind the voice — read first at ten metres, argue with you at one.</p>
+            </div>
+            <blockquote class="pull">“Misregistration is not a mistake. It is the press signing its work.”</blockquote>
+            <p class="sp-spec mono">Edition — 41 motifs × 400 · riso A1 · numbered &amp; signed</p>
+          </div>
+        </div>
+        <div class="filmstrip">
+          <div class="fs-cap mono"><i class="chip"></i><span class="fs-cur">01 — Brann · PMS Warm Red U</span><span class="fs-hint">Drag the strip — scrub the inks</span></div>
+          <div class="fs-vp"><div class="fs-track"></div><div class="fs-ph"></div></div>
+        </div>
+      </article>
+
+      <!-- 04 GROTESK NOR -->
+      <article class="spread" id="sp-grotesk" data-title="GROTESK NOR — TYPE"
+        data-palette='[{"n":"Blekk","c":"PMS BLACK 6 U","h":"#17140E"},{"n":"Papir","c":"MUNKEN POLAR","h":"#F4F0E6"},{"n":"Rød","c":"PMS WARM RED U","h":"#EE3A1C"},{"n":"Blå","c":"PMS 2728 U","h":"#1C39BB"},{"n":"Grafitt","c":"PMS C.GRAY 9 U","h":"#6E6A5E"}]'>
+        <span class="spread-num" aria-hidden="true">04</span>
+        <div class="spread-main">
+          <div class="spread-visual">
+            <div class="visual-stack">
+              <div class="glyph-lab">
+                <div class="gl-rules" aria-hidden="true">
+                  <i style="top:16%"><b>CAP 700</b></i>
+                  <i style="top:42%"><b>X 510</b></i>
+                  <i style="top:82%"><b>BASE 0</b></i>
+                </div>
+                <div class="gl-glyph" id="gGlyph">Rg</div>
+                <div class="gl-axes mono"><span>WGHT <b id="gW">900</b></span><span>WDTH <b id="gD">118</b></span><span>UPM 1000</span></div>
+              </div>
+            </div>
+            <p class="fig mono">Fig. 04 — live axis readout, wdth × wght, the numbers are real</p>
+          </div>
+          <div class="gutter" aria-hidden="true"><i class="gd gd-t"></i><span class="gtext">Voss Foundry — type design — 2021–2024</span><i class="gd gd-b"></i></div>
+          <div class="spread-copy">
+            <header class="sp-kicker mono"><span class="no">N°04</span><span>Type design</span><span>Voss Foundry</span><span>2021–24</span></header>
+            <h3 class="sp-head disp">A grotesk with bad manners — the useful kind<span class="dot">.</span></h3>
+            <div class="sp-body">
+              <p>Nine styles and two axes, drawn for Norwegian signage light: flat winters, low sun, long words. The ‘a’ keeps its temper at width 62 and gets opinionated at 125. Terminals are cut straight because Norway does not do decorative, and the counters are generous because wind rattles the sign at minus eighteen.</p>
+              <p>It ships variable, and the specimen is pinned to the board below — drag it, pinch it, take the PDF home. What you are reading right now is set in it. Of course it is.</p>
+            </div>
+            <blockquote class="pull">“A typeface is public infrastructure. Draw it like someone has to live with it for thirty years.”</blockquote>
+            <p class="sp-spec mono">Release — 9 styles + variable · wdth 62–125 · wght 100–900 · Latin ext</p>
+          </div>
+        </div>
+        <div class="filmstrip">
+          <div class="fs-cap mono"><i class="chip"></i><span class="fs-cur">01 — Blekk · PMS Black 6 U</span><span class="fs-hint">Drag the strip — scrub the inks</span></div>
+          <div class="fs-vp"><div class="fs-track"></div><div class="fs-ph"></div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= CLIENTS ================= -->
+  <aside class="clients" aria-label="Selected clients">
+    <div class="mq-row">
+      <span>Havn Kulturkai<b>·</b>Brenna Kaffe<b>·</b>Oslo Jazzfestival<b>·</b>Nasjonalmuseet<b>·</b>Fritænker Forlag<b>·</b>Voss Foundry<b>·</b>Oslo Symphonietta<b>·</b>Kunstnernes Hus<b>·</b></span>
+      <span aria-hidden="true">Havn Kulturkai<b>·</b>Brenna Kaffe<b>·</b>Oslo Jazzfestival<b>·</b>Nasjonalmuseet<b>·</b>Fritænker Forlag<b>·</b>Voss Foundry<b>·</b>Oslo Symphonietta<b>·</b>Kunstnernes Hus<b>·</b></span>
+    </div>
+  </aside>
+
+  <!-- ================= SPECIMENS ================= -->
+  <section class="specimens" id="type">
+    <header class="sec-head">
+      <div class="sec-kick mono rv"><span>02</span><span>Type specimens — Voss Foundry</span><span>Take a sheet, they’re free</span></div>
+      <h2 class="sec-title disp rv">Specimens<span class="dot">.</span></h2>
+    </header>
+    <p class="spec-hint mono rv">Drag the sheets · pinch (or Ctrl + scroll) to resize · double-click to reset · the PDF sets itself when you download</p>
+    <div class="board rv" id="board">
+      <span class="board-label mono">Paste-up board — 50 × 70 cm — reg. marks included</span>
+
+      <div class="sheet-wrap" data-x="5" data-y="7" data-r="-1.8">
+        <article class="sheet" data-spec="grotesk">
+          <header class="sh-top mono"><span>Voss Foundry — spec. <b>N°1</b></span><span>Display · 2024</span></header>
+          <div class="sh-glyph">Ag</div>
+          <h3 class="sh-name">Grotesk Nor</h3>
+          <p class="sh-desc">Nine styles, two axes, no patience for decoration. Drawn for signage light and long Norwegian words.</p>
+          <p class="sh-set">AaBbGgRr ÆØÅ 0123456789 {!?&amp;@;} — bredde er en holdning.</p>
+          <footer class="sh-foot"><span class="sh-scale mono">Scale 100%</span><button class="dl-btn mono" data-dl="grotesk">Download PDF ↓</button></footer>
+        </article>
+      </div>
+
+      <div class="sheet-wrap" data-x="44" data-y="36" data-r="1.6">
+        <article class="sheet" data-spec="tittel">
+          <header class="sh-top mono"><span>Voss Foundry — spec. <b>N°2</b></span><span>Serif · 2023</span></header>
+          <div class="sh-glyph">Qh</div>
+          <h3 class="sh-name">Tittel Display</h3>
+          <p class="sh-desc">A display serif for headlines with an opinion. Optical size to 144, italics that gesticulate.</p>
+          <p class="sh-set">Quivering? — «åpne» ¡no! ÆØÅ 0123 — hwæt, jort.</p>
+          <footer class="sh-foot"><span class="sh-scale mono">Scale 100%</span><button class="dl-btn mono" data-dl="tittel">Download PDF ↓</button></footer>
+        </article>
+      </div>
+
+      <div class="sheet-wrap" data-x="70" data-y="5" data-r="2.4">
+        <article class="sheet" data-spec="mono">
+          <header class="sh-top mono"><span>Voss Foundry — spec. <b>N°3</b></span><span>Mono · 2021</span></header>
+          <div class="sh-glyph">@{</div>
+          <h3 class="sh-name">Kommentar Mono</h3>
+          <p class="sh-desc">For captions, folios and margin notes. The only mono we know with a slot for a registration mark.</p>
+          <p class="sh-set">if(x){print()} // 0O1lI {}[]&lt;&gt;=+*#% — fast folio.</p>
+          <footer class="sh-foot"><span class="sh-scale mono">Scale 100%</span><button class="dl-btn mono" data-dl="mono">Download PDF ↓</button></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TALKS ================= -->
+  <section class="talks" id="talks">
+    <header class="sec-head">
+      <div class="sec-kick mono rv"><span>03</span><span>Lectures &amp; talks</span><span>Say it to my face — recordings</span></div>
+      <h2 class="sec-title disp rv">Lectures<span class="dot">.</span></h2>
+    </header>
+    <div class="talks-grid">
+      <div class="player rv" id="player">
+        <div class="player-screen">
+          <video id="vid" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" preload="metadata" playsinline></video>
+          <div class="player-poster" id="poster">
+            <p class="pp-kick mono" id="ppKick">Lecture — Typo Grafisk Dag, Oslo · 2024</p>
+            <h3 class="pp-title disp" id="ppTitle">Print is not<br>nostalgia<span class="dot">.</span></h3>
+            <button class="pp-play" id="ppPlay" aria-label="Play recording">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg>
+            </button>
+            <p class="pp-note mono" id="ppNote">38:12 · Høyre sal · subtitles by the author</p>
+          </div>
+        </div>
+        <div class="pbar">
+          <button id="pbPlay" aria-label="Play or pause">
+            <svg id="icoPlay" viewBox="0 0 24 24" width="15" height="15"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg>
+            <svg id="icoPause" viewBox="0 0 24 24" width="15" height="15" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+          </button>
+          <div class="pb-track" id="pbTrack"><i id="pbFill"></i></div>
+          <span class="pb-time mono" id="pbTime">00:00 / 00:00</span>
+          <button id="pbMute" aria-label="Mute or unmute">
+            <svg id="icoSnd" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor" stroke="none"/><path d="M17 8c1.5 1.5 1.5 6.5 0 8"/></svg>
+            <svg id="icoMut" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor" stroke="none"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+          </button>
+          <button id="pbFull" aria-label="Fullscreen">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+      <ul class="talk-list rv" id="talkList">
+        <li><button class="talk-row active" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          data-title="PRINT IS NOT&lt;br&gt;NOSTALGIA." data-kick="Lecture — Typo Grafisk Dag, Oslo · 2024" data-note="38:12 · Høyre sal · subtitles by the author">
+          <span class="t-idx mono">01</span>
+          <span><span class="t-title">Print Is Not Nostalgia</span><span class="t-venue mono">Typo Grafisk Dag — Oslo</span></span>
+          <span class="t-year mono">2024</span><span class="t-dur mono">38:12</span><span class="t-arr">↗</span></button></li>
+        <li><button class="talk-row" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          data-title="THE LOGO IS&lt;br&gt;THE LEAST OF IT." data-kick="Brand Talks, Amsterdam · 2024" data-note="26:40 · Q&amp;A included · one walkout (valid)">
+          <span class="t-idx mono">02</span>
+          <span><span class="t-title">The Logo Is the Least of It</span><span class="t-venue mono">Brand Talks — Amsterdam</span></span>
+          <span class="t-year mono">2024</span><span class="t-dur mono">26:40</span><span class="t-arr">↗</span></button></li>
+        <li><button class="talk-row" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+          data-title="RISO IS A&lt;br&gt;DISCIPLINE." data-kick="Print Matters, London · 2023" data-note="19:05 · live duplicator demo · smell not included">
+          <span class="t-idx mono">03</span>
+          <span><span class="t-title">Riso Is a Discipline</span><span class="t-venue mono">Print Matters — London</span></span>
+          <span class="t-year mono">2023</span><span class="t-dur mono">19:05</span><span class="t-arr">↗</span></button></li>
+        <li><button class="talk-row" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+          data-title="WIDTH IS&lt;br&gt;AN EMOTION." data-kick="ATypI, Paris · 2023" data-note="44:51 · variable-font karaoke at 31:20">
+          <span class="t-idx mono">04</span>
+          <span><span class="t-title">Width Is an Emotion</span><span class="t-venue mono">ATypI — Paris</span></span>
+          <span class="t-year mono">2023</span><span class="t-dur mono">44:51</span><span class="t-arr">↗</span></button></li>
+        <li><button class="talk-row" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+          data-title="PACKAGING FOR&lt;br&gt;PEOPLE WHO READ." data-kick="Grafill, Oslo · 2022" data-note="31:27 · tin opened on stage · coffee served after">
+          <span class="t-idx mono">05</span>
+          <span><span class="t-title">Packaging for People Who Read</span><span class="t-venue mono">Grafill — Oslo</span></span>
+          <span class="t-year mono">2022</span><span class="t-dur mono">31:27</span><span class="t-arr">↗</span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="c-kick mono rv"><span>04 — Contact</span><span>Booking Q3–Q4 2025</span><span>Replies within two tides</span></div>
+    <h2 class="c-head disp rv">Let’s put<br>ink on paper<span class="dot">.</span></h2>
+    <a class="c-mail rv" href="mailto:hei@maravoss.no">hei@maravoss.no<span class="arr">↗</span></a>
+    <div class="c-grid">
+      <div class="rv"><h4>Studio</h4><p>Skippergata 22<br>0154 Oslo, Norway<br>Tue–Fri 09–16<br>Mondays we print.</p></div>
+      <div class="rv"><h4>Commissions</h4><p>Identity, packaging,<br>posters, type systems.<br>Briefs to the same address — the stranger, the better.</p></div>
+      <div class="rv"><h4>Elsewhere</h4><p><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><br><a href="https://www.are.na/" target="_blank" rel="noopener">Are.na ↗</a><br><a href="https://fontsinuse.com/" target="_blank" rel="noopener">Fonts In Use ↗</a></p></div>
+      <div class="rv"><h4>Foundry</h4><p>Voss Foundry<br><a href="mailto:foundry@maravoss.no">foundry@maravoss.no</a><br>Trial fonts, no watermark drama.</p></div>
+    </div>
+    <footer class="colophon mono">
+      <span>© 2025 Mara Voss · Set in Grotesk Nor, Tittel Display &amp; Kommentar Mono · Two-colour risograph: warm red &amp; 2728 U on 120 gsm Munken Polar</span>
+      <span>No stock photography was harmed — the plates are stand-ins pending the real scans</span>
+    </footer>
+  </section>
+
+</main>
+
+<footer class="folio" aria-hidden="true">
+  <span class="mono" id="fPages">P. 001–002</span>
+  <span class="fprog"><i id="fBar"></i></span>
+  <span class="mono" id="fSec">Cover</span>
+  <span class="mono" id="clock">OSLO 00:00:00</span>
+</footer>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="/main.ts"></script>
+</body>
+</html>

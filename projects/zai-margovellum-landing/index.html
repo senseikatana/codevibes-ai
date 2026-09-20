@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Margo Vellum — Graphic Design Monograph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#F2EEE3; --paper2:#EAE4D4; --ink:#191512; --ink-soft:#57503F;
+  --orange:#FF6C2F; --blue:#0078BF; --pink:#FF48B0; --green:#00A95C;
+  --yellow:#FFE800; --red:#FF665E; --purple:#765BA7; --teal:#00838A;
+  --sans:'Archivo',sans-serif; --serif:'Instrument Serif',serif; --mono:'Space Mono',monospace;
+  --m:clamp(18px,4vw,64px);
+  --hair:1px solid var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0.35 0.35 0 0"/></filter><rect width="220" height="220" filter="url(%23n)" opacity="0.16"/></svg>');
+  color:var(--ink); font-family:var(--sans); overflow-x:hidden;
+}
+::selection{background:var(--orange);color:var(--paper)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--paper)}
+::-webkit-scrollbar-thumb{background:var(--ink);border:2px solid var(--paper)}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+h1,h2,h3{text-transform:uppercase}
+
+/* ============ CURSOR TRAIL ============ */
+#trail{position:fixed;inset:0;z-index:80;pointer-events:none;mix-blend-mode:multiply}
+
+/* ============ FIXED BARS (book chrome) ============ */
+.bar{position:fixed;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  background:var(--paper);border-bottom:var(--hair);padding:0 var(--m);height:54px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.bar.top{top:0}.bar.bot{bottom:0;top:auto;border-bottom:none;border-top:var(--hair);height:42px}
+.bar-l{display:flex;align-items:center;gap:10px;font-weight:700}
+.bar-dot{width:8px;height:8px;background:var(--orange);border-radius:50%;display:inline-block}
+nav.mainnav{display:flex;gap:clamp(10px,2vw,28px)}
+nav.mainnav a{padding:4px 6px;border:1px solid transparent;transition:.18s}
+nav.mainnav a:hover{background:var(--ink);color:var(--paper)}
+.folio-mid{color:var(--ink-soft)}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh;min-height:100svh;padding:88px var(--m) 70px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.crop{position:absolute;width:20px;height:20px;opacity:.85}
+.crop.tl{top:68px;left:14px;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.crop.tr{top:68px;right:14px;border-top:1.5px solid var(--ink);border-right:1.5px solid var(--ink)}
+.crop.bl{bottom:56px;left:14px;border-bottom:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.crop.br{bottom:56px;right:14px;border-bottom:1.5px solid var(--ink);border-right:1.5px solid var(--ink)}
+.hero-meta-top{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.08em;
+  border-bottom:var(--hair);padding-bottom:12px;opacity:0;animation:bUp .8s .9s cubic-bezier(.2,.7,.25,1) forwards}
+.hero-name{font-size:clamp(62px,16.5vw,235px);line-height:.82;letter-spacing:-.028em;font-weight:800;user-select:none}
+.hline{display:block;overflow:hidden;padding:.02em 0}
+.hline2{text-align:right}
+.lt{display:inline-block;transform:translateY(112%);will-change:transform;
+  animation:ltIn .95s var(--d) cubic-bezier(.16,.8,.24,1) both}
+@keyframes ltIn{
+  0%{transform:translateY(112%);font-variation-settings:'wght' 100,'wdth' 62}
+  100%{transform:translateY(0);font-variation-settings:'wght' 800,'wdth' 86}}
+.hero-name.live .lt{animation:none}
+.lt.mis{color:var(--orange);text-shadow:5px 4px 0 var(--blue)}
+.hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  border-top:var(--hair);padding-top:16px;opacity:0;animation:bUp .8s 1.25s cubic-bezier(.2,.7,.25,1) forwards}
+.hero-tag{font-size:clamp(14px,1.5vw,19px);line-height:1.35;max-width:34ch;font-weight:500}
+.hero-tag em{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--orange);font-size:1.12em}
+.reg-mark{flex:none;animation:spin 16s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scroll-cue{font-size:11px;letter-spacing:.14em;text-align:right;line-height:1.7}
+.scroll-cue:hover{color:var(--orange)}
+@keyframes bUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* ============ STATEMENT ============ */
+.statement{padding:24vh var(--m);border-top:var(--hair)}
+.st-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;margin-bottom:4vh;display:block}
+.st-line{font-size:clamp(34px,6.6vw,112px);line-height:1.02;font-weight:900;letter-spacing:-.02em;text-transform:uppercase}
+.st-line.serif{font-weight:400}
+.st-line em{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--orange);font-size:1.06em;letter-spacing:0}
+.st-word{display:inline-block;opacity:.1;transform:translateY(.35em);transition:opacity .7s cubic-bezier(.2,.7,.25,1),transform .7s cubic-bezier(.2,.7,.25,1);transition-delay:var(--wd,0s)}
+.statement.in .st-word{opacity:1;transform:none}
+.st-note{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-soft);margin-top:5vh;max-width:52ch;line-height:1.8}
+
+/* ============ WORK — sticky cross-fading spreads ============ */
+#work{height:460vh;position:relative}
+.work-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.w-head{position:absolute;top:66px;left:var(--m);right:var(--m);z-index:40;display:flex;align-items:center;gap:18px;
+  font-size:11px;letter-spacing:.1em;pointer-events:none}
+.w-prog{flex:1;height:1.5px;background:rgba(25,21,18,.18);position:relative}
+.w-prog i{position:absolute;inset:0;background:var(--orange);transform-origin:left;transform:scaleX(0)}
+.spread{position:absolute;inset:0;padding:108px var(--m) 76px;display:grid;
+  grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr auto;column-gap:2vw;row-gap:1rem;
+  will-change:opacity,transform;background:var(--paper)}
+.spread .b{opacity:0}
+.spread.is-active .b{animation:bUp .8s cubic-bezier(.2,.7,.25,1) both;animation-delay:var(--bd,0s)}
+.s-head{grid-column:1/-1;display:flex;justify-content:space-between;gap:14px;border-top:1.5px solid var(--ink);
+  padding-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.1em}
+.s-title{font-size:clamp(44px,7.6vw,124px);line-height:.85;letter-spacing:-.025em;font-weight:900;
+  font-variation-settings:'wdth' 112;z-index:2;align-self:end}
+.s-pull{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.1vw,30px);line-height:1.2;max-width:24ch}
+.s-pull em{color:var(--ink)}
+.s-copy{font-size:clamp(13px,1.05vw,16px);line-height:1.55;max-width:38ch;color:var(--ink)}
+.s-copy p+p{margin-top:.8em}
+.s-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;line-height:2;align-self:end;color:var(--ink-soft)}
+.chip{display:inline-block;width:10px;height:10px;background:var(--ink);vertical-align:baseline;margin-right:4px}
+.s-ghost{position:absolute;font-weight:900;font-size:36vh;line-height:1;color:transparent;
+  -webkit-text-stroke:1.5px var(--ink);opacity:.13;pointer-events:none;user-select:none;z-index:0}
+.s-visual{position:relative;display:flex;align-items:center;justify-content:center;z-index:1}
+
+/* spread compositions */
+.sp1 .s-visual{grid-column:7/13;grid-row:2/4}
+.sp1 .s-title{grid-column:1/8;grid-row:2}
+.sp1 .s-pull{grid-column:1/6;grid-row:2;align-self:start;margin-top:1vh}
+.sp1 .s-copy{grid-column:1/6;grid-row:3;align-self:start}
+.sp1 .s-meta{grid-column:6/7;grid-row:3}
+.sp1 .s-ghost{top:8vh;right:2vw}
+.sp2 .s-visual{grid-column:5/10;grid-row:2/4}
+.sp2 .s-title{grid-column:1/6;grid-row:2}
+.sp2 .s-pull{grid-column:1/5;grid-row:2;align-self:start;margin-top:1vh}
+.sp2 .s-copy{grid-column:1/5;grid-row:3;align-self:start}
+.sp2 .s-meta{grid-column:10/13;grid-row:3}
+.sp2 .s-ghost{bottom:2vh;left:2vw}
+.sp3 .s-visual{grid-column:1/7;grid-row:2/4}
+.sp3 .s-title{grid-column:7/13;grid-row:2}
+.sp3 .s-pull{grid-column:8/13;grid-row:2;align-self:start;margin-top:1vh}
+.sp3 .s-copy{grid-column:8/13;grid-row:3;align-self:start}
+.sp3 .s-meta{grid-column:7/8;grid-row:3}
+.sp3 .s-ghost{top:6vh;left:30vw}
+.sp4 .s-visual{grid-column:6/13;grid-row:2/4}
+.sp4 .s-title{grid-column:1/9;grid-row:2}
+.sp4 .s-pull{grid-column:1/6;grid-row:2;align-self:start;margin-top:1vh}
+.sp4 .s-copy{grid-column:1/6;grid-row:3;align-self:start}
+.sp4 .s-meta{grid-column:6/7;grid-row:3}
+.sp4 .s-ghost{bottom:4vh;right:3vw}
+
+/* — artifact 01: Kilter mark — */
+.mark-svg{height:min(52vh,470px);overflow:visible}
+.mk-g{stroke:var(--ink);fill:none;stroke-width:.8;opacity:.3;stroke-dasharray:100;stroke-dashoffset:100}
+.mk-frame{stroke:var(--ink);fill:none;stroke-width:3;stroke-dasharray:100;stroke-dashoffset:100}
+.mk-bar,.mk-a{fill:var(--blue);transform-box:fill-box}
+.mk-bar{transform-origin:top center;transform:scaleY(0)}
+.mk-a{transform-origin:center;opacity:0}
+.mk-wob{transform-box:fill-box;transform-origin:center 6%}
+.spread.is-active .mk-g{animation:draw 1s .1s ease forwards}
+.spread.is-active .mk-frame{animation:draw 1s .2s ease forwards}
+.spread.is-active .mk-bar{animation:growY .55s .5s cubic-bezier(.2,.8,.25,1) forwards}
+.spread.is-active .mk-a1{animation:armIn .85s .75s cubic-bezier(.2,.8,.25,1) forwards}
+.spread.is-active .mk-a2{animation:armIn .85s .95s cubic-bezier(.2,.8,.25,1) forwards}
+.spread.is-active .mk-wob{animation:wobble 3.4s 2s ease-in-out infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes growY{to{transform:scaleY(1)}}
+@keyframes armIn{from{opacity:0;transform:rotate(-210deg) scale(.5)}to{opacity:1;transform:rotate(var(--fin)) scale(1)}}
+@keyframes wobble{0%,100%{transform:rotate(0)}50%{transform:rotate(7deg)}}
+.lockups{position:absolute;bottom:0;left:0;right:0;display:flex;gap:12px;justify-content:center}
+.lockup{border:1.5px solid var(--ink);padding:12px 18px;font-weight:900;font-size:15px;letter-spacing:.02em;
+  display:flex;align-items:center;gap:9px;background:var(--paper)}
+.lockup i{width:13px;height:13px;background:var(--blue);display:inline-block}
+.lockup.inv{background:var(--blue);color:var(--paper)}
+.lockup.inv i{background:var(--paper)}
+.lockup.out i{background:transparent;border:2.5px solid var(--blue)}
+
+/* — artifact 02: Ferment jars — */
+.jar-shelf{display:flex;align-items:flex-end;gap:clamp(12px,2vw,30px)}
+.jar{width:clamp(70px,9.5vw,104px);height:min(38vh,350px);border:1.5px solid var(--ink);border-radius:10px 10px 14px 14px;
+  background:var(--paper);position:relative;display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(70px);opacity:0;transition:transform .85s cubic-bezier(.2,.8,.25,1),opacity .6s;transition-delay:var(--jd,0s)}
+.spread.is-active .jar{transform:translateY(0) rotate(var(--jr,0deg));opacity:1}
+.jar.lid{border-top:12px solid var(--ink);padding-top:6px}
+.jar-band{background:var(--band);border-bottom:1.5px solid var(--ink);flex:1;display:flex;align-items:center;justify-content:center}
+.jar-band b{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:900;font-size:clamp(20px,3.4vh,34px);letter-spacing:-.02em;color:var(--paper)}
+.jar-name{font-family:var(--serif);font-style:italic;font-size:clamp(11px,1.6vh,15px);padding:6px 8px 2px;text-align:center;line-height:1.1}
+.jar-info{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;padding:0 8px 8px;line-height:1.7;color:var(--ink-soft)}
+.bc{height:16px;margin:0 8px 8px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px,var(--ink) 5px 6px,transparent 6px 11px)}
+
+/* — artifact 03: posters fan — */
+.fan{position:relative;width:min(60vh,560px);height:min(52vh,470px)}
+.poster{position:absolute;inset:0;margin:auto;height:min(48vh,430px);aspect-ratio:1/1.414;background:#FBF8EF;
+  border:1.5px solid var(--ink);padding:5% 6%;display:flex;flex-direction:column;overflow:hidden;
+  transform:translate(0,4%) rotate(-4deg);transition:transform .95s cubic-bezier(.2,.8,.25,1);transition-delay:var(--pd,0s);
+  box-shadow:0 10px 24px rgba(25,21,18,.14)}
+.spread.is-active .poster{transform:translate(var(--fx),0) rotate(var(--fr))}
+.poster .dots{position:absolute;inset:30% 14% 26%;background-image:radial-gradient(var(--pc) 1.3px,transparent 1.45px);background-size:8px 8px;opacity:.55}
+.poster h4{font-weight:900;font-size:clamp(28px,5.4vh,58px);line-height:.86;letter-spacing:-.03em;position:relative;z-index:1}
+.poster .pword2{margin-top:auto;text-align:right}
+.poster .pcred{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;line-height:1.8;border-top:1.5px solid var(--ink);padding-top:6px;margin-top:8px;position:relative;z-index:1}
+.poster .ptag{position:absolute;top:5%;right:6%;font-family:var(--mono);font-size:9px;z-index:1}
+
+/* — artifact 04: book spread — */
+.book{width:min(78vh,760px);max-width:96%;aspect-ratio:1.46/1;perspective:1400px;display:flex;position:relative}
+.pg{flex:1;background:#FBF8EF;border:1.5px solid var(--ink);padding:5% 4%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.pg+.pg{border-left:none}
+.pg .run{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;border-bottom:1px solid var(--ink);padding-bottom:5px;margin-bottom:10px;display:flex;justify-content:space-between}
+.pg .body{columns:2;column-gap:12px;font-size:9.5px;line-height:1.55;text-align:justify;hyphens:auto;color:var(--ink-soft)}
+.pg .body::first-letter{font-weight:900;font-size:34px;float:left;line-height:.85;padding-right:4px;color:var(--ink)}
+.pg .chapno{font-weight:900;font-size:clamp(40px,7vh,74px);line-height:.9}
+.pg .chapt{font-family:var(--serif);font-style:italic;font-size:clamp(15px,2.6vh,24px);margin:6px 0 12px}
+.folio-no{margin-top:auto;font-family:var(--mono);font-size:9px;align-self:flex-end}
+.pg.flip{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:left center;background:#FBF8EF;
+  border:1.5px solid var(--ink);border-left:2.5px solid rgba(25,21,18,.4);backface-visibility:hidden;z-index:2}
+.spread.is-active .pg.flip{animation:flipIn 1.25s .35s cubic-bezier(.55,0,.25,1) both}
+@keyframes flipIn{from{transform:rotateY(-86deg);opacity:.35}to{transform:rotateY(0);opacity:1}}
+.spine-dot{position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:rgba(25,21,18,.25)}
+
+/* ============ SECTION HEADERS ============ */
+.sec{padding:16vh 0 10vh}
+.sec-head{display:flex;align-items:flex-end;gap:clamp(14px,2.4vw,40px);border-top:1.5px solid var(--ink);
+  padding:20px var(--m) 0;margin:0 0 7vh}
+.sec-no{font-size:clamp(58px,9vw,140px);line-height:.78;font-weight:900;color:transparent;-webkit-text-stroke:2px var(--ink)}
+.sec-title{font-size:clamp(36px,5.6vw,92px);line-height:.85;letter-spacing:-.02em;font-weight:900}
+.sec-sub{margin-left:auto;text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.08em;line-height:1.9;color:var(--ink-soft);max-width:30ch}
+
+/* ============ SPECIMENS ============ */
+.spec-hint{font-family:var(--mono);font-size:11px;letter-spacing:.1em;margin:0 var(--m) 18px;color:var(--ink-soft)}
+.spec-table{position:relative;margin:0 var(--m);height:1420px;border:1.5px solid var(--ink);overflow:hidden;
+  background-image:
+    repeating-linear-gradient(0deg,transparent 0 79px,rgba(25,21,18,.08) 79px 80px),
+    repeating-linear-gradient(90deg,transparent 0 79px,rgba(25,21,18,.08) 79px 80px)}
+.spec{position:absolute;width:clamp(280px,27vw,410px);background:var(--paper);border:1.5px solid var(--ink);
+  box-shadow:0 14px 30px rgba(25,21,18,.16);padding:14px 16px 12px;cursor:grab;touch-action:none;user-select:none}
+.spec.grab{cursor:grabbing;box-shadow:0 26px 50px rgba(25,21,18,.28)}
+.spec-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid var(--ink);padding-bottom:8px;font-size:13px}
+.spec-top strong{font-weight:900;letter-spacing:-.01em}
+.spec-top span{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft)}
+.spec-glyph{font-size:clamp(84px,7.5vw,118px);line-height:1;padding:12px 0 4px;font-weight:800;pointer-events:none}
+.spec.serifspec .spec-glyph,.spec.serifspec .spec-water{font-family:var(--serif);font-weight:400;font-style:italic}
+.spec.monospec .spec-glyph,.spec.monospec .spec-water{font-family:var(--mono);font-weight:700}
+.spec-charset{font-size:15px;line-height:1.35;word-break:break-all;border-top:1px solid var(--ink);padding-top:8px;pointer-events:none}
+.spec-water{pointer-events:none}
+.spec-water div{white-space:nowrap;overflow:hidden;line-height:1.3}
+.spec-foot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid var(--ink);
+  margin-top:10px;padding-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.06em}
+.spec-pdf{border:1.5px solid var(--ink);padding:6px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  background:var(--ink);color:var(--paper);transition:.15s}
+.spec-pdf:hover{background:var(--sc);border-color:var(--sc);color:var(--ink)}
+.spec-grip{position:absolute;right:0;bottom:0;width:22px;height:22px;cursor:nwse-resize;touch-action:none;
+  background:repeating-linear-gradient(135deg,transparent 0 4px,var(--ink) 4px 5.5px,transparent 5.5px 8px)}
+
+/* ============ TALKS ============ */
+.talks-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,64px);padding:0 var(--m);align-items:start}
+.screen{border:1.5px solid var(--ink);background:#111;position:relative;cursor:pointer}
+.screen canvas{display:block;width:100%;aspect-ratio:16/9}
+.pv-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  opacity:0;transition:.25s;background:rgba(17,14,11,.28)}
+.paused .pv-overlay{opacity:1}
+.pctl{display:flex;align-items:center;gap:14px;border:1.5px solid var(--ink);border-top:none;padding:10px 14px;background:var(--paper)}
+.pbtn{width:34px;height:34px;flex:none;display:grid;place-items:center;border:1.5px solid var(--ink);transition:.15s}
+.pbtn:hover{background:var(--ink);color:var(--paper)}
+.scrub{flex:1;height:22px;display:flex;align-items:center;cursor:pointer;touch-action:none}
+.scrub-rail{width:100%;height:4px;background:rgba(25,21,18,.2);position:relative}
+.scrub-fill{position:absolute;inset:0;background:var(--orange);transform-origin:left;transform:scaleX(0)}
+.scrub-fill i{position:absolute;right:-5px;top:50%;width:11px;height:11px;background:var(--ink);transform:translateY(-50%) rotate(45deg)}
+.ptime{font-family:var(--mono);font-size:11px;letter-spacing:.06em;min-width:9ch;text-align:right}
+.talk-list{list-style:none;border-top:1.5px solid var(--ink)}
+.talk{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:18px 10px;
+  border-bottom:1.5px solid var(--ink);cursor:pointer;transition:.15s;position:relative}
+.talk:hover{background:var(--ink);color:var(--paper)}
+.talk.is-current::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--orange)}
+.t-no{font-family:var(--mono);font-size:12px}
+.talk h3{font-size:clamp(17px,1.7vw,24px);letter-spacing:-.01em;line-height:1.05}
+.t-meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;margin-top:5px;color:var(--ink-soft)}
+.talk:hover .t-meta{color:rgba(242,238,227,.7)}
+.t-arrow{font-size:20px;transition:transform .2s}
+.talk:hover .t-arrow{transform:translateX(6px)}
+.talk.is-current .t-arrow{color:var(--orange)}
+
+/* ============ COLOPHON ============ */
+.colo-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,5vw,80px);padding:0 var(--m);margin-bottom:6vh;align-items:end}
+.spec-rows{border-top:1.5px solid var(--ink)}
+.spec-row{display:flex;justify-content:space-between;gap:16px;padding:11px 2px;border-bottom:1px solid rgba(25,21,18,.35);
+  font-family:var(--mono);font-size:11px;letter-spacing:.07em}
+.spec-row b{font-weight:700}
+.ink-read h3{font-size:clamp(52px,9vw,140px);line-height:.9;letter-spacing:-.02em}
+.ink-swatch{display:inline-block;width:.62em;height:.62em;background:var(--cur);vertical-align:baseline;margin-right:.18em;border:1.5px solid var(--ink)}
+.ink-meta{font-family:var(--mono);font-size:12px;letter-spacing:.08em;margin-top:12px}
+.ink-idx{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-soft)}
+.strip-wrap{margin:0 var(--m);position:relative}
+.strip{overflow:hidden;border-top:var(--hair);border-bottom:var(--hair);cursor:grab;touch-action:pan-y}
+.strip.grabbing{cursor:grabbing}
+.track{display:flex;gap:18px;padding:0 0;height:190px;align-items:stretch;width:max-content}
+.frame{width:198px;flex:none;background:#111;position:relative;display:flex;flex-direction:column;
+  opacity:.45;transform:scale(.94);transition:opacity .3s,transform .3s}
+.frame.is-center{opacity:1;transform:scale(1)}
+.frame .sprock{height:16px;flex:none;background:repeating-linear-gradient(90deg,transparent 0 12px,var(--paper) 12px 24px,transparent 24px 36px)}
+.frame .cell{flex:1;margin:0 8px;position:relative;display:flex;align-items:flex-end;padding:8px}
+.frame .cell b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;mix-blend-mode:normal}
+.frame .no{position:absolute;top:22px;left:10px;font-family:var(--mono);font-size:9px;color:var(--paper)}
+.center-line{position:absolute;top:0;bottom:0;left:50%;width:1.5px;background:var(--paper);mix-blend-mode:difference;pointer-events:none}
+.strip-caption{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-soft);margin-top:10px;display:flex;justify-content:space-between}
+
+/* ============ CONTACT ============ */
+.contact{padding:18vh var(--m) 100px;border-top:1.5px solid var(--ink)}
+.c-big{font-size:clamp(52px,10.5vw,178px);line-height:.86;letter-spacing:-.028em;font-weight:900}
+.c-big em{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--orange);font-weight:400;letter-spacing:0}
+.c-mailrow{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:6vh 0 4vh}
+.c-mail{font-weight:800;font-size:clamp(22px,4.4vw,64px);letter-spacing:-.02em;border-bottom:5px solid var(--ink);
+  padding-bottom:6px;display:inline-flex;align-items:center;gap:.3em;transition:color .2s,border-color .2s}
+.c-mail span{transition:transform .25s;display:inline-block}
+.c-mail:hover{color:var(--orange);border-color:var(--orange)}
+.c-mail:hover span{transform:translate(6px,-6px)}
+.c-copy{border:1.5px solid var(--ink);padding:10px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;transition:.15s}
+.c-copy:hover{background:var(--ink);color:var(--paper)}
+.c-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--ink);border:1.5px solid var(--ink)}
+.c-col{background:var(--paper);padding:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;line-height:2}
+.c-col b{display:block;color:var(--ink-soft);font-weight:400;font-size:9px;letter-spacing:.14em}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  border-top:1.5px solid var(--ink);margin-top:9vh;padding-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft)}
+#toTop{border:1px solid var(--ink);padding:6px 12px;color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.1em;transition:.15s}
+#toTop:hover{background:var(--ink);color:var(--paper)}
+
+/* ============ TOAST ============ */
+#toast{position:fixed;bottom:64px;left:50%;transform:translate(-50%,140%);z-index:90;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:12px 20px;transition:transform .35s cubic-bezier(.2,.8,.25,1);
+  border:1px solid var(--paper);max-width:86vw}
+#toast.show{transform:translate(-50%,0)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:900px){
+  .folio-mid,.hero-meta-top span:nth-child(2){display:none}
+  .spread{display:flex;flex-direction:column;gap:10px;padding:84px var(--m) 60px;overflow:hidden}
+  .s-title{font-size:clamp(40px,11vw,72px)}
+  .s-copy{font-size:12px;max-width:none}
+  .s-pull{font-size:16px}
+  .s-ghost{display:none}
+  .s-visual{flex:1;min-height:0}
+  .sp1 .mark-svg{height:30vh}
+  .lockups{position:static;margin-top:8px;flex-wrap:wrap}
+  .jar{height:24vh}
+  .fan{height:34vh;width:90%}
+  .poster{height:30vh}
+  .book{width:94%}
+  .s-meta{font-size:9px}
+  .talks-grid{grid-template-columns:1fr}
+  .colo-grid{grid-template-columns:1fr;align-items:start}
+  .spec-table{height:1980px}
+  .spec{width:76vw}
+  .sec-head{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .lt{transform:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="trail" aria-hidden="true"></canvas>
+
+<header class="bar top">
+  <div class="bar-l">MARGO VELLUM<span class="bar-dot"></span>GRAPHIC DESIGN</div>
+  <nav class="mainnav">
+    <a href="#work">WORK</a><a href="#type">SPECIMENS</a><a href="#talks">TALKS</a><a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<main>
+  <!-- P.01 COVER -->
+  <section class="hero" id="top" data-folio="P.01 — COVER">
+    <div class="crop tl"></div><div class="crop tr"></div><div class="crop bl"></div><div class="crop br"></div>
+    <div class="hero-meta-top mono">
+      <span>MONOGRAPH — VOL. I</span><span>GRAPHIC DESIGN &amp; ART DIRECTION</span><span>ROTTERDAM, NL — EST. 2016</span>
+    </div>
+    <h1 class="hero-name" id="heroName" aria-label="Margo Vellum">
+      <span class="hline" data-text="MARGO"></span>
+      <span class="hline hline2" data-text="VELLUM"></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-tag">Identity systems, packaging, posters &amp; typefaces —<br><em>built to survive contact with reality.</em></p>
+      <svg class="reg-mark" width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="#191512" stroke-width="1.4" aria-hidden="true">
+        <circle cx="26" cy="26" r="17"/><path d="M26 2v48M2 26h48"/>
+      </svg>
+      <a class="scroll-cue mono" href="#statement">SCROLL<br>↓</a>
+    </div>
+  </section>
+
+  <!-- P.02 INTRODUCTION -->
+  <section class="statement" id="statement" data-folio="P.02 — INTRODUCTION">
+    <span class="st-kicker mono">INTRODUCTION — READ ALOUD</span>
+    <p class="st-line" data-words>PRINT ISN'T DEAD —</p>
+    <p class="st-line serif" data-words>it just got <em>taste.</em></p>
+    <p class="st-note">IDENTITY SYSTEMS · PACKAGING · POSTERS · TYPEFACES — DESIGNED IN ROTTERDAM, PRINTED WHEREVER IT STILL MATTERS. TEN PAGES, EIGHT INKS, NO APOLOGIES.</p>
+  </section>
+
+  <!-- PP.03–06 SELECTED WORK -->
+  <section id="work" data-folio="P.03 — KILTER RECORDS">
+    <div class="work-stage">
+      <div class="w-head mono">
+        <span>02 / SELECTED WORK</span>
+        <div class="w-prog"><i id="wProgBar"></i></div>
+        <span><b id="wCount">01</b> — 04</span>
+      </div>
+
+      <!-- Spread 1 -->
+      <article class="spread sp1" style="--ink:var(--blue)">
+        <span class="s-ghost" aria-hidden="true">01</span>
+        <div class="s-head b" style="--bd:.05s"><span>№ 01</span><span>IDENTITY / LOGO SYSTEM</span><span>2024</span></div>
+        <h3 class="s-title b">KILTER<br>RECORDS</h3>
+        <p class="s-pull b" style="--bd:.1s">“A label that never<br><em>sits still.</em>”</p>
+        <div class="s-copy b" style="--bd:.16s">
+          <p>Kilter presses records by artists who can't be pinned down, so the identity refuses to be either. The mark is three misregistered strokes — a K mid-collapse — redrawn at every size, never twice the same.</p>
+          <p>The system ships as rules, not artwork: weights, angles and a construction grid any intern can break correctly.</p>
+        </div>
+        <div class="s-meta b" style="--bd:.24s">CLIENT — KILTER RECORDS<br>SCOPE — IDENTITY, MOTION, VINYL<br>INK — <i class="chip" style="background:var(--blue)"></i>BLUE 072</div>
+        <div class="s-visual">
+          <svg class="mark-svg" viewBox="0 0 220 220" aria-label="Kilter Records logo construction">
+            <circle class="mk-g" cx="110" cy="110" r="79" pathLength="100"/>
+            <line class="mk-g" x1="48" y1="48" x2="172" y2="172" pathLength="100"/>
+            <line class="mk-g" x1="172" y1="48" x2="48" y2="172" pathLength="100"/>
+            <rect class="mk-frame" x="48" y="48" width="124" height="124" pathLength="100"/>
+            <rect class="mk-bar" x="66" y="62" width="22" height="96"/>
+            <rect class="mk-a mk-a1" x="94" y="74" width="64" height="20" style="--fin:-45deg"/>
+            <g class="mk-wob"><rect class="mk-a mk-a2" x="94" y="126" width="64" height="20" style="--fin:45deg"/></g>
+            <circle cx="110" cy="110" r="7" fill="none" stroke="#191512" stroke-width="1.2" opacity=".5"/>
+          </svg>
+          <div class="lockups">
+            <span class="lockup b" style="--bd:1.15s"><i></i>KILTER</span>
+            <span class="lockup inv b" style="--bd:1.3s"><i></i>KILTER</span>
+            <span class="lockup out b" style="--bd:1.45s"><i></i>KILTER</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spread 2 -->
+      <article class="spread sp2" style="--ink:var(--green)">
+        <span class="s-ghost" aria-hidden="true">02</span>
+        <div class="s-head b" style="--bd:.05s"><span>№ 02</span><span>PACKAGING SYSTEM</span><span>2023</span></div>
+        <h3 class="s-title b">FERMENT</h3>
+        <p class="s-pull b" style="--bd:.1s">“Shelf presence<br><em>without shouting.</em>”</p>
+        <div class="s-copy b" style="--bd:.16s">
+          <p>Thirty-one SKUs, one grid. Ferment's jars are labelled like specimen cards — latin binomials at 8&nbsp;pt, flavour at 190&nbsp;pt — because the product is alive and the design should look like it knows.</p>
+          <p>No photography. The typography does the tasting.</p>
+        </div>
+        <div class="s-meta b" style="--bd:.24s">CLIENT — FERMENT BV<br>SCOPE — PACKAGING, NAMING, 31 SKU<br>INK — <i class="chip" style="background:var(--green)"></i>GREEN 045</div>
+        <div class="s-visual">
+          <div class="jar-shelf">
+            <div class="jar lid" style="--band:var(--green);--jd:.35s;--jr:-2deg">
+              <div class="jar-band"><b>FERMENT</b></div>
+              <div class="jar-name">Brassica oleracea</div><div class="jar-info">№001 — SAUERKRAUT<br>850 ML — LIVE</div><div class="bc"></div>
+            </div>
+            <div class="jar lid" style="--band:var(--orange);--jd:.5s;--jr:0deg">
+              <div class="jar-band"><b>FERMENT</b></div>
+              <div class="jar-name">Capsicum annuum</div><div class="jar-info">№002 — KIMCHI<br>850 ML — LIVE</div><div class="bc"></div>
+            </div>
+            <div class="jar lid" style="--band:var(--pink);--jd:.65s;--jr:2deg">
+              <div class="jar-band"><b>FERMENT</b></div>
+              <div class="jar-name">Beta vulgaris</div><div class="jar-info">№003 — BEET KVAS<br>750 ML — LIVE</div><div class="bc"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spread 3 -->
+      <article class="spread sp3" style="--ink:var(--pink)">
+        <span class="s-ghost" aria-hidden="true">03</span>
+        <div class="s-head b" style="--bd:.05s"><span>№ 03</span><span>POSTER SERIES × 12</span><span>2024</span></div>
+        <h3 class="s-title b">NO<br>SIGNAL</h3>
+        <p class="s-pull b" style="--bd:.1s">“Twelve posters for a cinema<br>that <em>locks phones away.</em>”</p>
+        <div class="s-copy b" style="--bd:.16s">
+          <p>A midnight programme for Kino Vondel. Each poster sets one word from the film's script at screaming size, then lets the riso misregistration do the acting.</p>
+          <p>Two passes on 90&nbsp;gsm newsprint. Half the run sold out before the credits rolled.</p>
+        </div>
+        <div class="s-meta b" style="--bd:.24s">CLIENT — KINO VONDEL<br>SCOPE — SERIES DESIGN, PRINT<br>INK — <i class="chip" style="background:var(--pink)"></i>FLUOR PINK 21</div>
+        <div class="s-visual">
+          <div class="fan">
+            <div class="poster" style="--fx:-13%;--fr:-9deg;--pd:.3s;--pc:var(--teal)">
+              <span class="ptag">NO SIGNAL / 07</span><div class="dots"></div>
+              <h4>HUSH</h4><h4 class="pword2">HUSH</h4>
+              <div class="pcred">KINO VONDEL — 00:15<br>DIR. L. BRANDT — 35MM</div>
+            </div>
+            <div class="poster" style="--fx:0%;--fr:-1deg;--pd:.45s;--pc:var(--pink)">
+              <span class="ptag">NO SIGNAL / 08</span><div class="dots"></div>
+              <h4>STATIC</h4><h4 class="pword2">STATIC</h4>
+              <div class="pcred">KINO VONDEL — 00:45<br>DIR. M. OKAFOR — 16MM</div>
+            </div>
+            <div class="poster" style="--fx:13%;--fr:8deg;--pd:.6s;--pc:var(--blue)">
+              <span class="ptag">NO SIGNAL / 09</span><div class="dots"></div>
+              <h4>VOLT</h4><h4 class="pword2">VOLT</h4>
+              <div class="pcred">KINO VONDEL — 02:00<br>DIR. I. PETROV — 35MM</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Spread 4 -->
+      <article class="spread sp4" style="--ink:var(--purple)">
+        <span class="s-ghost" aria-hidden="true">04</span>
+        <div class="s-head b" style="--bd:.05s"><span>№ 04</span><span>EDITORIAL / BOOK DESIGN</span><span>2025</span></div>
+        <h3 class="s-title b">ASFALT<br>PRESS</h3>
+        <p class="s-pull b" style="--bd:.1s">“Books built<br><em>like overpasses.</em>”</p>
+        <div class="s-copy b" style="--bd:.16s">
+          <p>A publisher of writing about cities. The grid takes its logic from road markings — lane widths, dashes, merge arrows — and holds 320 pages together without a single ornament.</p>
+          <p>The colophon is set in the typeface of highway signage. Obviously.</p>
+        </div>
+        <div class="s-meta b" style="--bd:.24s">CLIENT — ASFALT PRESS<br>SCOPE — SERIES GRID, 6 TITLES<br>INK — <i class="chip" style="background:var(--purple)"></i>PURPLE 265</div>
+        <div class="s-visual">
+          <div class="book b" style="--bd:.3s">
+            <div class="pg">
+              <div class="run"><span>ASFALT PRESS — FALL 2025</span><span>ESSAYS III</span></div>
+              <div class="body">Cities are read at the speed of traffic. The underpass is a paragraph; the overpass, a footnote that got ambitious. This issue collects eleven essays on concrete, wayfinding, and the particular loneliness of parking garages at three in the morning. None of the writers drive. All of them walk the same ring road, at different hours, taking notes in the margins of free transit maps they refuse to pay for. The result is a guidebook to a city that keeps repaving itself mid-sentence.</div>
+              <span class="folio-no">112</span>
+            </div>
+            <div class="pg flip">
+              <div class="run"><span>CHAPTER</span><span>№ 03</span></div>
+              <div class="chapno">3</div>
+              <div class="chapt">The Underpass</div>
+              <div class="body">Every city has a room it pretends not to keep. Down here the typography is municipal and the acoustics are generous. We measured the echo in seconds and set the chapter openers to match.</div>
+              <span class="folio-no" style="align-self:flex-start">113</span>
+            </div>
+            <span class="spine-dot"></span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- P.07 TYPE SPECIMENS -->
+  <section class="sec" id="type" data-folio="P.07 — TYPE SPECIMENS">
+    <header class="sec-head">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">TYPE<br>SPECIMENS</h2>
+      <p class="sec-sub">THREE CUTS FROM THE FOUNDRY DRAWER. PDFS ARE CUT ON DEMAND, WHILE YOU WAIT.</p>
+    </header>
+    <p class="spec-hint">DRAG TO ARRANGE — PINCH, TRACKPAD-PINCH OR PULL THE CORNER TO RESIZE</p>
+    <div class="spec-table" id="specTable">
+      <div class="spec" data-spec="grotesk" style="--sc:var(--orange);left:5%;top:44px;--r:-2deg">
+        <div class="spec-top"><strong>VELLUM GROTESK</strong><span>9 STYLES</span></div>
+        <div class="spec-glyph">Aa</div>
+        <div class="spec-charset">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;?!§€@()</div>
+        <div class="spec-water" style="font-weight:800">
+          <div style="font-size:32px">Hamburgefonstiv</div>
+          <div style="font-size:22px">Hamburgefonstiv 22/26</div>
+          <div style="font-size:14px">Hamburgefonstiv — 14/18 — tight aperture, bad temper</div>
+        </div>
+        <div class="spec-foot"><span>€40 / STYLE</span><button class="spec-pdf" data-pdf="grotesk">SPECIMEN PDF ↓</button></div>
+        <span class="spec-grip" aria-hidden="true"></span>
+      </div>
+      <div class="spec serifspec" data-spec="serif" style="--sc:var(--blue);left:46%;top:330px;--r:1.6deg">
+        <div class="spec-top"><strong style="font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;font-size:17px">Vellum Serif</strong><span>2 STYLES</span></div>
+        <div class="spec-glyph">Qu</div>
+        <div class="spec-charset" style="font-family:var(--serif);font-style:italic;word-break:normal">AaBbCcDdEeFfGgHh IiJjKkLlMmNn 0123456789 &amp;?!ﬁﬂ</div>
+        <div class="spec-water">
+          <div style="font-size:32px">Hamburgefonstiv</div>
+          <div style="font-size:22px">Hamburgefonstiv 22/26</div>
+          <div style="font-size:14px">For pull quotes and last words — 14/18</div>
+        </div>
+        <div class="spec-foot"><span>€55 / STYLE</span><button class="spec-pdf" data-pdf="serif">SPECIMEN PDF ↓</button></div>
+        <span class="spec-grip" aria-hidden="true"></span>
+      </div>
+      <div class="spec monospec" data-spec="mono" style="--sc:var(--teal);left:18%;top:800px;--r:-1.2deg">
+        <div class="spec-top"><strong style="font-family:var(--mono)">KILTER MONO</strong><span>4 STYLES</span></div>
+        <div class="spec-glyph">01</div>
+        <div class="spec-charset" style="font-family:var(--mono);font-size:13px">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &lt;/&gt;{}[]#@*</div>
+        <div class="spec-water">
+          <div style="font-size:28px">Hamburgefonstiv</div>
+          <div style="font-size:19px">Hamburgefonstiv 19/24</div>
+          <div style="font-size:13px">Metadata, timecode, receipts — 13/18</div>
+        </div>
+        <div class="spec-foot"><span>€35 / STYLE</span><button class="spec-pdf" data-pdf="mono">SPECIMEN PDF ↓</button></div>
+        <span class="spec-grip" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- P.08 LECTURES & TALKS -->
+  <section class="sec" id="talks" data-folio="P.08 — LECTURES">
+    <header class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">LECTURES<br>&amp; TALKS</h2>
+      <p class="sec-sub">THE SLIDES ARE TYPE ONLY, SO THE TALKS TRAVEL AS TEXT. PRESS PLAY — THE FOOTAGE IS RENDERED LIVE.</p>
+    </header>
+    <div class="talks-grid">
+      <div class="player paused" id="player">
+        <div class="screen" id="screen"><canvas id="film" width="1280" height="720"></canvas>
+          <div class="pv-overlay">
+            <svg width="74" height="74" viewBox="0 0 74 74" aria-hidden="true"><polygon points="26,18 60,37 26,56" fill="#F2EEE3"/></svg>
+          </div>
+        </div>
+        <div class="pctl">
+          <button class="pbtn" id="pp" aria-label="Play or pause">
+            <svg id="icPlay" width="14" height="14" viewBox="0 0 14 14"><polygon points="2,1 13,7 2,13" fill="currentColor"/></svg>
+            <svg id="icPause" width="14" height="14" viewBox="0 0 14 14" style="display:none"><rect x="2" y="1" width="3.6" height="12" fill="currentColor"/><rect x="8.4" y="1" width="3.6" height="12" fill="currentColor"/></svg>
+          </button>
+          <div class="scrub" id="scrub"><div class="scrub-rail"><div class="scrub-fill" id="scrubFill"><i></i></div></div></div>
+          <span class="ptime" id="ptime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <ol class="talk-list" id="talkList">
+        <li class="talk is-current" data-i="0">
+          <span class="t-no">01</span>
+          <div><h3>“The Logo Is the Least of It”</h3><p class="t-meta">AGI OPEN — ROTTERDAM — 2024 — <span data-dur></span> EXCERPT</p></div>
+          <span class="t-arrow">→</span>
+        </li>
+        <li class="talk" data-i="1">
+          <span class="t-no">02</span>
+          <div><h3>“Two Inks Are Enough”</h3><p class="t-meta">TYPOGRAPHICS — NEW YORK — 2023 — <span data-dur></span> EXCERPT</p></div>
+          <span class="t-arrow">→</span>
+        </li>
+        <li class="talk" data-i="2">
+          <span class="t-no">03</span>
+          <div><h3>“Designing Camera-Ready”</h3><p class="t-meta">US BY NIGHT — ANTWERP — 2025 — <span data-dur></span> EXCERPT</p></div>
+          <span class="t-arrow">→</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- P.09 COLOPHON / INK LIBRARY -->
+  <section class="sec" id="colophon" data-folio="P.09 — COLOPHON">
+    <header class="sec-head">
+      <span class="sec-no">05</span>
+      <h2 class="sec-title">COLOPHON<br>&amp; INKS</h2>
+      <p class="sec-sub">EVERY PROJECT IN THIS BOOK RUNS ON ONE SPOT INK. SCRUB THE STRIP TO AUDITION THE LIBRARY.</p>
+    </header>
+    <div class="colo-grid">
+      <div class="spec-rows">
+        <div class="spec-row"><b>PAPER</b><span>MUNKEN POLAR 120 GSM</span></div>
+        <div class="spec-row"><b>PRESS</b><span>RISO MZ790, 2 DRUMS</span></div>
+        <div class="spec-row"><b>TYPEFACES</b><span>SEE PP. 07</span></div>
+        <div class="spec-row"><b>BINDING</b><span>SMYTH-SEWN, OPEN SPINE</span></div>
+        <div class="spec-row"><b>EDITION</b><span>300 NUMBERED COPIES</span></div>
+        <div class="spec-row"><b>ERRORS</b><span>KEPT, WHERE CHARMING</span></div>
+      </div>
+      <div class="ink-read">
+        <span class="ink-idx" id="inkIdx">02 / 08</span>
+        <h3><span class="ink-swatch" id="inkSwatch"></span><span id="inkName">ORANGE</span></h3>
+        <p class="ink-meta" id="inkMeta">#FF6C2F — “THE LOUD ONE” — DRUM 02</p>
+      </div>
+    </div>
+    <div class="strip-wrap">
+      <div class="strip" id="strip"><div class="track" id="track"></div><div class="center-line"></div></div>
+      <div class="strip-caption"><span>← DRAG THE STRIP →</span><span>SOY-BASED, ARCHIVAL, OPINIONATED</span></div>
+    </div>
+  </section>
+
+  <!-- P.10 CONTACT -->
+  <section class="contact" id="contact" data-folio="P.10 — CONTACT">
+    <h2 class="c-big">GOT A BRAND<br>THAT NEEDS <em>spine?</em></h2>
+    <div class="c-mailrow">
+      <a class="c-mail" href="mailto:hello@margovellum.com">HELLO@MARGOVELLUM.COM <span>↗</span></a>
+      <button class="c-copy" id="copyMail">COPY ADDRESS</button>
+    </div>
+    <div class="c-cols">
+      <div class="c-col"><b>NEW BUSINESS</b>hello@margovellum.com<br>Reply within 48h, in ink.</div>
+      <div class="c-col"><b>LECTURES</b>talks@margovellum.com<br>Slides travel as type only.</div>
+      <div class="c-col"><b>STUDIO</b>Keileweg 14, Rotterdam<br>Visits by appointment.</div>
+      <div class="c-col"><b>BOOKING</b>Taking projects from<br>February 2026.</div>
+    </div>
+    <footer class="foot">
+      <span>© 2025 MARGO VELLUM — FIRST EDITION</span>
+      <span>SET IN ARCHIVO, INSTRUMENT SERIF &amp; SPACE MONO. PRINTED NOWHERE. MADE OF CODE.</span>
+      <button id="toTop">TOP ↑</button>
+    </footer>
+  </section>
+</main>
+
+<div id="toast" role="status"></div>
+
+<script>
+(()=>{'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const INK='#191512',PAPER='#F2EEE3';
+
+/* ---------- toast ---------- */
+let toastT;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600);};
+
+/* ---------- hero: split + kinetic letters ---------- */
+ $$('.hline').forEach((ln,li)=>{
+  [...ln.dataset.text].forEach((ch,i)=>{
+    const s=document.createElement('span');
+    s.className='lt'+(li===1&&i===ln.dataset.text.length-1?' mis':'');
+    s.textContent=ch;s.style.setProperty('--d',(li*.34+i*.055)+'s');
+    ln.appendChild(s);
+  });
+});
+const lts=$$('.hero-name .lt').map(el=>({el,w:800,wd:86}));
+let mx=-9e3,my=-9e3;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+const ease=t=>t*t*(3-2*t);
+function heroLoop(t){
+  for(let i=0;i<lts.length;i++){
+    const o=lts[i],r=o.el.getBoundingClientRect();
+    const d=Math.hypot(mx-(r.left+r.width/2),my-(r.top+r.height/2));
+    const inf=reduced?0:ease(Math.max(0,1-d/240));
+    const wave=reduced?0:Math.sin(t/720+i*.72)*3.2;
+    o.wd+=((86+inf*39+wave)-o.wd)*.14;
+    o.w+=((800+inf*100)-o.w)*.14;
+    o.el.style.fontVariationSettings=`'wght' ${o.w.toFixed(1)}, 'wdth' ${o.wd.toFixed(1)}`;
+  }
+  requestAnimationFrame(heroLoop);
+}
+setTimeout(()=>{$('#heroName').classList.add('live');requestAnimationFrame(heroLoop);},2100);
+
+/* ---------- riso cursor trail ---------- */
+const tcv=$('#trail'),tctx=tcv.getContext('2d');
+let dots=[],lx=-9,ly=-9;
+const sizeTrail=()=>{tcv.width=innerWidth;tcv.height=innerHeight;};
+sizeTrail();addEventListener('resize',sizeTrail);
+if(!reduced){
+  addEventListener('pointermove',e=>{
+    if(Math.hypot(e.clientX-lx,e.clientY-ly)<16)return;
+    lx=e.clientX;ly=e.clientY;
+    const c=Math.random()<.5?'#FF6C2F':'#0078BF',c2=c==='#FF6C2F'?'#0078BF':'#FF6C2F';
+    dots.push({x:e.clientX+(Math.random()*8-4),y:e.clientY+(Math.random()*8-4),r:1.2+Math.random()*2.6,a:.5,c,c2,vx:(Math.random()-.5)*.4,vy:-.15-Math.random()*.2});
+    if(dots.length>240)dots.splice(0,dots.length-240);
+  },{passive:true});
+  (function trailLoop(){
+    tctx.clearRect(0,0,tcv.width,tcv.height);
+    for(let i=dots.length-1;i>=0;i--){const d=dots[i];
+      d.a-=.007;d.x+=d.vx;d.y+=d.vy;
+      if(d.a<=0){dots.splice(i,1);continue;}
+      tctx.globalAlpha=d.a*.4;tctx.fillStyle=d.c2;tctx.beginPath();tctx.arc(d.x+3,d.y+2.5,d.r,0,7);tctx.fill();
+      tctx.globalAlpha=d.a;tctx.fillStyle=d.c;tctx.beginPath();tctx.arc(d.x,d.y,d.r,0,7);tctx.fill();
+    }
+    tctx.globalAlpha=1;requestAnimationFrame(trailLoop);
+  })();
+}
+
+/* ---------- statement word reveal ---------- */
+ $$('.statement [data-words]').forEach((line,li)=>{
+  const tmp=document.createElement('div');tmp.innerHTML=line.innerHTML;
+  let wi=0;(function walk(node){
+    [...node.childNodes].forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(w=>{
+          if(!w.trim()){frag.appendChild(document.createTextNode(' '));return;}
+          const s=document.createElement('span');s.className='st-word';s.style.setProperty('--wd',(li*.25+wi*.07)+'s');s.textContent=w;wi++;frag.appendChild(s);
+        });
+        node.replaceChild(frag,n);
+      } else walk(n);
+    });
+  })(tmp);line.innerHTML=tmp.innerHTML;
+});
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}}),{threshold:.35})
+  .observe($('.statement'));
+
+/* ---------- work: sticky cross-fade spreads ---------- */
+const wrap=$('#work'),spreads=$$('.spread'),NS=spreads.length,
+  wBar=$('#wProgBar'),wCount=$('#wCount'),
+  spreadNames=['KILTER RECORDS','FERMENT','NO SIGNAL','ASFALT PRESS'];
+let curIdx=-1;
+function workP(){
+  const r=wrap.getBoundingClientRect();
+  return clamp(-r.top/(r.height-innerHeight),0,1)*(NS-1);
+}
+function workScroll(){
+  const p=workP();
+  spreads.forEach((s,i)=>{
+    const d=p-i,a=clamp(1-Math.abs(d)*1.35,0,1);
+    s.style.opacity=a;
+    s.style.transform=`translateX(${(-d*9).toFixed(2)}vw)`;
+    s.style.visibility=a<=0?'hidden':'visible';
+    s.style.pointerEvents=a>.85?'auto':'none';
+    s.style.zIndex=10+i;
+  });
+  const idx=clamp(Math.round(p),0,NS-1);
+  if(idx!==curIdx){
+    curIdx=idx;
+    spreads.forEach((s,i)=>s.classList.toggle('is-active',i===idx));
+  }
+  wCount.textContent=String(idx+1).padStart(2,'0');
+  wBar.style.transform=`scaleX(${p/(NS-1)})`;
+}
+
+/* ---------- folio + clock ---------- */
+const folio=$('#folioPage')||document.querySelector('.bar.bot span:first-child');
+const secEls=$$('[data-folio]');
+function updateFolio(){
+  const mid=scrollY+innerHeight*.5;let cur=secEls[0];
+  for(const s of secEls){if(s.offsetTop<=mid)cur=s;}
+  let label=cur.dataset.folio;
+  if(cur.id==='work')label=`P.${String(3+clamp(Math.round(workP()),0,NS-1)).padStart(2,'0')} — ${spreadNames[clamp(Math.round(workP()),0,NS-1)]}`;
+  folio.textContent=label;
+}
+function onScroll(){workScroll();updateFolio();}
+let tick=false;
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{onScroll();tick=false;});}},{passive:true});
+onScroll();
+setInterval(()=>{ $('#localTime') ;document.querySelectorAll('.bar.bot span')[2] &&
+ (document.querySelectorAll('.bar.bot span')[2].textContent='LOCAL '+new Date().toLocaleTimeString('en-GB'));},1000);
+
+/* ---------- smooth nav ---------- */
+ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=$(a.getAttribute('href'));
+  if(t){e.preventDefault();t.scrollIntoView({behavior:reduced?'auto':'smooth'});}
+}));
+ $('#toTop').addEventListener('click',()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
+
+/* ---------- specimen drag / pinch / resize ---------- */
+let zTop=20;
+ $$('.spec').forEach(card=>{
+  const st={x:0,y:0,s:1,r:parseFloat(card.dataset.r)||0};
+  const apply=()=>card.style.transform=`translate(${st.x}px,${st.y}px) rotate(${st.r}deg) scale(${st.s})`;
+  const pts=new Map();let pinchBase=null,moveBase=null;
+  card.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.spec-pdf')||e.target.closest('.spec-grip'))return;
+    card.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    card.classList.add('grab');card.style.zIndex=++zTop;
+    if(pts.size===2){const[a,b]=[...pts.values()];pinchBase={d:Math.hypot(a.x-b.x,a.y-b.y),s:st.s};moveBase=null;}
+    else moveBase={x:e.clientX,y:e.clientY,ox:st.x,oy:st.y};
+  });
+  card.addEventListener('pointermove',e=>{
+    if(!pts.has(e.pointerId))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2&&pinchBase){const[a,b]=[...pts.values()];st.s=clamp(pinchBase.s*Math.hypot(a.x-b.x,a.y-b.y)/pinchBase.d,.55,1.8);}
+    else if(moveBase){st.x=moveBase.ox+e.clientX-moveBase.x;st.y=moveBase.oy+e.clientY-moveBase.y;}
+    apply();
+  });
+  const end=e=>{pts.delete(e.pointerId);
+    if(pts.size===1){const[p]=[...pts.values()];moveBase={x:p.x,y:p.y,ox:st.x,oy:st.y};pinchBase=null;}
+    if(!pts.size){pinchBase=null;moveBase=null;card.classList.remove('grab');}};
+  card.addEventListener('pointerup',end);card.addEventListener('pointercancel',end);
+  const grip=card.querySelector('.spec-grip');
+  grip.addEventListener('pointerdown',e=>{
+    e.stopPropagation();grip.setPointerCapture(e.pointerId);
+    const sx=e.clientX,sy=e.clientY,ss=st.s;
+    const mv=ev=>{st.s=clamp(ss+(ev.clientX-sx+ev.clientY-sy)/260,.55,1.8);apply();};
+    const up=()=>{grip.removeEventListener('pointermove',mv);grip.removeEventListener('pointerup',up);grip.removeEventListener('pointercancel',up);};
+    grip.addEventListener('pointermove',mv);grip.addEventListener('pointerup',up);grip.addEventListener('pointercancel',up);
+  });
+  card.addEventListener('wheel',e=>{if(!e.ctrlKey)return;e.preventDefault();
+    st.s=clamp(st.s*(e.deltaY<0?1.05:0.952),.55,1.8);apply();},{passive:false});
+  apply();
+});
+
+/* ---------- specimen PDF (hand-built PDF with embedded JPEG) ---------- */
+const SPECS={
+  grotesk:{no:'01',file:'vellum-grotesk',name:'VELLUM GROTESK',family:'Archivo',weight:'800',italic:false,
+    styles:'9 STYLES — THIN TO BLACK, WITH ITALICS',ink:'#FF6C2F',glyph:'Aa',
+    blurb:'The workhorse. Tight aperture, flat terminals, bad temper. Built for headlines that need to be forgiven by nobody.',
+    charset:['ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz','0123456789 &?!§€@()[]{}']},
+  serif:{no:'02',file:'vellum-serif',name:'Vellum Serif',family:'"Instrument Serif"',weight:'400',italic:true,
+    styles:'2 STYLES — ROMAN & ITALIC',ink:'#0078BF',glyph:'Qu',
+    blurb:'For pull quotes and last words. High contrast, sharp entry strokes, and just enough doubt in the terminals.',
+    charset:['AaBbCcDdEeFfGgHhIiJjKkLl','MmNnOoPpQqRrSsTtUuVvWw','0123456789 &?!ﬁﬂ()']},
+  mono:{no:'03',file:'kilter-mono',name:'KILTER MONO',family:'"Space Mono"',weight:'700',italic:false,
+    styles:'4 STYLES — WITH TRUE ITALICS',ink:'#00838A',glyph:'01',
+    blurb:'Metadata, timecode, receipts. Every glyph the same width, every opinion different.',
+    charset:['ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz','0123456789 </>{}[]#@*']}
+};
+function buildPDF(jpegBytes,imgW,imgH,w,h){
+  const chunks=[];let off=0;const start=[];
+  const pushB=b=>{chunks.push(b);off+=b.length;};
+  const S=s=>pushB(new TextEncoder().encode(s));
+  pushB(new Uint8Array([0x25,0x50,0x44,0x46,0x2D,0x31,0x2E,0x34,0x0A,0x25,0xE2,0xE3,0xCF,0xD3,0x0A]));
+  start[1]=off;S('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+  start[2]=off;S('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+  start[3]=off;S(`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${w} ${h}] /Resources << /XObject << /Im0 4 0 R >> /ProcSet [/PDF /ImageC] >> /Contents 5 0 R >>\nendobj\n`);
+  start[4]=off;
+  S(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${imgW} /Height ${imgH} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`);
+  pushB(jpegBytes);S('\nendstream\nendobj\n');
+  const cont=`q ${w} 0 0 ${h} 0 0 cm /Im0 Do Q`;
+  start[5]=off;S(`5 0 obj\n<< /Length ${cont.length} >>\nstream\n${cont}\nendstream\nendobj\n`);
+  const xrefOff=off;
+  let x='xref\n0 6\n0000000000 65535 f\r\n';
+  for(let i=1;i<=5;i++)x+=String(start[i]).padStart(10,'0')+' 00000 n \r\n';
+  x+=`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefOff}\n%%EOF`;
+  S(x);
+  return new Blob(chunks,{type:'application/pdf'});
+}
+function wrapText(g,text,x,y,maxW,lh){
+  const words=text.split(' ');let line='',yy=y;
+  for(const w of words){
+    const test=line?line+' '+w:w;
+    if(g.measureText(test).width>maxW&&line){g.fillText(line,x,yy);line=w;yy+=lh;}
+    else line=test;
+  }
+  if(line)g.fillText(line,x,yy);
+  return yy;
+}
+async function cutSpecimen(key){
+  const sp=SPECS[key];
+  await Promise.all([
+    document.fonts.load('800 100px Archivo'),document.fonts.load('900 100px Archivo'),
+    document.fonts.load('italic 400 100px "Instrument Serif"'),
+    document.fonts.load('700 100px "Space Mono"'),document.fonts.load('400 100px "Space Mono"')
+  ]).catch(()=>{});
+  const W=1240,H=1754,c=document.createElement('canvas');c.width=W;c.height=H;
+  const g=c.getContext('2d');
+  g.fillStyle=PAPER;g.fillRect(0,0,W,H);
+  g.strokeStyle=INK;g.lineWidth=5;g.strokeRect(48,48,W-96,H-96);
+  g.lineWidth=1.5;g.strokeRect(66,66,W-132,H-132);
+  g.fillStyle=INK;g.textBaseline='alphabetic';
+  g.font='400 24px "Space Mono"';
+  g.fillText('MARGO VELLUM TYPE — SPECIMEN',100,136);
+  g.textAlign='right';g.fillText('2025 — SHEET '+sp.no,W-100,136);g.textAlign='left';
+  let size=176;g.font=`${sp.italic?'italic ':''}${sp.weight} ${size}px ${sp.family}`;
+  let w=g.measureText(sp.name).width;
+  if(w>W-200){size*=(W-200)/w;g.font=`${sp.italic?'italic ':''}${sp.weight} ${size}px ${sp.family}`;}
+  const ny=180+size*.78;g.fillText(sp.name,100,ny);
+  g.fillStyle=sp.ink;g.fillRect(100,ny+26,W-200,52);
+  g.fillStyle=PAPER;g.font='400 22px "Space Mono"';
+  g.fillText(sp.styles,116,ny+60);
+  g.fillStyle=INK;
+  /* giant glyph with misregistered ghost */
+  let gs=440;g.font=`${sp.italic?'italic ':''}${sp.weight} ${gs}px ${sp.family}`;
+  const gw=g.measureText(sp.glyph).width;
+  if(gw>W-220){gs*=(W-220)/gw;g.font=`${sp.italic?'italic ':''}${sp.weight} ${gs}px ${sp.family}`;}
+  const gy=ny+150+gs*.74;
+  g.fillStyle=sp.ink;g.fillText(sp.glyph,114,gy+10);
+  g.fillStyle=INK;g.fillText(sp.glyph,100,gy);
+  /* charset */
+  let cy=gy+70;g.font=`${sp.italic?'italic ':''}${sp.weight} 46px ${sp.family}`;
+  sp.charset.forEach(l=>{cy+=58;g.fillText(l,100,cy);});
+  /* waterfall */
+  cy+=40;
+  [[96,'Hamburgefonstiv'],[62,'Hamburgefonstiv 62/70'],[40,'Hamburgefonstiv — 40/48'],[26,'Hamburgefonstiv — small sizes hold their nerve'],[17,'Hamburgefonstiv — 17/24 caption cut, still legible on newsprint']]
+  .forEach(([sz,txt])=>{
+    cy+=sz*1.28;
+    g.strokeStyle=INK;g.lineWidth=1;g.beginPath();g.moveTo(100,cy-sz-14);g.lineTo(W-100,cy-sz-14);g.stroke();
+    g.font=`${sp.italic?'italic ':''}${sp.weight} ${sz}px ${sp.family}`;g.fillStyle=INK;
+    g.fillText(txt,100,cy);
+    g.font='400 17px "Space Mono"';g.textAlign='right';g.fillText(sz+' PT',W-100,cy);g.textAlign='left';
+  });
+  cy+=56;
+  g.strokeStyle=INK;g.lineWidth=2.5;g.beginPath();g.moveTo(100,cy);g.lineTo(W-100,cy);g.stroke();
+  g.font='italic 400 33px "Instrument Serif"';g.fillStyle=INK;
+  wrapText(g,sp.blurb,100,cy+48,W-200,42);
+  g.strokeStyle=INK;g.lineWidth=1.5;g.beginPath();g.moveTo(100,H-140);g.lineTo(W-100,H-140);g.stroke();
+  g.font='400 20px "Space Mono"';
+  g.fillText('MARGOVELLUM.COM — SPECIMEN '+sp.no+' / 03 — A4 — CUT '+new Date().toISOString().slice(0,10),100,H-104);
+  g.textAlign='right';g.fillText('MUNKEN POLAR 120 GSM (SIMULATED)',W-100,H-104);g.textAlign='left';
+  const url=c.toDataURL('image/jpeg',.9);
+  const bin=atob(url.split(',')[1]);
+  const bytes=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  const blob=buildPDF(bytes,W,H,595.28,841.89);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=`margo-vellum_${sp.file}_specimen.pdf`;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  toast(`SPECIMEN EXPORTED — ${(blob.size/1024).toFixed(0)} KB — ${sp.file.toUpperCase()}`);
+}
+ $$('.spec-pdf').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();cutSpecimen(b.dataset.pdf);}));
+
+/* ---------- talks: generative kinetic-type player ---------- */
+const C={ink:INK,paper:PAPER,orange:'#FF6C2F',blue:'#0078BF',pink:'#FF48B0',purple:'#765BA7',teal:'#00838A'};
+const TALKS=[
+ {title:'THE LOGO IS THE LEAST OF IT',venue:'AGI OPEN — ROTTERDAM',frames:[
+   {m:'slam',l:['THE LOGO'],bg:C.ink,fg:C.paper,d:2.8},
+   {m:'slam',l:['IS THE LEAST'],bg:C.orange,fg:C.paper,d:2.4},
+   {m:'slam',l:['OF IT.'],bg:C.paper,fg:C.ink,d:2.0},
+   {m:'rise',l:['A BRAND IS WHAT','IT DOES WHEN','NOBODY LOOKS.'],d:4.6},
+   {m:'scroll',t:'WHAT IT DOES WHEN NOBODY IS LOOKING — ',d:6.0},
+   {m:'rise',l:['SO BUILD','THE DOING FIRST.'],d:4.2},
+   {m:'slam',l:['Q&A'],bg:C.blue,fg:C.paper,d:2.8}]},
+ {title:'TWO INKS ARE ENOUGH',venue:'TYPOGRAPHICS — NEW YORK',frames:[
+   {m:'slam',l:['TWO INKS'],bg:C.orange,fg:C.paper,d:2.6},
+   {m:'slam',l:['ARE ENOUGH.'],bg:C.paper,fg:C.ink,d:2.2},
+   {m:'rise',l:['BLACK IS NOT','A COLOUR.'],d:3.8},
+   {m:'scroll',t:'IT IS ALL OF THEM AT ONCE — OVERPRINT AND PRAY — ',d:5.6},
+   {m:'slam',l:['REGISTRATION'],bg:C.blue,fg:C.paper,d:2.4},
+   {m:'rise',l:['IS A SUGGESTION.'],d:3.2},
+   {m:'slam',l:['FIN.'],bg:C.ink,fg:C.paper,d:2.4}]},
+ {title:'DESIGNING CAMERA-READY',venue:'US BY NIGHT — ANTWERP',frames:[
+   {m:'slam',l:['CAMERA-'],bg:C.pink,fg:C.paper,d:2.2},
+   {m:'slam',l:['READY.'],bg:C.paper,fg:C.ink,d:2.0},
+   {m:'rise',l:['EVERY FILE IS','A PROMISE','TO A PRINTER.'],d:4.8},
+   {m:'scroll',t:'BLEED — GRID — KERN — PROOF — ',d:5.4},
+   {m:'slam',l:['THE PRINTER'],bg:C.purple,fg:C.paper,d:2.6},
+   {m:'rise',l:['ALWAYS KNOWS.','ASK THEM.'],d:4.0},
+   {m:'slam',l:['FIN.'],bg:C.teal,fg:C.paper,d:2.4}]}
+];
+TALKS.forEach(t=>t.total=t.frames.reduce((a,f)=>a+f.d,0));
+ $$('[data-dur]').forEach((el,i)=>el.textContent='00:'+String(Math.round(TALKS[i].total)).padStart(2,'0'));
+
+const cv=$('#film'),cx=cv.getContext('2d');
+const CW=1280,CH=720,dpr=Math.min(devicePixelRatio||1,2);
+cv.width=CW*dpr;cv.height=CH*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+const eo=t=>1-Math.pow(1-t,4),ec=t=>1-Math.pow(1-t,3);
+function fit(lines,maxW,size,wt,it){
+  let s=size;
+  for(;;){cx.font=`${it?'italic ':''}${wt} ${s}px Archivo`;
+    const w=Math.max(...lines.map(l=>cx.measureText(l).width));
+    if(w<=maxW||s<10)return s;s*=.95;}
+}
+function drawTalk(talk,t){
+  let acc=0,f=talk.frames[talk.frames.length-1],local=1;
+  for(const fr of talk.frames){if(t<acc+fr.d){f=fr;local=(t-acc)/fr.d;break;}acc+=fr.d;}
+  cx.fillStyle=f.bg||C.paper;cx.fillRect(0,0,CW,CH);
+  if(f.m==='slam'){
+    const e=eo(clamp(local/.28,0,1)),a=clamp(local/.14,0,1),shake=(1-e)*6;
+    const s=fit(f.l,CW*.82,150,'900',false);
+    cx.globalAlpha=a;cx.fillStyle=f.fg;cx.textAlign='center';cx.textBaseline='middle';
+    f.l.forEach((ln,i)=>{const y=CH/2+(i-(f.l.length-1)/2)*s*.98;
+      cx.save();cx.translate(CW/2+(Math.random()-.5)*shake,y+(Math.random()-.5)*shake);
+      cx.scale(1.32-.32*e,1.32-.32*e);cx.fillText(ln,0,0);cx.restore();});
+    cx.globalAlpha=1;
+  }else if(f.m==='rise'){
+    const s=fit(f.l,CW*.84,108,'800',false);
+    cx.textBaseline='middle';let gi=0;
+    f.l.forEach((ln,li)=>{
+      cx.fillStyle=C.ink;
+      const w=cx.measureText(ln).width;let x=CW/2-w/2;const y=CH/2+(li-(f.l.length-1)/2)*s*1.1;
+      for(const ch of ln){
+        const p=clamp(local*2.4-gi*.02,0,1),e=ec(p);
+        cx.globalAlpha=e;cx.fillText(ch,x,y+(1-e)*CH*.16);
+        x+=cx.measureText(ch).width;gi++;
+      }});
+    cx.globalAlpha=1;
+  }else if(f.m==='scroll'){
+    const s=104;cx.font='800 '+s+'px Archivo';cx.textBaseline='middle';
+    const seg=cx.measureText(f.t).width,sp=210;
+    const off=(local*f.d*sp)%seg;
+    cx.fillStyle=C.ink;
+    cx.fillRect(0,CH*.32,CW,2);cx.fillRect(0,CH*.68,CW,2);
+    for(let x=-off;x<CW;x+=seg)cx.fillText(f.t,x,CH*.42);
+    for(let x=off-seg;x<CW;x+=seg)cx.fillText(f.t,x,CH*.58);
+  }
+  /* burn-ins */
+  cx.font='400 21px "Space Mono"';cx.textBaseline='alphabetic';cx.textAlign='left';
+  cx.fillStyle=f.bg===C.paper||!f.bg?'rgba(25,21,18,.75)':'rgba(242,238,227,.75)';
+  const fr=Math.floor((t%1)*24);
+  cx.fillText('TC 00:'+String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t%60)).padStart(2,'0')+':'+String(fr).padStart(2,'0'),36,CH-30);
+  cx.textAlign='right';cx.fillText(talk.venue,CW-36,CH-30);
+  cx.textAlign='left';cx.fillText('RENDERED LIVE — NOT FOOTAGE',36,44);
+  /* grain */
+  cx.fillStyle='rgba(25,21,18,1)';
+  for(let i=0;i<70;i++){cx.globalAlpha=Math.random()*.05;
+    cx.fillRect(Math.random()*CW,Math.random()*CH,2,2);}
+  cx.globalAlpha=1;cx.textAlign='left';
+}
+const player=$('#player'),ppBtn=$('#pp'),icPlay=$('#icPlay'),icPause=$('#icPause'),
+  scrub=$('#scrub'),scrubFill=$('#scrubFill'),ptime=$('#ptime');
+let curTalk=0,t=0,playing=false,raf=null,lastTs=0;
+function fmt(s){return '00:'+String(Math.floor(s)).padStart(2,'0');}
+function render(){drawTalk(TALKS[curTalk],t);
+  scrubFill.style.transform=`scaleX(${t/TALKS[curTalk].total})`;
+  ptime.textContent=fmt(t)+' / '+fmt(TALKS[curTalk].total);}
+function setPlaying(p){
+  playing=p;player.classList.toggle('paused',!p);
+  icPlay.style.display=p?'none':'block';icPause.style.display=p?'block':'none';
+  if(p){lastTs=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(tick);}
+  else cancelAnimationFrame(raf);
+}
+function tick(ts){
+  t+=(ts-lastTs)/1000;lastTs=ts;
+  const total=TALKS[curTalk].total;
+  if(t>=total){t=total;setPlaying(false);}
+  render();
+  if(playing)raf=requestAnimationFrame(tick);
+}
+function loadTalk(i,autoplay){
+  curTalk=i;t=0;
+  $$('.talk').forEach((li,j)=>li.classList.toggle('is-current',j===i));
+  render();
+  if(autoplay)setPlaying(true);else setPlaying(false);
+}
+ppBtn.addEventListener('click',()=>{
+  if(!playing&&t>=TALKS[curTalk].total-.01)t=0;
+  setPlaying(!playing);});
+ $('#screen').addEventListener('click',()=>{
+  if(!playing&&t>=TALKS[curTalk].total-.01)t=0;
+  setPlaying(!playing);});
+function seekFromEvent(e){
+  const r=scrub.getBoundingClientRect();
+  t=clamp((e.clientX-r.left)/r.width,0,1)*TALKS[curTalk].total;
+  render();
+}
+scrub.addEventListener('pointerdown',e=>{
+  scrub.setPointerCapture(e.pointerId);seekFromEvent(e);
+  const mv=ev=>seekFromEvent(ev);
+  const up=()=>{scrub.removeEventListener('pointermove',mv);scrub.removeEventListener('pointerup',up);};
+  scrub.addEventListener('pointermove',mv);scrub.addEventListener('pointerup',up);
+});
+ $$('.talk').forEach(li=>li.addEventListener('click',()=>loadTalk(+li.dataset.i,true)));
+document.fonts.ready.then(()=>render());
+
+/* ---------- ink library film strip ---------- */
+const INKS=[
+ {n:'BLUE',h:'#0078BF',q:'“THE CALM ONE”',dr:'01'},
+ {n:'ORANGE',h:'#FF6C2F',q:'“THE LOUD ONE”',dr:'02'},
+ {n:'PINK',h:'#FF48B0',q:'“THE FLIRT”',dr:'08'},
+ {n:'GREEN',h:'#00A95C',q:'“THE FRESH ONE”',dr:'04'},
+ {n:'YELLOW',h:'#FFE800',q:'“THE COWARD”',dr:'11'},
+ {n:'RED',h:'#FF665E',q:'“THE WARM ONE”',dr:'05'},
+ {n:'PURPLE',h:'#765BA7',q:'“THE DEEP CUT”',dr:'07'},
+ {n:'TEAL',h:'#00838A',q:'“THE COLD ONE”',dr:'13'}];
+const strip=$('#strip'),track=$('#track');
+INKS.forEach((k,i)=>{
+  const f=document.createElement('div');f.className='frame';
+  f.innerHTML=`<div class="sprock"></div><span class="no">${String(i+1).padStart(2,'0')}</span>
+    <div class="cell" style="background:${k.h}"><b style="color:${(k.n==='YELLOW'||k.n==='PINK')?'#191512':'#F2EEE3'}">${k.n} 072</b></div>
+    <div class="sprock"></div>`;
+  track.appendChild(f);
+});
+const frames=$$('.frame'),FW=198,GAP=18,STEP=FW+GAP;
+let sx=0,sv=0,sdrag=false,sLastX=0,sIdx=-1,gotoIdx=null,downX=0;
+const centerOf=i=>strip.clientWidth/2-(i*STEP+FW/2);
+function setInk(i){
+  if(i===sIdx)return;sIdx=i;
+  const k=INKS[i];
+  $('#inkName').textContent=k.n;
+  $('#inkMeta').textContent=`${k.h} — ${k.q} — DRUM ${k.dr}`;
+  $('#inkIdx').textContent=String(i+1).padStart(2,'0')+' / 08';
+  $('#inkSwatch').style.background=k.h;
+  frames.forEach((f,j)=>f.classList.toggle('is-center',j===i));
+}
+sx=centerOf(1);
+(function stripLoop(){
+  if(!sdrag){
+    sv*=.92;sx+=sv;
+    const lo=centerOf(INKS.length-1),hi=centerOf(0);
+    if(sx>hi){sx+=(hi-sx)*.18;sv=0;}
+    if(sx<lo){sx+=(lo-sx)*.18;sv=0;}
+    if(Math.abs(sv)<.2){
+      const target=gotoIdx!==null?gotoIdx:Math.round((strip.clientWidth/2-sx-FW/2)/STEP);
+      gotoIdx=null;
+      sx+=(centerOf(clamp(target,0,INKS.length-1))-sx)*.09;
+    }
+  }
+  track.style.transform=`translateX(${sx}px)`;
+  setInk(clamp(Math.round((strip.clientWidth/2-sx-FW/2)/STEP),0,INKS.length-1));
+  requestAnimationFrame(stripLoop);
+})();
+strip.addEventListener('pointerdown',e=>{
+  sdrag=true;sLastX=e.clientX;downX=e.clientX;sv=0;
+  strip.classList.add('grabbing');strip.setPointerCapture(e.pointerId);
+});
+strip.addEventListener('pointermove',e=>{
+  if(!sdrag)return;
+  const dx=e.clientX-sLastX;sLastX=e.clientX;
+  sx+=dx;sv=dx;
+});
+const sEnd=e=>{sdrag=false;strip.classList.remove('grabbing');
+  if(Math.abs(e.clientX-downX)<6){
+    const fr=e.target.closest('.frame');
+    if(fr)gotoIdx=frames.indexOf(fr);
+  }};
+strip.addEventListener('pointerup',sEnd);strip.addEventListener('pointercancel',sEnd);
+setInk(1);
+
+const emailCopy = document.getElementById('#copyMail').addEventListener('click', async function() {
+
+})
+
+
+/* ---------- copy email ---------- */
+ $('#copyMail').addEventListener('click',async()=>{
+  const mail='hello@margovellum.com';
+  try{await navigator.clipboard.writeText(mail);}
+  catch{const ta=document.createElement('textarea');ta.value=mail;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+  toast('contacto.sergiojurado@protonmail.com - COPIED on CLIPBOARD');
+});
+})();
+</script>
+</body>
+</html>

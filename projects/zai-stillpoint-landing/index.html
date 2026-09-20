@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Stillpoint — Slow Yoga for Fast Lives</title>
+<meta name="description" content="A slow yoga studio on Alder Street. Sixteen mats, morning light, no mirrors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Karla:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ============ tokens ============ */
+:root{
+  --paper:#F5F0E5;
+  --sand:#E8DECB;
+  --ink:#3B372F;
+  --ink-soft:rgba(59,55,47,.72);
+  --ink-faint:rgba(59,55,47,.5);
+  --moss:#4A5340;
+  --sage:#7E8D6D;
+  --sage-mid:#A2AF93;
+  --terra:#BC6B4A;
+  --terra-deep:#A0573A;
+  --dusk:#D9A092;
+  --hair:rgba(59,55,47,.16);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Karla','Segoe UI',sans-serif;
+  --ease:cubic-bezier(.23,.61,.28,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--paper);
+  background-image:
+    repeating-linear-gradient(90deg,rgba(74,83,64,.025) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(0deg,rgba(74,83,64,.025) 0 1px,transparent 1px 4px);
+  font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+/* paper grain over everything */
+body::after{
+  content:"";position:fixed;inset:0;z-index:998;pointer-events:none;
+  opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+::selection{background:var(--terra);color:#FBF7EE}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:4px}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1220px;margin:0 auto;padding:0 clamp(1.4rem,4.5vw,3.5rem)}
+section{padding:clamp(6rem,13vh,9.5rem) 0}
+.overline{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);margin-bottom:1.1rem}
+.overline.moss{color:var(--moss)}
+.overline.dusk-c{color:var(--dusk)}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,4.6vw,3.4rem);line-height:1.08;letter-spacing:-.01em}
+.lede{color:var(--ink-soft);max-width:52ch;margin-top:1.4rem;font-size:1.06rem}
+em.acc{font-family:var(--serif);font-style:italic}
+
+/* reveal on scroll — 600ms soft rise */
+.js .reveal{opacity:0;transform:translateY(28px);filter:blur(9px);transition:opacity .6s var(--ease),transform .6s var(--ease),filter .6s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
+.js .reveal.in{opacity:1;transform:none;filter:blur(0)}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+
+/* ============ buttons & links ============ */
+.btn{display:inline-flex;align-items:center;gap:.6rem;border-radius:999px;border:0;cursor:pointer;text-decoration:none;
+  font-family:var(--sans);font-weight:600;font-size:.95rem;letter-spacing:.03em;padding:.9rem 1.7rem;transition:.28s var(--ease)}
+.btn.primary{background:var(--terra);color:#FBF7EE}
+.btn.primary:hover{background:var(--terra-deep);transform:translateY(-2px)}
+.btn.primary:active{transform:translateY(0)}
+.btn.primary .ic{transition:transform .28s var(--ease)}
+.btn.primary:hover .ic{transform:translateX(4px)}
+.btn.line{background:transparent;border:1.5px solid var(--terra);color:var(--terra)}
+.btn.line:hover{background:var(--terra);color:#FBF7EE}
+.btn.small{padding:.62rem 1.35rem;font-size:.86rem}
+.btn.held{background:var(--moss);border:1.5px solid var(--moss);color:#F0EBDD;cursor:default}
+.btn:disabled{cursor:default}
+.tlink{color:var(--ink);font-weight:600;text-decoration:none;font-size:.95rem;border-bottom:1px solid var(--hair);padding-bottom:2px;transition:.25s}
+.tlink:hover{color:var(--terra);border-color:var(--terra)}
+
+/* ============ header ============ */
+.site-head{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:1.15rem clamp(1.2rem,4vw,3rem);transition:background .35s,box-shadow .35s,border-color .35s;border-bottom:1px solid transparent}
+.site-head.scrolled{background:rgba(245,240,229,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--hair)}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--ink)}
+.brand svg{width:26px;height:26px}
+.brand b{font-family:var(--serif);font-weight:500;font-size:1.35rem;letter-spacing:-.01em}
+.site-nav{display:flex;align-items:center;gap:2.3rem}
+.site-nav a{font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);position:relative}
+.site-nav a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--terra);transition:width .3s var(--ease)}
+.site-nav a:not(.btn):hover{color:var(--ink)}
+.site-nav a:not(.btn):hover::after{width:100%}
+@media(max-width:880px){.site-nav a:not(.btn){display:none}}
+
+/* ============ hero ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;background:var(--sand);display:flex;align-items:center;padding:8.5rem 0 7rem;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-20%;left:-12%;width:56%;height:80%;
+  background:radial-gradient(closest-side,rgba(255,251,242,.5),rgba(255,251,242,0));pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2.5rem,6vw,6rem);align-items:center;width:100%}
+.hero h1{font-family:var(--serif);font-weight:480;font-size:clamp(3.4rem,9vw,6.8rem);line-height:.96;letter-spacing:-.02em}
+.tagline{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.35rem,2.6vw,1.9rem);color:var(--terra);margin-top:1.3rem}
+.hero .lede{font-size:1.08rem}
+.cta-row{display:flex;align-items:center;gap:1.8rem;margin-top:2.6rem;flex-wrap:wrap}
+.hero-foot{position:absolute;left:clamp(1.4rem,4.5vw,3.5rem);right:clamp(1.4rem,4.5vw,3.5rem);bottom:1.8rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
+.cue{display:flex;align-items:center;gap:.9rem;color:var(--ink-faint);font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.cue .line{position:relative;width:64px;height:1px;background:var(--hair);overflow:hidden}
+.cue .line::after{content:"";position:absolute;top:0;left:0;width:18px;height:1px;background:var(--terra);animation:cue 2.8s var(--ease) infinite}
+@keyframes cue{0%{transform:translateX(-20px)}100%{transform:translateX(70px)}}
+/* chime opt-in */
+.chime{display:inline-flex;align-items:center;gap:.65rem;background:rgba(245,240,229,.55);border:1px solid var(--hair);border-radius:999px;
+  padding:.55rem 1rem;cursor:pointer;color:var(--ink-soft);font-size:.78rem;letter-spacing:.02em;transition:.3s var(--ease)}
+.chime:hover{border-color:var(--terra);color:var(--ink)}
+.chime .ic{width:15px;height:15px;transition:.3s}
+.chime .knob{width:28px;height:16px;border-radius:999px;border:1px solid var(--hair);position:relative;background:rgba(59,55,47,.08);transition:.3s;flex:none}
+.chime .knob::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--ink-soft);transition:.3s var(--ease)}
+.chime[aria-pressed="true"]{border-color:var(--terra);color:var(--terra)}
+.chime[aria-pressed="true"] .knob{background:var(--terra);border-color:var(--terra)}
+.chime[aria-pressed="true"] .knob::after{left:14px;background:#FBF7EE}
+.chime.done{opacity:.55;cursor:default}
+.chime.armed-once .ic{animation:ring .8s var(--ease)}
+@keyframes ring{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}55%{transform:rotate(11deg)}80%{transform:rotate(-6deg)}}
+/* the breathing arch */
+.arch-frame{position:relative;width:min(430px,100%);margin-left:auto;margin-right:clamp(0rem,3vw,2rem)}
+.arch-frame::before{content:"";position:absolute;inset:-24px;border:1px solid var(--hair);border-radius:999px 999px 18px 18px;pointer-events:none}
+.arch{position:relative;aspect-ratio:4/5;border:1px solid var(--hair);border-radius:999px 999px 16px 16px;padding:9px;background:rgba(245,240,229,.4);will-change:transform}
+.arch-in{position:relative;width:100%;height:100%;overflow:hidden;border-radius:inherit;background:var(--sage-mid)}
+.beams{position:absolute;inset:0;pointer-events:none}
+.beam{position:absolute;top:-30%;height:150%;filter:blur(15px);transform:rotate(25deg);transform-origin:top center}
+.b1{left:4%;width:40%;background:linear-gradient(to bottom,rgba(252,249,240,.6),rgba(252,249,240,0) 74%)}
+.b2{left:36%;width:15%;background:linear-gradient(to bottom,rgba(252,249,240,.45),rgba(252,249,240,0) 62%)}
+.halo{position:absolute;left:13%;top:18%;width:74%;aspect-ratio:1;border-radius:50%;will-change:transform;
+  background:radial-gradient(circle at 50% 46%,rgba(250,247,238,.95),rgba(250,247,238,.32) 46%,rgba(250,247,238,0) 70%)}
+.ring-wrap{position:absolute;left:4%;top:5%;width:92%;aspect-ratio:1;will-change:transform}
+.ring{position:absolute;inset:0;border:1px solid rgba(250,247,238,.55);border-radius:50%;animation:spin 16s linear infinite}
+.ring i{position:absolute;top:-3px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#FAF7EE}
+@keyframes spin{to{transform:rotate(360deg)}}
+.floor{position:absolute;left:9%;right:9%;bottom:6.5%;height:1px;background:rgba(69,78,59,.28)}
+.figure{position:absolute;left:31%;bottom:7%;width:38%;transform-origin:50% 100%;will-change:transform}
+.mote{position:absolute;border-radius:50%;background:#FBF8EF;filter:blur(.7px);opacity:0;animation:drift linear infinite}
+@keyframes drift{0%{transform:translate(0,0);opacity:0}14%{opacity:.9}72%{opacity:.45}100%{transform:translate(64px,150px);opacity:0}}
+.m1{width:3px;height:3px;left:22%;top:18%;animation-duration:12s}
+.m2{width:2px;height:2px;left:38%;top:34%;animation-duration:15s;animation-delay:3s}
+.m3{width:3.5px;height:3.5px;left:48%;top:22%;animation-duration:10s;animation-delay:5s}
+.m4{width:2px;height:2px;left:30%;top:46%;animation-duration:14s;animation-delay:7s}
+.m5{width:2.5px;height:2.5px;left:55%;top:40%;animation-duration:11s;animation-delay:1.5s}
+.arch-cap{margin-top:1.9rem;text-align:center}
+.breath-word{position:relative;height:1.3em;font-size:.72rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--terra)}
+.breath-word span{position:absolute;inset:0;transition:opacity .5s var(--ease)}
+.arch-cap small{display:block;margin-top:.55rem;font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--ink-faint)}
+/* leaf shadow, upper right */
+.leaf-shadow{position:absolute;top:-4%;right:-6%;width:min(360px,42vw);opacity:.14;color:#414A39;pointer-events:none}
+@media(max-width:980px){
+  .hero-inner{grid-template-columns:1fr;gap:3.5rem}
+  .arch-frame{margin:0 auto}
+  .leaf-shadow{right:-18%}
+}
+
+/* ============ practices ============ */
+.practices .head{max-width:640px;margin-bottom:4.5rem}
+.practice-list{border-top:1px solid var(--hair)}
+.practice{display:grid;grid-template-columns:96px 1.15fr 1fr 210px;gap:clamp(1.2rem,3vw,3rem);align-items:center;
+  padding:2.4rem .8rem;border-bottom:1px solid var(--hair);text-decoration:none;color:inherit;position:relative;transition:background .3s}
+.practice:hover{background:rgba(150,166,135,.09)}
+.p-glyph{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem}
+.p-glyph svg{width:46px;height:30px;stroke:var(--ink-soft);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s,transform .45s var(--ease)}
+.practice:hover .p-glyph svg{stroke:var(--terra);transform:translateX(3px) rotate(-2deg)}
+.p-glyph small{font-size:.66rem;letter-spacing:.22em;font-weight:600;color:var(--ink-faint)}
+.p-name{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3vw,2.5rem);line-height:1;letter-spacing:-.01em;transition:color .3s}
+.practice:hover .p-name{color:var(--terra)}
+.p-sub{font-family:var(--serif);font-style:italic;color:var(--ink-faint);margin-top:.5rem;font-size:1.02rem}
+.p-desc{color:var(--ink-soft);font-size:.98rem;line-height:1.7;max-width:44ch}
+.p-meta{font-size:.85rem;color:var(--ink-soft);display:flex;flex-direction:column;gap:.8rem;align-items:flex-start}
+.p-meta .sep{color:var(--ink-faint)}
+.effort{display:flex;align-items:center;gap:.55rem}
+.effort em{font-style:normal;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+.effort i{width:15px;height:3px;border-radius:2px;background:rgba(59,55,47,.14)}
+.effort i.on{background:var(--terra)}
+.p-arrow{position:absolute;right:.8rem;top:2.4rem;color:var(--terra);opacity:0;transform:translateX(-8px);transition:.35s var(--ease)}
+.practice:hover .p-arrow{opacity:1;transform:none}
+@media(max-width:1020px){
+  .practice{grid-template-columns:64px 1fr;grid-template-rows:auto auto}
+  .p-desc,.p-meta{grid-column:2}
+  .p-arrow{display:none}
+  .p-glyph svg{width:38px;height:25px}
+}
+/* floating cursor image */
+#floatImg{position:fixed;left:0;top:0;width:225px;aspect-ratio:4/5;border-radius:999px 999px 12px 12px;overflow:hidden;
+  pointer-events:none;z-index:900;opacity:0;transition:opacity .35s var(--ease);background:#A96B48;
+  box-shadow:0 24px 60px -18px rgba(59,55,47,.45);border:1px solid rgba(59,55,47,.2)}
+#floatImg.on{opacity:1}
+#floatImg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.95;
+  transform:scale(1.03) translate(0,0);transition:transform 8s cubic-bezier(.25,.6,.3,1)}
+#floatImg.on img{transform:scale(1.13) translate(-2%,-1.5%)}
+
+/* ============ teachers ============ */
+.teachers{background:var(--sand)}
+.teachers .head{max-width:660px;margin-bottom:5rem}
+.hover-hint{font-family:var(--serif);font-style:italic;color:var(--ink-faint);font-size:.95rem;margin-top:.9rem}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2.5rem,5vw,4.5rem);padding-bottom:10rem}
+.teacher{outline:none}
+.teacher:nth-child(2){margin-top:5.5rem}
+.teacher:nth-child(3){margin-top:11rem}
+.teacher .ph{position:relative;overflow:hidden;border-radius:999px 999px 12px 12px;background:#6E7A5F;border:1px solid var(--hair)}
+.teacher:nth-child(1) .ph{aspect-ratio:3/4}
+.teacher:nth-child(2) .ph{aspect-ratio:4/5}
+.teacher:nth-child(3) .ph{aspect-ratio:3/4}
+.teacher .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.95;filter:contrast(.95) brightness(1.05);
+  transform:scale(1.02);transition:transform 7s cubic-bezier(.25,.6,.3,1)}
+.teacher:hover .ph img,.teacher:focus-visible .ph img,.teacher:focus .ph img{transform:scale(1.11) translate(1.5%,-1%)}
+.teacher h3{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin-top:1.6rem}
+.t-role{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-top:.45rem}
+.t-quote{margin-top:1.3rem;min-height:8.2em;font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:var(--ink-soft);transition:opacity .35s}
+.t-quote .hint{color:var(--ink-faint)}
+.t-quote.out{opacity:0}
+.caret{display:inline-block;width:2px;height:1em;background:var(--terra);margin-left:2px;vertical-align:-.12em;opacity:0}
+.teacher.typing .caret{opacity:1;animation:blink 1.05s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+.t-since{margin-top:.9rem;font-size:.8rem;color:var(--ink-faint);letter-spacing:.04em}
+@media(max-width:880px){
+  .t-grid{grid-template-columns:1fr;max-width:460px;padding-bottom:0}
+  .teacher:nth-child(n){margin-top:0}
+  .t-quote{min-height:0}
+}
+
+/* ============ photo band ============ */
+.band{position:relative}
+.band .ph{position:relative;overflow:hidden;height:clamp(300px,46vh,460px);background:#A98D6E;border-block:1px solid var(--hair)}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.96;
+  transform:scale(1.02);transition:transform 8s cubic-bezier(.25,.6,.3,1)}
+.band:hover img{transform:scale(1.1) translate(0,-1.5%)}
+.band figcaption{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.2rem clamp(1.4rem,4.5vw,3.5rem);
+  font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:.98rem}
+.band figcaption b{font-family:var(--sans);font-style:normal;font-weight:600;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);align-self:center}
+
+/* ============ schedule ============ */
+.schedule .head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.week-scroll{overflow-x:auto;border-block:1px solid var(--hair);scrollbar-width:none}
+.week-scroll::-webkit-scrollbar{display:none}
+.week{display:grid;grid-template-columns:repeat(7,minmax(72px,1fr));min-width:640px}
+.day{display:flex;flex-direction:column;align-items:center;gap:3px;padding:1rem .4rem .85rem;background:none;border:0;border-left:1px solid var(--hair);cursor:pointer;transition:background .25s}
+.day:first-child{border-left:0}
+.day span{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.day strong{font-family:var(--serif);font-weight:500;font-size:1.55rem;line-height:1.1}
+.day em{font-style:normal;font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.day:hover{background:rgba(150,166,135,.12)}
+.day.sel{background:var(--moss)}
+.day.sel span{color:rgba(245,240,229,.7)}
+.day.sel strong{color:#F5F0E5}
+.day.sel em{color:var(--dusk)}
+.sched-grid{display:grid;grid-template-columns:280px 1fr;gap:clamp(2.5rem,5vw,5rem);margin-top:3.2rem}
+.day-info{position:sticky;top:110px;align-self:start}
+.day-info h3{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1.15}
+.day-note{color:var(--ink-soft);font-size:.95rem;margin-top:1rem;max-width:30ch}
+.legend{display:flex;align-items:center;gap:.5rem;margin-top:2rem;font-size:.82rem;color:var(--ink-soft)}
+.legend .gap{width:1.2rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--sage);box-shadow:inset 0 0 0 1px rgba(59,55,47,.14);flex:none}
+.dot.taken{background:transparent;box-shadow:inset 0 0 0 1px rgba(59,55,47,.35)}
+.dot.pop{animation:pop .5s var(--ease)}
+@keyframes pop{0%{transform:scale(1.9)}100%{transform:scale(1)}}
+#classList{transition:opacity .22s ease,transform .22s ease}
+#classList.swap{opacity:0;transform:translateY(6px)}
+.cls{border-bottom:1px solid var(--hair)}
+.cls:first-child{border-top:1px solid var(--hair)}
+.cls-head{display:grid;grid-template-columns:112px 1fr auto 26px;align-items:center;gap:1.2rem;width:100%;text-align:left;background:none;border:0;padding:1.25rem .8rem;cursor:pointer;transition:background .25s}
+.cls-head:hover{background:rgba(150,166,135,.1)}
+.cls.open .cls-head{background:rgba(150,166,135,.09)}
+.cls-t{font-family:var(--serif);font-weight:500;font-size:1.35rem;white-space:nowrap}
+.cls-nm strong{display:block;font-weight:600;font-size:1.05rem;letter-spacing:.01em}
+.cls-nm em{display:block;font-style:normal;font-size:.83rem;color:var(--ink-faint);margin-top:.2rem}
+.cls-mats{display:flex;flex-direction:column;align-items:flex-end;gap:.45rem}
+.dots{display:flex;gap:5px;flex-wrap:wrap;max-width:130px;justify-content:flex-end}
+.open-n{font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--ink-soft)}
+.open-n.low{color:var(--terra)}
+.open-n.full{color:var(--ink-faint)}
+.chev{transition:transform .35s var(--ease);color:var(--ink-faint)}
+.cls.open .chev{transform:rotate(180deg);color:var(--terra)}
+.cls-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.cls.open .cls-body{grid-template-rows:1fr}
+.cls-body-in{overflow:hidden}
+.cls-detail{display:grid;grid-template-columns:1fr 1.3fr auto;gap:2.5rem;padding:.4rem .8rem 1.9rem 7.4rem;align-items:start}
+.cls-detail h4{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem}
+.cls-detail p{font-size:.93rem;color:var(--ink-soft);line-height:1.65}
+.cls-detail .props{margin-top:.8rem;font-family:var(--serif);font-style:italic;color:var(--ink-faint)}
+@media(max-width:1080px){
+  .sched-grid{grid-template-columns:1fr}
+  .day-info{position:static;display:flex;flex-wrap:wrap;align-items:baseline;gap:1.5rem}
+  .day-note,.legend{margin-top:0}
+}
+@media(max-width:760px){
+  .cls-head{grid-template-columns:70px 1fr 26px}
+  .cls-mats{grid-column:2;grid-row:2;flex-direction:row;align-items:center;justify-content:flex-start}
+  .cls-t{font-size:1.1rem}
+  .cls-detail{grid-template-columns:1fr;padding:0 .8rem 1.8rem;gap:1.4rem}
+}
+
+/* ============ begin (first class free) ============ */
+.begin{background:#414A39;color:#EFEBDD;position:relative;overflow:hidden}
+.begin .wm{position:absolute;right:-7rem;top:50%;transform:translateY(-50%);width:560px;color:#F5F0E5;opacity:.05;pointer-events:none}
+.begin .head{max-width:680px;position:relative}
+.begin .lede{color:rgba(239,235,221,.75)}
+#freeForm{max-width:640px;margin-top:3.5rem;position:relative}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+#freeForm label{display:flex;flex-direction:column;gap:.7rem;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(239,235,221,.6);margin-bottom:2.2rem}
+#freeForm input,#freeForm select{
+  background:transparent;border:0;border-bottom:1px solid rgba(239,235,221,.3);color:#EFEBDD;
+  font:400 1.05rem var(--sans);padding:.5rem 0;border-radius:0;caret-color:var(--dusk);transition:border-color .3s}
+#freeForm input::placeholder{color:rgba(239,235,221,.32)}
+#freeForm input:focus,#freeForm select:focus{outline:none;border-color:#E9DCC8}
+#freeForm select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23EFEBDD' stroke-width='2' stroke-linecap='round'><path d='m6 9 6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right .2rem center}
+#freeForm select option{color:#2f2c26;background:#F5F0E5}
+.fsub{display:flex;align-items:center;gap:1.8rem;flex-wrap:wrap}
+.fine{font-family:var(--serif);font-style:italic;font-size:.92rem;color:rgba(239,235,221,.55)}
+.err{font-size:.8rem!important;letter-spacing:.02em!important;text-transform:none!important;color:var(--dusk)!important;min-height:1.2em;margin-top:-.9rem;margin-bottom:1.6rem;font-weight:400}
+.fsuccess{max-width:640px;margin-top:3.5rem;display:flex;gap:1.6rem;align-items:flex-start;animation:fadeup .6s var(--ease)}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.fsuccess .mark{width:52px;height:52px;border:1px solid rgba(239,235,221,.4);border-radius:50%;display:grid;place-items:center;flex:none}
+.fsuccess .mark .ic{width:22px;height:22px;color:var(--dusk)}
+.fsuccess h3{font-family:var(--serif);font-weight:500;font-size:1.9rem}
+.fsuccess p{color:rgba(239,235,221,.75);margin-top:.8rem;max-width:48ch}
+.fsuccess .fine2{margin-top:1.4rem;font-family:var(--serif);font-style:italic;color:var(--dusk)}
+@media(max-width:640px){.frow{grid-template-columns:1fr}}
+
+/* ============ footer ============ */
+footer{border-top:1px solid var(--hair)}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding:4.5rem 0 3.5rem}
+.f-brand .brand b{font-size:1.5rem}
+.f-brand address{font-style:normal;color:var(--ink-soft);font-size:.95rem;margin-top:1.2rem;line-height:1.8}
+footer h5{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.1rem}
+footer li{list-style:none;font-size:.95rem;color:var(--ink-soft);margin:.35rem 0}
+footer li a{color:var(--ink-soft);text-decoration:none}
+footer li a:hover{color:var(--terra)}
+.f-bottom{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--hair);padding:1.6rem 0 2rem;
+  font-size:.85rem;color:var(--ink-faint)}
+.f-bottom em{font-family:var(--serif)}
+@media(max-width:820px){.f-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.f-grid{grid-template-columns:1fr}}
+
+/* ============ toast ============ */
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,18px);opacity:0;z-index:1000;pointer-events:none;
+  display:flex;align-items:center;gap:.7rem;background:var(--ink);color:#F5F0E5;border-radius:999px;padding:.85rem 1.5rem;
+  font-size:.92rem;box-shadow:0 18px 44px -12px rgba(59,55,47,.5);transition:.4s var(--ease);max-width:min(92vw,540px)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast .ic{color:var(--dusk);width:16px;height:16px}
+</style>
+</head>
+<body>
+
+<!-- inline icon set -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.99-5.54 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.2 4 14.99 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M4.5 21V11.5a7.5 7.5 0 0 1 15 0V21"/><circle cx="12" cy="13.5" r="2" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<header class="site-head" id="siteHead">
+  <a class="brand" href="#top" aria-label="Stillpoint — home">
+    <svg><use href="#i-mark"/></svg><b>Stillpoint</b>
+  </a>
+  <nav class="site-nav">
+    <a href="#practices">Practices</a>
+    <a href="#teachers">Teachers</a>
+    <a href="#schedule">Schedule</a>
+    <a class="btn primary small" href="#schedule">Book a class</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <!-- leaf shadow cast by the window plants -->
+    <svg class="leaf-shadow" viewBox="0 0 300 240" fill="currentColor" aria-hidden="true">
+      <path d="M160 8 C 200 40, 250 30, 292 62 C 254 78, 210 66, 186 84 C 226 96, 248 130, 252 172 C 218 152, 196 118, 166 106 C 190 140, 184 184, 158 214 C 146 176, 152 136, 138 110 C 118 140, 84 148, 48 138 C 76 116, 112 108, 128 86 C 96 88, 62 74, 40 46 C 82 42, 118 54, 142 44 C 116 30, 96 12, 92 -8 C 124 0, 148 18, 160 8 Z"/>
+    </svg>
+
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="overline reveal">A slow yoga studio — est. 2019</p>
+        <h1 class="reveal" style="--d:1">Stillpoint.</h1>
+        <p class="tagline reveal" style="--d:2">Slow yoga for fast lives.</p>
+        <p class="lede reveal" style="--d:3">Two quiet rooms on Alder Street. Sixteen mats, morning light, and no mirrors — because nothing here is about how you look, and nothing here is in a hurry.</p>
+        <div class="cta-row reveal" style="--d:4">
+          <a class="btn primary" href="#schedule">Book a class this week <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a class="tlink" href="#begin">or claim your free first class</a>
+        </div>
+      </div>
+
+      <div class="arch-frame reveal" style="--d:2">
+        <div class="arch" id="breathRoot">
+          <div class="arch-in">
+            <div class="beams" id="beams"><i class="beam b1"></i><i class="beam b2"></i></div>
+            <div class="halo" id="halo"></div>
+            <div class="ring-wrap" id="ringWrap"><div class="ring"><i></i></div></div>
+            <div class="floor"></div>
+            <!-- a student, seated -->
+            <svg class="figure" id="fig" viewBox="0 0 120 130" aria-hidden="true">
+              <ellipse cx="60" cy="113" rx="33" ry="4.5" fill="rgba(58,63,48,.2)"/>
+              <g fill="#454E3B">
+                <circle cx="60" cy="30" r="9"/>
+                <path d="M60 43 C 51.5 43 47 48.5 46 56 L 44.2 70 C 43.6 76 46.5 80.5 52 81.5 L 68 81.5 C 73.5 80.5 76.4 76 75.8 70 L 74 56 C 73 48.5 68.5 43 60 43 Z"/>
+                <path d="M60 76 C 47 77 37 81.5 33.5 88 C 31.8 91.8 34.6 95 39 95 L 81 95 C 85.4 95 88.2 91.8 86.5 88 C 83 81.5 73 77 60 76 Z"/>
+                <circle cx="34.5" cy="88.5" r="5.2"/>
+                <circle cx="85.5" cy="88.5" r="5.2"/>
+              </g>
+              <g stroke="#454E3B" stroke-width="7.5" stroke-linecap="round" fill="none">
+                <path d="M47 52 C 38 58 36 70 42 79"/>
+                <path d="M73 52 C 82 58 84 70 78 79"/>
+              </g>
+            </svg>
+            <i class="mote m1"></i><i class="mote m2"></i><i class="mote m3"></i><i class="mote m4"></i><i class="mote m5"></i>
+          </div>
+        </div>
+        <div class="arch-cap">
+          <div class="breath-word"><span class="w-in">inhale</span><span class="w-ex" style="opacity:0">exhale</span></div>
+          <small>the Garden Room · 7:04 am · breathe with it</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <div class="cue"><span>scroll</span><span class="line"></span></div>
+      <button class="chime" id="chimeBtn" aria-pressed="false">
+        <svg class="ic"><use href="#i-bell"/></svg>
+        <span id="chimeLabel">begin with a soft chime</span>
+        <span class="knob" aria-hidden="true"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICES ============ -->
+  <section class="practices" id="practices">
+    <div class="wrap">
+      <header class="head">
+        <p class="overline moss reveal">01 — The practice</p>
+        <h2 class="reveal" style="--d:1">Four ways in.</h2>
+        <p class="lede reveal" style="--d:2">No levels, no ladders, no leaderboard. Four doors into the same quiet room — choose the one your body is asking for today. <em class="acc">Rest your cursor on each to peek inside.</em></p>
+      </header>
+
+      <div class="practice-list" id="practiceList">
+        <a class="practice reveal" href="#schedule" data-img="https://picsum.photos/seed/stillpoint-flow/440/560.jpg">
+          <span class="p-glyph">
+            <svg viewBox="0 0 44 28"><path d="M2 17 C 9 3, 17 3, 21 13 S 33 27, 42 9"/></svg>
+            <small>01</small>
+          </span>
+          <span><span class="p-name">Vinyasa</span><span class="p-sub" style="display:block">breath-led flow</span></span>
+          <span class="p-desc">Movement stitched to breath — one shape, one exhale — until the sequence remembers itself and you can finally stop thinking.</span>
+          <span class="p-meta"><span>60 min <span class="sep">·</span> gently warmed <span class="sep">·</span> all bodies</span>
+            <span class="effort"><em>effort</em><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span>
+          <svg class="ic p-arrow"><use href="#i-arrow"/></svg>
+        </a>
+
+        <a class="practice reveal" href="#schedule" data-img="https://picsum.photos/seed/stillpoint-yin/440/560.jpg" style="--d:1">
+          <span class="p-glyph">
+            <svg viewBox="0 0 44 28"><path d="M3 12 H41"/><circle cx="12" cy="20" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="20" r="1.5" fill="currentColor" stroke="none"/><circle cx="32" cy="20" r="1.5" fill="currentColor" stroke="none"/></svg>
+            <small>02</small>
+          </span>
+          <span><span class="p-name">Yin</span><span class="p-sub" style="display:block">long, held stillness</span></span>
+          <span class="p-desc">Floor shapes held for three to five slow minutes. Time moves through the muscle and into the tissue underneath it.</span>
+          <span class="p-meta"><span>75 min <span class="sep">·</span> cool room <span class="sep">·</span> all bodies</span>
+            <span class="effort"><em>effort</em><i class="on"></i><i></i><i></i><i></i></span></span>
+          <svg class="ic p-arrow"><use href="#i-arrow"/></svg>
+        </a>
+
+        <a class="practice reveal" href="#schedule" data-img="https://picsum.photos/seed/stillpoint-rest/440/560.jpg" style="--d:2">
+          <span class="p-glyph">
+            <svg viewBox="0 0 44 28"><path d="M3 7 Q 22 27, 41 7"/><path d="M3 7 v-4 M41 7 v-4"/></svg>
+            <small>03</small>
+          </span>
+          <span><span class="p-name">Restorative</span><span class="p-sub" style="display:block">supported rest</span></span>
+          <span class="p-desc">Bolsters, blankets, and nothing to achieve. The poses do nothing at all — that is entirely the point.</span>
+          <span class="p-meta"><span>60 min <span class="sep">·</span> candlelit <span class="sep">·</span> all bodies</span>
+            <span class="effort"><em>effort</em><i class="on"></i><i></i><i></i><i></i></span></span>
+          <svg class="ic p-arrow"><use href="#i-arrow"/></svg>
+        </a>
+
+        <a class="practice reveal" href="#schedule" data-img="https://picsum.photos/seed/stillpoint-breath/440/560.jpg" style="--d:3">
+          <span class="p-glyph">
+            <svg viewBox="0 0 44 28"><circle cx="22" cy="14" r="11"/><circle cx="22" cy="14" r="4.5"/></svg>
+            <small>04</small>
+          </span>
+          <span><span class="p-name">Breathwork</span><span class="p-sub" style="display:block">the oldest practice</span></span>
+          <span class="p-desc">Seated, guided pranayama. Breath moved in patterns until the nervous system remembers its resting rate.</span>
+          <span class="p-meta"><span>45 min <span class="sep">·</span> still room <span class="sep">·</span> all bodies</span>
+            <span class="effort"><em>effort</em><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <svg class="ic p-arrow"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEACHERS ============ -->
+  <section class="teachers" id="teachers">
+    <div class="wrap">
+      <header class="head">
+        <p class="overline moss reveal">02 — The teachers</p>
+        <h2 class="reveal" style="--d:1">The people holding space.</h2>
+        <p class="lede reveal" style="--d:2">Every teacher here was asked the same question — <em class="acc">why do you teach?</em> — and answered it in one breath.</p>
+        <p class="hover-hint reveal" id="hoverHint" style="--d:3">( rest your cursor on a face )</p>
+      </header>
+
+      <div class="t-grid">
+        <article class="teacher reveal" tabindex="0" data-quote="“I teach because the breath is the only teacher that never leaves you. Everything I know, I learned by listening to it.”">
+          <div class="ph"><img src="https://picsum.photos/seed/stillpoint-maren/520/680.jpg" alt="Maren Adeyemi, portrait" loading="lazy"></div>
+          <h3>Maren Adeyemi</h3>
+          <p class="t-role">Vinyasa · Breathwork · she/her</p>
+          <p class="t-quote"><span class="hint">— why do you teach?</span><span class="typed"></span><span class="caret"></span></p>
+          <p class="t-since">Teaching since 2009 · found yoga via a running injury</p>
+        </article>
+
+        <article class="teacher reveal" tabindex="0" style="--d:1" data-quote="“I teach because stillness was the hardest pose I ever learned — and the only one that gave anything back.”">
+          <div class="ph"><img src="https://picsum.photos/seed/stillpoint-theo/520/680.jpg" alt="Theo Lindqvist, portrait" loading="lazy"></div>
+          <h3>Theo Lindqvist</h3>
+          <p class="t-role">Yin · Anatomy · he/him</p>
+          <p class="t-quote"><span class="hint">— why do you teach?</span><span class="typed"></span><span class="caret"></span></p>
+          <p class="t-since">Teaching since 2013 · ex-physiotherapist</p>
+        </article>
+
+        <article class="teacher reveal" tabindex="0" style="--d:2" data-quote="“I teach because rest is not a reward. It is a right — and most of us were never taught how.”">
+          <div class="ph"><img src="https://picsum.photos/seed/stillpoint-priya/520/680.jpg" alt="Priya Raman, portrait" loading="lazy"></div>
+          <h3>Priya Raman</h3>
+          <p class="t-role">Restorative · Yin · she/her</p>
+          <p class="t-quote"><span class="hint">— why do you teach?</span><span class="typed"></span><span class="caret"></span></p>
+          <p class="t-since">Teaching since 2016 · keeps the studio's tea shelf</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHOTO BAND ============ -->
+  <figure class="band">
+    <div class="ph"><img src="https://picsum.photos/seed/stillpoint-room/1600/560.jpg" alt="The Quiet Room at Stillpoint" loading="lazy"></div>
+    <figcaption>Cork mats and wool blankets — brushed, rolled and reset between every class. <b>The Quiet Room · Fridays, candlelit restorative, 8 pm</b></figcaption>
+  </figure>
+
+  <!-- ============ SCHEDULE ============ -->
+  <section class="schedule" id="schedule">
+    <div class="wrap">
+      <header class="head">
+        <div>
+          <p class="overline moss reveal">03 — This week</p>
+          <h2 class="reveal" style="--d:1">This week at Stillpoint.</h2>
+          <p class="lede reveal" style="--d:2">Pick a day. Each dot is a mat — when they fill, the room is full. Open a class to see the room, the prerequisites, and a place to say yes.</p>
+        </div>
+      </header>
+
+      <div class="week-scroll reveal" style="--d:1"><div class="week" id="weekStrip"></div></div>
+
+      <div class="sched-grid">
+        <aside class="day-info reveal" style="--d:2">
+          <p class="overline moss" style="margin-bottom:.6rem">Selected day</p>
+          <h3 id="dayTitle"></h3>
+          <p class="day-note">Doors open 15 minutes early. Tea is always on. Latecomers welcomed quietly.</p>
+          <div class="legend"><span class="dot"></span> open mat <span class="gap"></span> <span class="dot taken"></span> taken</div>
+        </aside>
+        <div id="classList" style="--d:3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIRST CLASS FREE ============ -->
+  <section class="begin" id="begin">
+    <svg class="wm" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:.6"><path d="M4.5 21V11.5a7.5 7.5 0 0 1 15 0V21"/><circle cx="12" cy="13.5" r="2" fill="currentColor" stroke="none"/></svg>
+    <div class="wrap">
+      <div class="head">
+        <p class="overline dusk-c reveal">04 — Beginning</p>
+        <h2 class="reveal" style="--d:1">Your first class is on us.</h2>
+        <p class="lede reveal" style="--d:2">No plan, no contract, no fine print. Come once, breathe with us, and see how you feel on the walk home. That's the whole offer.</p>
+      </div>
+
+      <form id="freeForm" class="reveal" style="--d:3" novalidate>
+        <div class="frow">
+          <label>First name
+            <input name="name" autocomplete="given-name" placeholder="Ada">
+            <span class="err" data-for="name"></span>
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" placeholder="ada@somewhere.com">
+            <span class="err" data-for="email"></span>
+          </label>
+        </div>
+        <label>Which practice is calling you?
+          <select name="practice">
+            <option value="unsure">Not sure yet — surprise me</option>
+            <option>Vinyasa</option><option>Yin</option><option>Restorative</option><option>Breathwork</option>
+          </select>
+        </label>
+        <div class="fsub">
+          <button class="btn primary" type="submit">Claim my free class <svg class="ic"><use href="#i-arrow"/></svg></button>
+          <p class="fine">One email — your pass — and then we leave you alone.</p>
+        </div>
+      </form>
+
+      <div class="fsuccess" id="fSuccess" hidden>
+        <span class="mark"><svg class="ic"><use href="#i-check"/></svg></span>
+        <div>
+          <h3>Welcome in, <span id="sName"></span>.</h3>
+          <p>Your pass is on its way to <span id="sEmail"></span>. Arrive ten minutes early — mats, props and tea are ours to give. Just bring yourself.</p>
+          <p class="fine2">We'll see you at the sage-green door.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a class="brand" href="#top"><svg><use href="#i-mark"/></svg><b>Stillpoint</b></a>
+        <address>
+          214 Alder Street, Portland, OR<br>
+          The sage-green door, between<br>the bookshop and the bakery.
+        </address>
+      </div>
+      <div>
+        <h5>Hours</h5>
+        <ul>
+          <li>Mon – Fri · 6:30a – 9:00p</li>
+          <li>Sat – Sun · 8:00a – 6:00p</li>
+          <li>Closed on full moons</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Say hello</h5>
+        <ul>
+          <li><a href="mailto:hello@stillpoint.studio">hello@stillpoint.studio</a></li>
+          <li><a href="tel:+15035550114">(503) 555-0114</a></li>
+          <li><a href="#schedule">This week's classes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#practices">The four practices</a></li>
+          <li><a href="#teachers">Our teachers</a></li>
+          <li><a href="#begin">First class free</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span><em>Breathe in. Begin again.</em></span>
+      <span>© 2025 Stillpoint Yoga · Portland, OR</span>
+    </div>
+  </div>
+</footer>
+
+<div id="floatImg" aria-hidden="true"><img alt=""></div>
+<div id="toast" role="status"><svg class="ic"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+function rnd(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}h>>>=0;return h%10000/10000}
+
+/* ---------- header state ---------- */
+const head=$('#siteHead');
+addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ---------- reveal on scroll (600ms soft rise) ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+ $$('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- the 4-second breath (drives scale + words together) ---------- */
+const breathRoot=$('#breathRoot'),halo=$('#halo'),ringW=$('#ringWrap'),fig=$('#fig'),beams=$('#beams');
+const wIn=$('.w-in'),wEx=$('.w-ex');
+if(RM){wIn.style.opacity=1;}
+else{
+  let bStart=null,half=0;
+  (function breathe(ts){
+    if(bStart===null)bStart=ts;
+    const p=((ts-bStart)%4000)/4000;                 // one full breath = 4s
+    const e=-(Math.cos(Math.PI*p)/2)+.5;             // ease in & out
+    breathRoot.style.transform=`scale(${(1+.022*e).toFixed(4)})`;
+    halo.style.transform=`scale(${(1+.09*e).toFixed(4)})`;
+    ringW.style.transform=`scale(${(1.05-.07*e).toFixed(4)})`;
+    fig.style.transform=`scaleY(${(1+.028*e).toFixed(4)})`;
+    beams.style.opacity=(.78+.22*e).toFixed(3);
+    const h=p<.5?0:1;
+    if(h!==half){half=h;wIn.style.opacity=1-h;wEx.style.opacity=h}
+    requestAnimationFrame(breathe);
+  })(performance.now());
+}
+
+/* ---------- floating image that follows the cursor over practices ---------- */
+const fi=$('#floatImg'),fim=fi.querySelector('img');
+if(FINE && !RM && innerWidth>1000){
+  ['flow','yin','rest','breath'].forEach(k=>{const im=new Image();im.src=`https://picsum.photos/seed/stillpoint-${k}/440/560.jpg`});
+  let tx=innerWidth/2,ty=innerHeight/2,fx=tx,fy=ty;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+  (function loop(){
+    fx+=(tx-fx)*.09; fy+=(ty-fy)*.09;
+    const rot=Math.max(-6,Math.min(6,(tx-fx)*.06));
+    const x=Math.min(fx+28,innerWidth-250), y=Math.max(90,fy-200);
+    fi.style.transform=`translate(${x}px,${y}px) rotate(${rot.toFixed(2)}deg)`;
+    requestAnimationFrame(loop);
+  })();
+  $$('#practiceList .practice').forEach(a=>{
+    a.addEventListener('mouseenter',()=>{fim.src=a.dataset.img;fi.classList.add('on')});
+  });
+  $('#practiceList').addEventListener('mouseleave',()=>fi.classList.remove('on'));
+}
+
+/* ---------- teacher quotes, typed one character at a time ---------- */
+const hintEl=$('#hoverHint');
+if(!FINE && hintEl) hintEl.textContent='( tap a face )';
+ $$('.teacher').forEach(t=>{
+  const quote=t.dataset.quote, out=t.querySelector('.typed'),
+        hint=t.querySelector('.hint'), box=t.querySelector('.t-quote');
+  let iv=null,outT=null,typing=false;
+  function start(){
+    clearInterval(iv);clearTimeout(outT);box.classList.remove('out');
+    hint.style.display='none';typing=true;t.classList.add('typing');
+    if(RM){out.textContent=quote;typing=false;return}
+    out.textContent='';let i=0;
+    iv=setInterval(()=>{out.textContent=quote.slice(0,++i);
+      if(i>=quote.length){clearInterval(iv);typing=false}},26);
+  }
+  function stop(){
+    clearInterval(iv);typing=false;t.classList.remove('typing');
+    if(out.textContent){box.classList.add('out');outT=setTimeout(()=>{out.textContent='';box.classList.remove('out');hint.style.display=''},380)}
+    else hint.style.display='';
+  }
+  t.addEventListener('mouseenter',start);
+  t.addEventListener('mouseleave',stop);
+  t.addEventListener('focus',start);
+  t.addEventListener('blur',stop);
+  t.addEventListener('click',()=>typing?stop():start());
+});
+
+/* ---------- schedule data ---------- */
+const TEACHERS={maren:'Maren',theo:'Theo',priya:'Priya'};
+const ROOMS={
+  garden:{name:'The Garden Room',note:'Our largest room — 14 mats, plants in every corner, southeast morning light.'},
+  quiet:{name:'The Quiet Room',note:'Eight mats, candlelit after 6 pm, wool blankets and a warm floor.'},
+  loft:{name:'The Loft',note:'Ten mats under the skylights and the old beams, above the tea counter.'}
+};
+const PREREQ={
+  vinyasa:'Comfort moving through a sun salutation helps — and we always review it, slowly, first.',
+  yin:'No prerequisites. Most of it happens lying down.',
+  restorative:'None. Truly none. Pajamas welcome.',
+  breathwork:'No prerequisites — seated from start to finish, chairs available.'
+};
+// [time, class, teacher, room, style, minutes]
+const WEEK_TEMPLATE=[
+  [['6:45 am','Sunrise Flow','maren','garden','vinyasa',60],['12:15 pm','Lunch Flow','theo','loft','vinyasa',45],['6:30 pm','Candlelight Restorative','priya','quiet','restorative',60],['8:00 pm','Evening Sit','maren','quiet','breathwork',45]],
+  [['6:45 am','Sunrise Flow','maren','garden','vinyasa',60],['9:30 am','Slow Vinyasa','theo','garden','vinyasa',75],['5:45 pm','Yin & Nidra','priya','quiet','yin',75],['7:30 pm','Foundations','theo','loft','vinyasa',60]],
+  [['6:45 am','Sunrise Flow','maren','garden','vinyasa',60],['12:15 pm','Lunch Flow','maren','loft','vinyasa',45],['6:30 pm','Yin, Deep','theo','quiet','yin',75],['8:00 pm','Breathwork Sit','maren','quiet','breathwork',45]],
+  [['6:45 am','Sunrise Flow','maren','garden','vinyasa',60],['9:30 am','Restorative Morning','priya','quiet','restorative',60],['6:30 pm','Candlelight Restorative','priya','quiet','restorative',60],['8:00 pm','Evening Sit','theo','quiet','breathwork',45]],
+  [['6:45 am','Sunrise Flow','maren','garden','vinyasa',60],['12:15 pm','Lunch Flow','theo','loft','vinyasa',45],['5:45 pm','Slow Vinyasa','maren','garden','vinyasa',75],['8:00 pm','Moonlight Yin','priya','quiet','yin',75]],
+  [['8:00 am','Long Slow Flow','maren','garden','vinyasa',90],['10:00 am','Foundations','theo','loft','vinyasa',60],['4:00 pm','Restorative','priya','quiet','restorative',60]],
+  [['9:00 am','Sunday Slow','maren','garden','vinyasa',75],['11:00 am','Breathwork Sit','theo','quiet','breathwork',45],['5:00 pm','Yin & Nidra','priya','quiet','yin',75]]
+];
+const ROOM_SIZE={garden:14,quiet:8,loft:10};
+const now=new Date(), monday=new Date(now); monday.setDate(now.getDate()-((now.getDay()+6)%7));
+const DAYS_S=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], DAYS_L=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const S=WEEK_TEMPLATE.map((day,di)=>{
+  const date=new Date(monday); date.setDate(monday.getDate()+di);
+  return {date,classes:day.map((c,ci)=>{
+    const [t,n,k,r,s,d]=c, total=ROOM_SIZE[r];
+    const hr=parseInt(t)+(t.includes('pm')&&parseInt(t)<12?12:0);
+    const band=hr<11?[.45,.9]:hr<15?[.25,.55]:[.4,.95];
+    let booked=Math.round(total*(band[0]+rnd(`b${di}-${ci}`)*(band[1]-band[0])));
+    if(di===5&&ci===0) booked=total; // Saturday's long flow is full — for the waitlist
+    booked=Math.min(total,booked);
+    const seed=`${di}|${ci}`;
+    const vals=[...Array(total)].map((_,i)=>rnd(seed+'o'+i));
+    const order=vals.map((v,i)=>i).sort((a,b)=>vals[a]-vals[b]);
+    return {t,n,k,r,s,d,total,booked,order,taken:new Set(order.slice(0,booked))};
+  })};
+});
+let selDay=(now.getDay()+6)%7;
+
+/* ---------- schedule render ---------- */
+const strip=$('#weekStrip'),list=$('#classList'),dayTitle=$('#dayTitle');
+function renderStrip(){
+  strip.innerHTML=S.map((d,i)=>`
+    <button class="day${i===selDay?' sel':''}" data-d="${i}" aria-label="${DAYS_L[i]} ${d.date.getDate()}">
+      <span>${DAYS_S[i]}</span><strong>${d.date.getDate()}</strong>${i===((now.getDay()+6)%7)?'<em>today</em>':''}
+    </button>`).join('');
+}
+function dotsHTML(c){
+  let h='';
+  for(let i=0;i<c.total;i++) h+=`<i class="dot${c.taken.has(i)?' taken':''}"></i>`;
+  return `<span class="dots">${h}</span>`;
+}
+function openLabel(c){
+  const open=c.total-c.booked;
+  if(open===0) return `<span class="open-n full">Full</span>`;
+  if(open<=3) return `<span class="open-n low">${open} open</span>`;
+  return `<span class="open-n">${open} open</span>`;
+}
+function renderDay(){
+  const D=S[selDay];
+  dayTitle.textContent=`${DAYS_L[selDay]}, ${MONTHS[D.date.getMonth()]} ${D.date.getDate()}`;
+  list.innerHTML=D.classes.map((c,i)=>{
+    const room=ROOMS[c.r];
+    const full=c.booked>=c.total;
+    const btn=full
+      ?`<button class="btn line small reserve" data-day="${selDay}" data-i="${i}">Join the waitlist</button>`
+      :`<button class="btn line small reserve" data-day="${selDay}" data-i="${i}">Reserve a mat</button>`;
+    return `
+    <article class="cls" data-day="${selDay}" data-i="${i}">
+      <button class="cls-head" aria-expanded="false">
+        <span class="cls-t">${c.t}</span>
+        <span class="cls-nm"><strong>${c.n}</strong><em>${c.s} · with ${TEACHERS[c.k]} · ${c.d} min</em></span>
+        <span class="cls-mats">${dotsHTML(c)}${openLabel(c)}</span>
+        <svg class="ic chev"><use href="#i-chev"/></svg>
+      </button>
+      <div class="cls-body"><div class="cls-body-in">
+        <div class="cls-detail">
+          <div><h4>${room.name}</h4><p>${room.note}</p></div>
+          <div><h4>Before you come</h4><p>${PREREQ[c.s]}</p><p class="props">Props, mats and tea are ours to give — bring nothing but yourself.</p></div>
+          <div>${btn}</div>
+        </div>
+      </div></div>
+    </article>`;
+  }).join('');
+}
+renderStrip();renderDay();
+
+strip.addEventListener('click',e=>{
+  const b=e.target.closest('.day'); if(!b)return;
+  const d=+b.dataset.d; if(d===selDay)return;
+  selDay=d; renderStrip();
+  list.classList.add('swap');
+  setTimeout(()=>{renderDay();list.classList.remove('swap')},200);
+});
+
+/* expand / collapse rows (one open at a time) */
+list.addEventListener('click',e=>{
+  const headBtn=e.target.closest('.cls-head');
+  if(headBtn){
+    const art=headBtn.closest('.cls'), open=art.classList.contains('open');
+    $$('#classList .cls.open').forEach(o=>{o.classList.remove('open');o.querySelector('.cls-head').setAttribute('aria-expanded','false')});
+    if(!open){art.classList.add('open');headBtn.setAttribute('aria-expanded','true')}
+    return;
+  }
+  const r=e.target.closest('.reserve');
+  if(r){
+    const art=r.closest('.cls'), d=+art.dataset.day, i=+art.dataset.i, c=S[d].classes[i];
+    if(c.booked>=c.total){
+      r.textContent='On the waitlist';r.classList.add('held');r.disabled=true;
+      toast(`You're on the list — we'll text you if a mat opens.`);
+      return;
+    }
+    c.booked++;
+    const ni=c.order[c.booked-1]; c.taken.add(ni);
+    const dot=art.querySelectorAll('.dot')[ni];
+    if(dot){dot.classList.add('taken','pop')}
+    const mats=art.querySelector('.cls-mats');
+    mats.innerHTML=dotsHTML(c)+openLabel(c);
+    r.textContent='Mat held — see you there';r.classList.add('held');r.disabled=true;
+    toast(`Mat held — <strong>${c.n}</strong>, ${DAYS_S[d]} ${c.t}. Come as you are.`);
+  }
+});
+
+/* ---------- toast ---------- */
+const toastEl=$('#toast'),toastMsg=$('#toastMsg');let toastT;
+function toast(html){
+  toastMsg.innerHTML=html;toastEl.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('show'),3800);
+}
+
+/* ---------- optional chime on first scroll ---------- */
+const chimeBtn=$('#chimeBtn'),chimeLabel=$('#chimeLabel');
+let armed=false,played=false,actx=null;
+function playBowl(){ // a small synthesized singing bowl
+  const t=actx.currentTime+.02, master=actx.createGain();
+  master.connect(actx.destination);
+  master.gain.setValueAtTime(0,t);
+  master.gain.linearRampToValueAtTime(.55,t+.05);
+  master.gain.exponentialRampToValueAtTime(.0001,t+4.2);
+  [[1,1],[2.71,.4],[5.18,.14]].forEach(([m,g])=>{
+    [0,.6].forEach(det=>{ // pairs of detuned partials beat gently, like a real bowl
+      const o=actx.createOscillator();o.type='sine';
+      o.frequency.value=246.9*m+det;
+      const og=actx.createGain();og.gain.value=g*.07;
+      o.connect(og);og.connect(master);o.start(t);o.stop(t+4.5);
+    });
+  });
+}
+chimeBtn.addEventListener('click',()=>{
+  if(chimeBtn.classList.contains('done'))return;
+  armed=!armed;
+  chimeBtn.setAttribute('aria-pressed',armed);
+  if(armed){
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    actx.resume();
+    chimeBtn.classList.add('armed-once');setTimeout(()=>chimeBtn.classList.remove('armed-once'),900);
+    chimeLabel.textContent='chime armed — scroll gently';
+  }else{
+    chimeLabel.textContent='begin with a soft chime';
+  }
+});
+addEventListener('scroll',()=>{
+  if(armed&&!played&&scrollY>6){
+    played=true;playBowl();
+    chimeBtn.setAttribute('aria-pressed','false');
+    chimeBtn.classList.add('done');
+    chimeLabel.textContent='chime sounded — welcome to practice';
+  }
+},{passive:true});
+
+/* ---------- first-class-free form ---------- */
+const form=$('#freeForm');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=form.name.value.trim(), email=form.email.value.trim();
+  const errs=$$('.err',? 0:null); // noop guard (kept simple below)
+  let ok=true;
+  const set=(f,msg)=>{const el=form.querySelector(`.err[data-for="${f}"]`);el.textContent=msg;if(msg)ok=false};
+  set('name', name.length<2 ? 'A name helps us greet you at the door.' : '');
+  set('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : 'That email doesn\u2019t look quite right — one more try?');
+  if(!ok)return;
+  $('#sName').textContent=name;
+  $('#sEmail').textContent=email;
+  form.hidden=true;
+  const s=$('#fSuccess');s.hidden=false;
+});
+})();
+</script>
+</body>
+</html>

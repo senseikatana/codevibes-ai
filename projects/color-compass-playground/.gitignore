@@ -44,7 +44,3 @@ coverage/
 .DS_Store
 Thumbs.db
 
-# Repo anidado independiente (tiene su propio .git y remoto: senseikatana/janulus-matrix).
-# Nunca commitear su contenido en este repo padre.
-projects/janulus-matrix/
-

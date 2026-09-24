@@ -432,11 +432,7 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
           </h2>
 
           <div class="flex items-center gap-4 mb-10 pb-6 border-b border-[var(--border)]">
-            <img
-              src="/img/marcusportrait-120x120.jpg"
-              class="w-12 h-12 object-cover"
-              alt="Author"
-            />
+            <img src="/img/marcusportrait-120x120.jpg" class="w-12 h-12 object-cover" alt="Author" />
             <div class="flex-1">
               <div class="font-semibold text-sm">Marcus Kilburn</div>
               <div class="text-[10px] text-[var(--fg-dim)] font-mono uppercase tracking-widest mt-0.5">
@@ -767,6 +763,7 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
       <form
         class="text-left max-w-2xl mx-auto"
         id="newsletterForm"
+        novalidate
         hx-post="/api/subscribe"
         hx-target="#subscribeStatus"
         hx-swap="innerHTML"

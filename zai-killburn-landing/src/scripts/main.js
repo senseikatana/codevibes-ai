@@ -214,6 +214,33 @@ function initFilterChips() {
   });
 }
 
+// ===== Newsletter validation (mirrors the legacy terminal-style errors) =====
+// Runs on capture so invalid emails never reach HTMX; valid ones pass through.
+function initNewsletterValidation() {
+  const form = document.getElementById('newsletterForm');
+  const input = document.getElementById('emailInput');
+  const status = document.getElementById('subscribeStatus');
+  if (!form || !input || form.dataset.validationWired) return;
+  form.dataset.validationWired = '1';
+  form.addEventListener(
+    'submit',
+    (e) => {
+      const email = input.value.trim();
+      if (!email || !email.includes('@') || email.length < 5) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (status) {
+          status.textContent = '> ERROR: Please enter a valid email address.';
+          status.style.color = 'var(--accent)';
+        }
+      } else if (status) {
+        status.style.color = 'var(--yellow)';
+      }
+    },
+    true,
+  );
+}
+
 // ===== HTMX fallbacks (kept here so templates stay parser-clean) =====
 function initHtmxFallbacks() {
   if (window.__killburnHtmxFallbacksWired) return;
@@ -239,4 +266,5 @@ initTypewriter();
 initScrollChrome();
 initChapters();
 initFilterChips();
+initNewsletterValidation();
 initHtmxFallbacks();

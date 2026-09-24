@@ -10,5 +10,10 @@ export default defineConfig({
   adapter: node({ mode: 'standalone' }),
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      // Permitir hosts de túneles (cloudflared, ngrok, etc.) en desarrollo.
+      // true = permitir todos; en producción esto no aplica (dev server).
+      allowedHosts: true,
+    },
   },
 });

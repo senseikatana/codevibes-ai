@@ -19,9 +19,13 @@ export const POST: APIRoute = async ({ request }) => {
     email = '';
   }
 
+  // NOTE: validation errors return 200 (not 422) on purpose — HTMX only
+  // swaps 2xx responses into the target by default; 4xx would need the
+  // response-targets extension. Real transport failures (404/403/500)
+  // still fire htmx:responseError, handled client-side in main.js.
   if (!email || !email.includes('@') || email.length < 5) {
     return new Response('> ERROR: Please enter a valid email address.', {
-      status: 422,
+      status: 200,
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
   }

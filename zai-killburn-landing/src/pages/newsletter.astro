@@ -18,6 +18,7 @@ import PageHero from '../components/PageHero.astro';
     <form
       class="text-left max-w-2xl mx-auto"
       id="newsletterForm"
+      novalidate
       hx-post="/api/subscribe"
       hx-target="#subscribeStatus"
       hx-swap="innerHTML"

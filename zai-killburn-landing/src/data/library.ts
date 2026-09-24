@@ -213,7 +213,7 @@ export const products: Product[] = [
 export function videoCardHTML(v: Video, index = 0): string {
   return `<article class="video-card shuffling" style="animation-delay: ${Math.min(index, 11) * 35}ms">
       <div class="video-card-thumb">
-        <img src="https://picsum.photos/seed/${v.img}/640/360" alt="${v.title}" loading="lazy">
+        <img src="/img/${v.img}-640x360.jpg" alt="${v.title}" loading="lazy">
         <div class="preview-tag">PREVIEWING</div>
         <div class="preview-progress"></div>
         <div class="absolute bottom-3 right-3 bg-black/85 text-white px-2 py-1 text-[11px] font-mono z-[2]">${v.runtime}</div>
@@ -234,7 +234,7 @@ export function videoCardHTML(v: Video, index = 0): string {
 export function productCardHTML(p: Product): string {
   return `<div class="rec-card" data-price="${p.price}" data-cat="${p.cat}">
       <div class="aspect-[4/3] overflow-hidden bg-black relative">
-        <img src="https://picsum.photos/seed/${p.img}/600/450" class="w-full h-full object-cover" alt="${p.name}" loading="lazy">
+        <img src="/img/${p.img}-600x450.jpg" class="w-full h-full object-cover" alt="${p.name}" loading="lazy">
         <div class="absolute top-3 left-3 bg-[var(--yellow)] text-black px-2 py-1 text-[10px] font-mono font-bold tracking-wider">${p.cat}</div>
         <div class="absolute bottom-3 right-3 bg-black/90 text-white px-3 py-1.5 text-sm font-mono">$${p.price.toLocaleString()}</div>
       </div>

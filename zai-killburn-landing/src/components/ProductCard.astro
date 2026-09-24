@@ -9,7 +9,7 @@ const { product: p } = Astro.props;
 <div class="rec-card" data-price={p.price} data-cat={p.cat}>
   <div class="aspect-[4/3] overflow-hidden bg-black relative">
     <img
-      src={`https://picsum.photos/seed/${p.img}/600/450`}
+      src={`/img/${p.img}-600x450.jpg`}
       class="w-full h-full object-cover"
       alt={p.name}
       loading="lazy"

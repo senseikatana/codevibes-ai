@@ -30,7 +30,7 @@ const related = videos.filter((v) => v.id !== video.id).slice(0, 3);
       </div>
       <div class="video-player-shell">
         <div class="video-player-screen">
-          <img src={`https://picsum.photos/seed/${video.img}/1280/720`} alt={video.title} />
+          <img src={`/img/${video.img}-1280x720.jpg`} alt={video.title} />
           <div class="absolute inset-0 flex items-center justify-center bg-black/30">
             <span class="w-16 h-16 bg-white/95 text-black flex items-center justify-center">
               <i class="fas fa-play text-xl"></i>

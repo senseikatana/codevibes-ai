@@ -2,6 +2,7 @@
 // HTMX owns: video filtering, load-more, newsletter submit (HTML over the wire).
 // This file keeps only what HTMX can't do: FLIP slider animation, typewriter,
 // scroll progress, section-accent observer, chapters, back-to-top.
+import 'htmx.org/dist/htmx.min.js';
 
 // ===== Price slider with FLIP animation (client-only, no server roundtrip) =====
 function initPriceFilter() {

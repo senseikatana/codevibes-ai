@@ -22,8 +22,13 @@ const config: SiteConfig = {
   nav: site.nav.map(({ label, href }) => ({ label, href })),
 };
 
-export function headTags(title: string, description: string): string {
-  return useHeadTags(config, { title, description });
+export function headTags(title: string, description: string, url?: string, image?: string): string {
+  return useHeadTags(config, {
+    title,
+    description,
+    url,
+    ...(image ? { ogImage: image } : {}),
+  });
 }
 
 export function siteUrl(path = ''): string {

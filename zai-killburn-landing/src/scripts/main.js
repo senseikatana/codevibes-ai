@@ -2,7 +2,7 @@
 // HTMX owns: video filtering, load-more, newsletter submit (HTML over the wire).
 // This file keeps only what HTMX can't do: FLIP slider animation, typewriter,
 // scroll progress, section-accent observer, chapters, back-to-top.
-import 'htmx.org/dist/htmx.min.js';
+import htmx from 'htmx.org/dist/htmx.min.js';
 
 // ===== Price slider with FLIP animation (client-only, no server roundtrip) =====
 function initPriceFilter() {
@@ -269,6 +269,33 @@ function initNewsletterValidation() {
   );
 }
 
+// ===== Astro View Transitions: re-wire after each client-side swap =====
+function initAstroTransitions() {
+  if (window.__killburnTransitionsWired) return;
+  window.__killburnTransitionsWired = true;
+  document.addEventListener('astro:after-swap', () => {
+    initPriceFilter();
+    initTypewriter();
+    observeAccentSections();
+    initChapters();
+    initFilterChips();
+    initNewsletterValidation();
+    initMobileMenu();
+    initHtmxFallbacks();
+    updateScroll();
+    // ClientRouter swaps don't notify htmx — reprocess new DOM explicitly.
+    if (htmx && typeof htmx.process === 'function') htmx.process(document.body);
+  });
+  document.addEventListener('astro:before-swap', () => {
+    // Never carry an open mobile menu across pages.
+    const menu = document.getElementById('mobileMenu');
+    if (menu && menu.classList.contains('open')) {
+      const btn = document.getElementById('menuButton');
+      if (btn) btn.click();
+    }
+  });
+}
+
 // ===== HTMX fallbacks (kept here so templates stay parser-clean) =====
 function initHtmxFallbacks() {
   if (window.__killburnHtmxFallbacksWired) return;
@@ -297,3 +324,4 @@ initFilterChips();
 initNewsletterValidation();
 initMobileMenu();
 initHtmxFallbacks();
+initAstroTransitions();

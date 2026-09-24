@@ -89,14 +89,13 @@ Para adaptar sin videos: vaciá `videos.json`, poné tus proyectos en
 
 - **SEO** (`adapters/astro` → `useHeadTags`): `src/data/seo.ts` mapea
   `content/site.json` + `author.json` al `SiteConfig` y el Layout inyecta
-  title/canonical/OG/RSS. Requiere el `SiteConfig` completo (`rss` + `seo`).
+  title/canonical/OG/RSS. El `SiteConfig` tiene que estar completo
+  (`rss` + `seo` + `nav`) o el build revienta en `siteConfigToOpts`
+  (dereferencia esos campos sin `?.`).
 - **RSS** (`useAstroCreateRssEndpoint`): `src/pages/rss.xml.ts` — posts del
   blog (fechas reales) + videos (fecha ancla demo documentada en el archivo).
 - **Paths** (`useAstroPathsFrom` / `useAstroPathsFromValues`): `getStaticPaths`
   de `videos/ep-[id]` y `blog/[slug]`.
-- **Notion** (`adapters/notion`): cliente completo disponible, sin cablear —
-  necesita `NOTION_TOKEN` + database IDs. Cuando los tengas, el blog puede
-  salir de una database en vez de Markdown.
 
 ## Recursos locales (anti-CDN-bloqueado)
 

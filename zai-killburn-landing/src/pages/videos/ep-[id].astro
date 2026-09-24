@@ -16,7 +16,7 @@ if (!video) return Astro.redirect('/videos');
 const related = videos.filter((v) => v.id !== video.id).slice(0, 3);
 ---
 
-<Layout title={`${video.title} — KILBURN`} description={video.title}>
+<Layout title={`${video.title} — KILBURN`} description={video.title} image={`/img/${video.img}-1280x720.jpg`}>
   <section class="pt-32 pb-12 px-6" data-accent="red">
     <div class="max-w-[1600px] mx-auto">
       <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-2">

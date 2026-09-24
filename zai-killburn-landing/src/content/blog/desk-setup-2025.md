@@ -3,6 +3,7 @@ title: 'My 2025 Desk Setup — Final Form'
 description: 'Every cable accounted for. The setup tour with receipts.'
 date: 2025-02-02
 tags: ['setup']
+cover: /img/vid243-1280x720.jpg
 minutes: 8
 ---
 

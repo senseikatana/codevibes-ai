@@ -3,6 +3,7 @@ title: 'The Truth About OLED Burn-In (3 Year Study)'
 description: 'Three panels, three years, one spreadsheet. What actually burns in.'
 date: 2025-01-20
 tags: ['deep-dive', 'displays']
+cover: /img/vid241-1280x720.jpg
 minutes: 14
 ---
 

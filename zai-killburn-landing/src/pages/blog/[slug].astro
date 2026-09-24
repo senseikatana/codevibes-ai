@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} — KILBURN`} description={post.data.description}>
+<Layout title={`${post.data.title} — KILBURN`} description={post.data.description} image={post.data.cover}>
   <section class="pt-32 pb-12 px-6" data-accent="blue">
     <div class="max-w-2xl mx-auto">
       <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-4">

@@ -3,6 +3,7 @@ title: 'The Phone That Killed The Compact Flagship'
 description: 'Three weeks with the Aspect Mini Pro — small phones grow up, with caveats.'
 date: 2025-03-14
 tags: ['review', 'phones']
+cover: /img/vid247-1280x720.jpg
 minutes: 12
 ---
 

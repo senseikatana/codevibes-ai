@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { useAstroPathsFrom } from 'katanakit-js/adapters/astro';
+import { products } from '../../data/library';
+
+export function getStaticPaths() {
+  return useAstroPathsFrom(products, {
+    param: 'slug',
+    valueFrom: (p) => p.slug,
+    propsFrom: (p) => ({ product: p }),
+  });
+}
+
+const { product: p } = Astro.props;
+const checkout = Astro.url.searchParams.get('checkout');
+const related = products.filter((x) => x.slug !== p.slug && x.cat === p.cat).slice(0, 2);
+const fallbackRelated = related.length > 0 ? related : products.filter((x) => x.slug !== p.slug).slice(0, 2);
+---
+<Layout
+  title={`${p.name} — KILBURN Picks`}
+  description={`"${p.why}" — $${p.price.toLocaleString()}, bought retail and verified.`}
+  image={`/img/${p.img}-600x450.jpg`}
+>
+  <section class="pt-32 pb-12 px-6" data-accent="yellow">
+    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16">
+      <div>
+        <div class="aspect-[4/3] overflow-hidden bg-black relative">
+          <img
+            src={`/img/${p.img}-600x450.jpg`}
+            class="w-full h-full object-cover"
+            alt={p.name}
+          />
+          <div class="absolute top-3 left-3 bg-[var(--yellow)] text-black px-2 py-1 text-[10px] font-mono font-bold tracking-wider">
+            {p.cat}
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)]">
+          <span>SKU · {p.slug}</span>
+          <span>·</span>
+          <span class="text-[var(--yellow)]">Verified Purchase</span>
+        </div>
+      </div>
+
+      <div>
+        {checkout === 'success' && (
+          <div class="mb-6 p-4 border border-[var(--yellow)] text-sm font-mono" style="color: var(--yellow)">
+            ✓ ORDER CONFIRMED — receipt by email. Welcome to the good-decisions club.
+          </div>
+        )}
+        {checkout === 'cancelled' && (
+          <div class="mb-6 p-4 border border-[var(--border)] text-sm font-mono text-[var(--fg-dim)]">
+            Checkout cancelled — the pick will wait for you here.
+          </div>
+        )}
+        <div class="section-label mb-4">/ Picks — What I'd Buy</div>
+        <h1 class="font-display text-4xl md:text-6xl mb-4" style="text-wrap: balance">{p.name}</h1>
+        <p class="font-display text-4xl md:text-5xl mb-6" style="color: var(--section-accent)">
+          ${p.price.toLocaleString()}
+        </p>
+        <p class="text-[var(--fg-dim)] text-base md:text-lg mb-8 max-w-xl">"{p.why}"</p>
+
+        <form
+          id="checkoutForm"
+          hx-post="/api/checkout"
+          hx-swap="none"
+          class="flex flex-wrap items-center gap-3 mb-4"
+        >
+          <input type="hidden" name="slug" value={p.slug} />
+          <button type="submit" class="btn-primary">
+            Buy now — ${p.price.toLocaleString()} <i class="fas fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="/picks" class="btn-outline">All picks</a>
+        </form>
+        <div id="checkoutStatus" class="text-xs font-mono min-h-4 mb-8"></div>
+
+        <div class="text-xs text-[var(--fg-dim)] flex items-center gap-3">
+          <i class="fas fa-shield-halved"></i>
+          <span>Secure checkout via Stripe. Bought retail, ships with opinions attached.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-4">
+        Pairs well with
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
+        {fallbackRelated.map((r) => <ProductCard product={r} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

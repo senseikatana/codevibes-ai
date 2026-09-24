@@ -2,7 +2,9 @@
 // HTMX owns: video filtering, load-more, newsletter submit (HTML over the wire).
 // This file keeps only what HTMX can't do: FLIP slider animation, typewriter,
 // scroll progress, section-accent observer, chapters, back-to-top.
-import htmx from 'htmx.org/dist/htmx.min.js';
+// htmx loads as a classic script (public/js/htmx.min.js, before this bundle),
+// so the global is always present — no bundler UMD interop involved.
+const htmxApi = typeof window !== 'undefined' ? window.htmx : undefined;
 
 // ===== Price slider with FLIP animation (client-only, no server roundtrip) =====
 function initPriceFilter() {
@@ -284,7 +286,7 @@ function initAstroTransitions() {
     initHtmxFallbacks();
     updateScroll();
     // ClientRouter swaps don't notify htmx — reprocess new DOM explicitly.
-    if (htmx && typeof htmx.process === 'function') htmx.process(document.body);
+    if (htmxApi && typeof htmxApi.process === 'function') htmxApi.process(document.body);
   });
   document.addEventListener('astro:before-swap', () => {
     // Never carry an open mobile menu across pages.

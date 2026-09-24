@@ -18,7 +18,8 @@
     "astro": "^7.3.5",
     "htmx.org": "^2.0.11",
     "katanakit-css": "^0.12.5",
-    "katanakit-js": "^5.0.1"
+    "katanakit-js": "^5.0.1",
+    "stripe": "^22.6.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

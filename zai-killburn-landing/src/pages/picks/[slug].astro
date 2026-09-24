@@ -13,6 +13,7 @@ export function getStaticPaths() {
 }
 
 const { product: p } = Astro.props;
+const checkout = Astro.url.searchParams.get('checkout');
 const related = products.filter((x) => x.slug !== p.slug && x.cat === p.cat).slice(0, 2);
 const fallbackRelated = related.length > 0 ? related : products.filter((x) => x.slug !== p.slug).slice(0, 2);
 ---
@@ -42,6 +43,16 @@ const fallbackRelated = related.length > 0 ? related : products.filter((x) => x.
       </div>
 
       <div>
+        {checkout === 'success' && (
+          <div class="mb-6 p-4 border border-[var(--yellow)] text-sm font-mono" style="color: var(--yellow)">
+            ✓ ORDER CONFIRMED — receipt by email. Welcome to the good-decisions club.
+          </div>
+        )}
+        {checkout === 'cancelled' && (
+          <div class="mb-6 p-4 border border-[var(--border)] text-sm font-mono text-[var(--fg-dim)]">
+            Checkout cancelled — the pick will wait for you here.
+          </div>
+        )}
         <div class="section-label mb-4">/ Picks — What I'd Buy</div>
         <h1 class="font-display text-4xl md:text-6xl mb-4" style="text-wrap: balance">{p.name}</h1>
         <p class="font-display text-4xl md:text-5xl mb-6" style="color: var(--section-accent)">
@@ -50,6 +61,7 @@ const fallbackRelated = related.length > 0 ? related : products.filter((x) => x.
         <p class="text-[var(--fg-dim)] text-base md:text-lg mb-8 max-w-xl">"{p.why}"</p>
 
         <form
+          id="checkoutForm"
           hx-post="/api/checkout"
           hx-swap="none"
           class="flex flex-wrap items-center gap-3 mb-4"

@@ -3,9 +3,10 @@ import tailwindcss from '@tailwindcss/vite';
 import node from '@astrojs/node';
 
 export default defineConfig({
-  // Static-first: every page prerenders to dist/*.html. Only routes with
-  // `export const prerender = false` (POST /api/subscribe) use the server
-  // entry — plain `Bun.serve` static hosting keeps working for everything else.
+  // Static-first (Astro 7: `hybrid` was merged into `static`): pages prerender
+  // to HTML; routes with `export const prerender = false`
+  // (POST /api/subscribe, POST /api/checkout) run on the server entry —
+  // needs a Node runtime + STRIPE_SECRET_KEY for checkout.
   output: 'static',
   adapter: node({ mode: 'standalone' }),
   vite: {

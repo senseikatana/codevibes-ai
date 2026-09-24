@@ -5,10 +5,11 @@ interface Props {
 }
 const { product: p } = Astro.props;
 ---
-
 <div class="rec-card" data-price={p.price} data-cat={p.cat}>
   <div class="aspect-[4/3] overflow-hidden bg-black relative">
-    <img src={`/img/${p.img}-600x450.jpg`} class="w-full h-full object-cover" alt={p.name} loading="lazy" />
+    <a href={`/picks/${p.slug}`} aria-label={p.name}>
+      <img src={`/img/${p.img}-600x450.jpg`} class="w-full h-full object-cover" alt={p.name} loading="lazy" />
+    </a>
     <div class="absolute top-3 left-3 bg-[var(--yellow)] text-black px-2 py-1 text-[10px] font-mono font-bold tracking-wider">
       {p.cat}
     </div>
@@ -17,12 +18,14 @@ const { product: p } = Astro.props;
     </div>
   </div>
   <div class="p-5">
-    <h3 class="font-display text-xl mb-2">{p.name}</h3>
+    <a href={`/picks/${p.slug}`}>
+      <h3 class="font-display text-xl mb-2 hover:text-[var(--yellow)] transition">{p.name}</h3>
+    </a>
     <p class="text-sm text-[var(--fg-dim)] mb-4 leading-relaxed">"{p.why}"</p>
     <div class="flex items-center justify-between text-xs">
       <span class="font-mono text-[var(--fg-dim)] uppercase">Verified Purchase</span>
       <a
-        href="/picks"
+        href={`/picks/${p.slug}`}
         class="text-[var(--yellow)] hover:text-white transition flex items-center gap-1.5 font-semibold uppercase tracking-wider"
       >
         Buy <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>

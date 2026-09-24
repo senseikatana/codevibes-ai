@@ -14,7 +14,10 @@ export interface Video {
 
 export interface Product {
   name: string;
+  slug: string;
   price: number;
+  priceCents: number;
+  currency: string;
   cat: string;
   why: string;
   img: string;

@@ -5,6 +5,7 @@ interface Props {
 }
 const { product: p } = Astro.props;
 ---
+
 <div class="rec-card" data-price={p.price} data-cat={p.cat}>
   <div class="aspect-[4/3] overflow-hidden bg-black relative">
     <a href={`/picks/${p.slug}`} aria-label={p.name}>

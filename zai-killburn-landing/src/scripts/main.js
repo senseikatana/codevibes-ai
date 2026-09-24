@@ -214,6 +214,34 @@ function initFilterChips() {
   });
 }
 
+// ===== Mobile menu (hamburger, below lg) =====
+function initMobileMenu() {
+  const button = document.getElementById('menuButton');
+  const menu = document.getElementById('mobileMenu');
+  const icon = document.getElementById('menuIcon');
+  if (!button || !menu || button.dataset.wired) return;
+  button.dataset.wired = '1';
+
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (icon) icon.className = open ? 'fas fa-xmark text-sm' : 'fas fa-bars text-sm';
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+
+  button.addEventListener('click', () => {
+    setOpen(!menu.classList.contains('open'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
+  });
+  menu.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setOpen(false);
+  });
+}
+
 // ===== Newsletter validation (mirrors the legacy terminal-style errors) =====
 // Runs on capture so invalid emails never reach HTMX; valid ones pass through.
 function initNewsletterValidation() {
@@ -267,4 +295,5 @@ initScrollChrome();
 initChapters();
 initFilterChips();
 initNewsletterValidation();
+initMobileMenu();
 initHtmxFallbacks();

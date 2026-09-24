@@ -1,9 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { useAstroPathsFromValues } from 'katanakit-js/adapters/astro';
 import { videos } from '../../data/library';
 
 export function getStaticPaths() {
-  return videos.map((v) => ({ params: { id: String(v.id) } }));
+  return useAstroPathsFromValues(
+    videos.map((v) => v.id),
+    'id',
+  );
 }
 
 const { id } = Astro.params;

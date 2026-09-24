@@ -52,6 +52,52 @@ Newsletter dominical: 3 productos, 2 opiniones, 0 relleno.
 - katanakit se importa con `layer(katanakit)` (capa más débil) — sin esto sus
   utilities sin capa (`.hidden`, `.text-*`) pisan las variantes responsive.
 
+## Contenido (tus datos reales van acá)
+
+Toda la data vive en `src/content/` — cambiá estos archivos y todo el sitio
+se actualiza (nav, footer, hero, stats, cards, páginas):
+
+| Archivo         | Qué contiene                                                           |
+| --------------- | ---------------------------------------------------------------------- |
+| `site.json`     | marca, nav, mobileNav, hero, stats, marquee, footer, socials, contacto |
+| `author.json`   | retrato, bio, facts, principios (página studio)                        |
+| `videos.json`   | grilla de videos + fragmentos HTMX + páginas ep                        |
+| `products.json` | grilla de picks (tu futura store)                                      |
+| `services.json` | servicios (semilla estilo corporate, ver abajo)                        |
+| `blog/*.md`     | posts en Markdown con frontmatter (título, fecha, tags, minutos)       |
+
+`src/content.config.ts` define la colección `blog` (content layer de Astro 7:
+loader `glob` + schema zod). Los JSON se importan directo, sin colección.
+
+## Adaptación a sitio personal (senseikatana.com)
+
+El esqueleto ya mapea 1:1 a un portfolio corporativo estilo Daath:
+
+| KILBURN (demo)               | Tu sitio                            |
+| ---------------------------- | ----------------------------------- |
+| hero + stats                 | hero de portfolio + métricas        |
+| `/videos` (library)          | `/proyectos` (trabajos)             |
+| `/reviews` + `/blog`         | casos de estudio + blog             |
+| `/picks` (products.json)     | store / servicios (`services.json`) |
+| `/newsletter`, `/membership` | contacto + pricing                  |
+| `/studio` (author.json)      | sobre mí                            |
+
+Para adaptar sin videos: vaciá `videos.json`, poné tus proyectos en
+`services.json` + posts en `blog/`, y reemplazá `site.json`/`author.json`.
+
+## katanakit-js (adapters en uso)
+
+- **SEO** (`adapters/astro` → `useHeadTags`): `src/data/seo.ts` mapea
+  `content/site.json` + `author.json` al `SiteConfig` y el Layout inyecta
+  title/canonical/OG/RSS. Requiere el `SiteConfig` completo (`rss` + `seo`).
+- **RSS** (`useAstroCreateRssEndpoint`): `src/pages/rss.xml.ts` — posts del
+  blog (fechas reales) + videos (fecha ancla demo documentada en el archivo).
+- **Paths** (`useAstroPathsFrom` / `useAstroPathsFromValues`): `getStaticPaths`
+  de `videos/ep-[id]` y `blog/[slug]`.
+- **Notion** (`adapters/notion`): cliente completo disponible, sin cablear —
+  necesita `NOTION_TOKEN` + database IDs. Cuando los tengas, el blog puede
+  salir de una database en vez de Markdown.
+
 ## Recursos locales (anti-CDN-bloqueado)
 
 `public/fonts/` (3 TTF variables), `@fortawesome/fontawesome-free` (npm),

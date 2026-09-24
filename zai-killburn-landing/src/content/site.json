@@ -1,0 +1,115 @@
+{
+  "brand": {
+    "name": "KILBURN",
+    "mark": "K",
+    "tagline": "TECH / EST.2019",
+    "url": "https://kilburn.tv",
+    "lang": "en",
+    "description": "Tech reviews without the marketing filter. One human, one opinion, 412 videos and counting.",
+    "est": "EST. 2019 · LONDON",
+    "company": "© 2025 KILBURN MEDIA LTD",
+    "companyNo": "CO. NO. 11824719"
+  },
+  "nav": [
+    { "n": "01", "label": "Videos", "href": "/videos" },
+    { "n": "02", "label": "Reviews", "href": "/reviews" },
+    { "n": "03", "label": "Picks", "href": "/picks" },
+    { "n": "04", "label": "Studio", "href": "/studio" },
+    { "n": "05", "label": "Blog", "href": "/blog" }
+  ],
+  "mobileNav": [
+    { "n": "01", "label": "Videos", "href": "/videos" },
+    { "n": "02", "label": "Reviews", "href": "/reviews" },
+    { "n": "03", "label": "Picks", "href": "/picks" },
+    { "n": "04", "label": "Studio", "href": "/studio" },
+    { "n": "05", "label": "Blog", "href": "/blog" },
+    { "n": "06", "label": "Archive", "href": "/archive" },
+    { "n": "07", "label": "Membership", "href": "/membership" }
+  ],
+  "hero": {
+    "live": "NEW · EP 247",
+    "date": "FRI 14.03.25",
+    "time": "21:00 UTC",
+    "subs": "1.24M",
+    "vids": "412",
+    "today": "↑ 8.4K TODAY",
+    "image": "/img/aspectphone-1920x1080.jpg",
+    "imageAlt": "Latest video thumbnail",
+    "badges": ["New Episode", "4K · HDR · DOLBY ATMOS", "SHOT ON FX3"],
+    "views": "142,304",
+    "runtime": "18:24",
+    "kicker": "Flagship Review · Mar 2025",
+    "titleA": "The Phone That Killed",
+    "titleB": "The Compact Flagship.",
+    "lede": "Three weeks with the Aspect Mini Pro — a phone that finally proves small doesn't mean compromise. Mostly. With caveats I'm still furious about.",
+    "watchLabel": "Watch · 18:24",
+    "watchHref": "/videos/ep-247",
+    "readLabel": "Read The Deep-Dive",
+    "readHref": "/reviews/ep-247"
+  },
+  "stats": [
+    { "label": "This Week", "value": "4 New Drops", "accent": false },
+    { "label": "Watching Now", "value": "2,847", "accent": false },
+    { "label": "In The Queue", "value": "38 Reviews", "accent": false },
+    { "label": "Next Drop", "value": "2 Days", "accent": true }
+  ],
+  "marquee": [
+    "HONEST TAKES",
+    "NO SPONSOR FILTERS",
+    "REAL BATTERY TESTS",
+    "CALIBRATED OPINIONS",
+    "RAW FOOTAGE",
+    "4K · 60FPS"
+  ],
+  "footer": {
+    "blurb": "Tech reviews without the marketing filter. One human, one opinion, 412 videos and counting.",
+    "columns": [
+      {
+        "title": "Content",
+        "links": [
+          { "label": "Latest Videos", "href": "/videos" },
+          { "label": "Written Reviews", "href": "/reviews" },
+          { "label": "Buying Guides", "href": "/picks" },
+          { "label": "Podcast", "href": "/podcast" },
+          { "label": "Archive", "href": "/archive" },
+          { "label": "Blog", "href": "/blog" }
+        ]
+      },
+      {
+        "title": "Studio",
+        "links": [
+          { "label": "About", "href": "/studio" },
+          { "label": "Equipment", "href": "/studio/equipment" },
+          { "label": "Methodology", "href": "/studio/methodology" },
+          { "label": "Ethics Policy", "href": "/studio/ethics" },
+          { "label": "Contact", "href": "/contact" }
+        ]
+      },
+      {
+        "title": "Support",
+        "links": [
+          { "label": "Patreon", "href": "/membership" },
+          { "label": "Newsletter", "href": "/newsletter" },
+          { "label": "Merch Store", "href": "/merch" },
+          { "label": "RSS Feed", "href": "/rss.xml" }
+        ]
+      }
+    ],
+    "socials": [
+      { "label": "YouTube", "href": "/videos", "icon": "fab fa-youtube" },
+      { "label": "X", "href": "/studio", "icon": "fab fa-x-twitter" },
+      { "label": "Instagram", "href": "/studio", "icon": "fab fa-instagram" },
+      { "label": "Patreon", "href": "/membership", "icon": "fab fa-patreon" },
+      { "label": "RSS", "href": "/rss.xml", "icon": "fas fa-rss" }
+    ],
+    "legal": [
+      { "label": "Privacy", "href": "/privacy" },
+      { "label": "Terms", "href": "/terms" },
+      { "label": "Disclosures", "href": "/disclosures" }
+    ]
+  },
+  "contact": {
+    "tips": "tips@kilburn.tv",
+    "corrections": "corrections@kilburn.tv"
+  }
+}

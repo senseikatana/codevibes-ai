@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout
+  title="Blog — KILBURN"
+  description="Notes, deep-dives and opinions. Markdown-powered, swap with your real posts."
+>
+  <PageHero
+    kicker="/ 07 — Blog"
+    title="Notes and"
+    accentWord="deep-dives."
+    accent="blue"
+    lede="Long-form thinking that doesn't fit a thumbnail. New posts are just Markdown files in src/content/blog/."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl">
+      {posts.map((p) => (
+        <a href={`/blog/${p.id.replace(/\.md$/, '')}`} class="rec-card p-8 block">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-3">
+            {p.data.date.toISOString().slice(0, 10)} · {p.data.minutes} MIN ·{' '}
+            {p.data.tags.join(' / ').toUpperCase()}
+          </div>
+          <h2 class="font-display text-3xl mb-3">{p.data.title}</h2>
+          <p class="text-sm text-[var(--fg-dim)]">{p.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { useAstroPathsFrom } from 'katanakit-js/adapters/astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return useAstroPathsFrom(posts, {
+    param: 'slug',
+    valueFrom: (p) => p.id.replace(/\.md$/, ''),
+    propsFrom: (p) => ({ post: p }),
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} — KILBURN`} description={post.data.description}>
+  <section class="pt-32 pb-12 px-6" data-accent="blue">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-4">
+        {post.data.date.toISOString().slice(0, 10)} · {post.data.minutes} MIN READ ·{' '}
+        {post.data.tags.join(' / ').toUpperCase()}
+      </div>
+      <h1 class="font-display text-4xl md:text-6xl mb-5" style="text-wrap: balance">
+        {post.data.title}
+      </h1>
+      <p class="text-[var(--fg-dim)] text-base md:text-lg mb-10">{post.data.description}</p>
+      <article class="article-body">
+        <Content />
+      </article>
+      <div class="mt-12 pt-6 border-t border-[var(--border)] flex gap-3">
+        <a href="/blog" class="btn-outline">
+          All posts
+        </a>
+        <a href="/newsletter" class="btn-primary">
+          Get posts by email
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

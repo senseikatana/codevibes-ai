@@ -3,8 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import VideoCard from '../components/VideoCard.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { videos, products } from '../data/library';
+import site from '../content/site.json';
 
 const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+const hero = site.hero;
 ---
 
 <Layout>
@@ -15,29 +17,26 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
       <div class="flex items-center justify-between mb-5 text-[11px] font-mono uppercase tracking-widest text-[var(--fg-dim)]">
         <div class="flex items-center gap-5">
           <span class="flex items-center gap-2 text-white">
-            <span class="live-dot"></span>NEW · EP 247
+            <span class="live-dot"></span>
+            {hero.live}
           </span>
-          <span class="hidden md:inline">FRI 14.03.25</span>
-          <span class="hidden md:inline">21:00 UTC</span>
+          <span class="hidden md:inline">{hero.date}</span>
+          <span class="hidden md:inline">{hero.time}</span>
         </div>
         <div class="hidden md:flex items-center gap-5">
           <span>
-            SUBS · <span class="text-white">1.24M</span>
+            SUBS · <span class="text-white">{hero.subs}</span>
           </span>
           <span>
-            VIDS · <span class="text-white">412</span>
+            VIDS · <span class="text-white">{hero.vids}</span>
           </span>
-          <span style="color: var(--section-accent)">↑ 8.4K TODAY</span>
+          <span style="color: var(--section-accent)">{hero.today}</span>
         </div>
       </div>
 
       <!-- Hero cinematic frame -->
       <div class="cinematic-frame vignette relative aspect-video cursor-pointer group">
-        <img
-          src="/img/aspectphone-1920x1080.jpg"
-          alt="Latest video thumbnail"
-          class="w-full h-full object-cover absolute inset-0"
-        />
+        <img src={hero.image} alt={hero.imageAlt} class="w-full h-full object-cover absolute inset-0" />
         <div class="scan-overlay"></div>
 
         <!-- Gradient overlays -->
@@ -48,21 +47,21 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
         <div class="absolute top-0 left-0 right-0 p-5 md:p-7 flex items-start justify-between z-[5]">
           <div class="flex items-center gap-2.5 flex-wrap">
             <span class="bg-[var(--accent)] text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider font-mono">
-              New Episode
+              {hero.badges[0]}
             </span>
             <span class="text-[10px] font-mono text-white/90 border border-white/30 px-2 py-1 backdrop-blur bg-black/30">
-              4K · HDR · DOLBY ATMOS
+              {hero.badges[1]}
             </span>
             <span class="hidden md:inline text-[10px] font-mono text-white/70 border border-white/20 px-2 py-1 backdrop-blur bg-black/30">
-              SHOT ON FX3
+              {hero.badges[2]}
             </span>
           </div>
           <div class="hidden md:flex items-center gap-4 text-[10px] font-mono text-white/70">
             <span>
-              <i class="fas fa-eye mr-1"></i> 142,304
+              <i class="fas fa-eye mr-1"></i> {hero.views}
             </span>
             <span>
-              <i class="far fa-clock mr-1"></i> 18:24
+              <i class="far fa-clock mr-1"></i> {hero.runtime}
             </span>
           </div>
         </div>
@@ -71,26 +70,28 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
         <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-14 z-[5]">
           <div class="max-w-4xl">
             <div class="text-[11px] font-mono uppercase tracking-widest text-[var(--accent)] mb-4 flex items-center gap-2">
-              <span class="w-8 h-px bg-[var(--accent)]"></span>Flagship Review · Mar 2025
+              <span class="w-8 h-px bg-[var(--accent)]"></span>
+              {hero.kicker}
             </div>
             <h1
               class="font-display text-4xl md:text-6xl lg:text-7xl text-white mb-5 accent-glow"
               style="text-wrap: balance"
             >
-              The Phone That Killed
+              {hero.titleA}
               <br />
-              The Compact Flagship.
+              {hero.titleB}
             </h1>
             <p class="text-white/75 text-base md:text-lg lg:text-xl max-w-2xl mb-7 leading-relaxed font-light">
-              Three weeks with the Aspect Mini Pro — a phone that finally proves small doesn't mean
-              compromise. Mostly. With caveats I'm still furious about.
+              {hero.lede}
             </p>
             <div class="flex flex-wrap items-center gap-3">
-              <a href="/videos/ep-247" class="btn-primary">
-                <i class="fas fa-play text-[10px]"></i>Watch · 18:24
+              <a href={hero.watchHref} class="btn-primary">
+                <i class="fas fa-play text-[10px]"></i>
+                {hero.watchLabel}
               </a>
-              <a href="/reviews/ep-247" class="btn-outline">
-                <i class="fas fa-align-left text-[10px]"></i>Read The Deep-Dive
+              <a href={hero.readHref} class="btn-outline">
+                <i class="fas fa-align-left text-[10px]"></i>
+                {hero.readLabel}
               </a>
               <span class="hidden md:flex items-center gap-2 ml-2 text-[10px] font-mono uppercase tracking-widest text-white/40">
                 <i class="fas fa-arrow-pointer"></i>Hover to preview
@@ -115,32 +116,19 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
 
       <!-- Stats strip -->
       <div class="grid grid-cols-2 md:grid-cols-4 mt-px border-y border-[var(--border)] bg-black">
-        <div class="stat-cell">
-          <div class="text-[10px] font-mono uppercase text-[var(--fg-dim)] mb-1.5 tracking-widest">
-            This Week
+        {site.stats.map((s) => (
+          <div class="stat-cell">
+            <div class="text-[10px] font-mono uppercase text-[var(--fg-dim)] mb-1.5 tracking-widest">
+              {s.label}
+            </div>
+            <div
+              class="font-display text-2xl md:text-3xl"
+              style={s.accent ? 'color: var(--section-accent)' : undefined}
+            >
+              {s.value}
+            </div>
           </div>
-          <div class="font-display text-2xl md:text-3xl">4 New Drops</div>
-        </div>
-        <div class="stat-cell">
-          <div class="text-[10px] font-mono uppercase text-[var(--fg-dim)] mb-1.5 tracking-widest">
-            Watching Now
-          </div>
-          <div class="font-display text-2xl md:text-3xl">2,847</div>
-        </div>
-        <div class="stat-cell">
-          <div class="text-[10px] font-mono uppercase text-[var(--fg-dim)] mb-1.5 tracking-widest">
-            In The Queue
-          </div>
-          <div class="font-display text-2xl md:text-3xl">38 Reviews</div>
-        </div>
-        <div class="stat-cell">
-          <div class="text-[10px] font-mono uppercase text-[var(--fg-dim)] mb-1.5 tracking-widest">
-            Next Drop
-          </div>
-          <div class="font-display text-2xl md:text-3xl" style="color: var(--section-accent)">
-            2 Days
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
@@ -148,30 +136,12 @@ const sortedProducts = [...products].sort((a, b) => a.price - b.price);
   <!-- Marquee -->
   <div class="marquee-wrap">
     <div class="marquee-track font-display text-xl md:text-2xl">
-      <span class="px-6">HONEST TAKES</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">NO SPONSOR FILTERS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">REAL BATTERY TESTS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">CALIBRATED OPINIONS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">RAW FOOTAGE</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">4K · 60FPS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">HONEST TAKES</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">NO SPONSOR FILTERS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">REAL BATTERY TESTS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">CALIBRATED OPINIONS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">RAW FOOTAGE</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
-      <span class="px-6">4K · 60FPS</span>
-      <span class="px-3 text-[var(--accent)]">●</span>
+      {[...site.marquee, ...site.marquee].map((item) => (
+        <>
+          <span class="px-6">{item}</span>
+          <span class="px-3 text-[var(--accent)]">●</span>
+        </>
+      ))}
     </div>
   </div>
 

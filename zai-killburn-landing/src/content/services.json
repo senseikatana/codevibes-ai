@@ -1,0 +1,34 @@
+[
+  {
+    "n": "01",
+    "slug": "web-commerce",
+    "title": "Web & Commerce",
+    "lede": "Corporate sites, landings and stores built to turn attention into business.",
+    "tags": ["Design", "UX", "Development"],
+    "href": "/studio/methodology"
+  },
+  {
+    "n": "02",
+    "slug": "ai-systems",
+    "title": "AI Systems",
+    "lede": "Bots, agents and automations that answer, qualify and route every opportunity.",
+    "tags": ["AI", "CRM", "Automation"],
+    "href": "/studio/methodology"
+  },
+  {
+    "n": "03",
+    "slug": "search-growth",
+    "title": "Search & Growth",
+    "lede": "SEO, GEO, campaigns and funnels so your brand shows up and converts.",
+    "tags": ["SEO", "Ads", "Funnels"],
+    "href": "/blog"
+  },
+  {
+    "n": "04",
+    "slug": "media-story",
+    "title": "Media & Story",
+    "lede": "Strategy, social, photo and video that turn an identity into a presence.",
+    "tags": ["Brand", "Social", "Production"],
+    "href": "/videos"
+  }
+]

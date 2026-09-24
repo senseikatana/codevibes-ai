@@ -210,8 +210,8 @@ export const products: Product[] = [
   },
 ];
 
-export function videoCardHTML(v: Video): string {
-  return `<article class="video-card">
+export function videoCardHTML(v: Video, index = 0): string {
+  return `<article class="video-card shuffling" style="animation-delay: ${Math.min(index, 11) * 35}ms">
       <div class="video-card-thumb">
         <img src="https://picsum.photos/seed/${v.img}/640/360" alt="${v.title}" loading="lazy">
         <div class="preview-tag">PREVIEWING</div>

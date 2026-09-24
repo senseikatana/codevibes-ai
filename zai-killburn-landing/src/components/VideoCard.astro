@@ -2,11 +2,12 @@
 import type { Video } from '../data/library';
 interface Props {
   video: Video;
+  index?: number;
 }
-const { video: v } = Astro.props;
+const { video: v, index = 0 } = Astro.props;
 ---
 
-<article class="video-card">
+<article class="video-card shuffling" style={`animation-delay: ${Math.min(index, 11) * 35}ms`}>
   <div class="video-card-thumb">
     <img src={`https://picsum.photos/seed/${v.img}/640/360`} alt={v.title} loading="lazy" />
     <div class="preview-tag">PREVIEWING</div>

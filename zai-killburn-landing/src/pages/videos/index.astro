@@ -88,8 +88,8 @@ import { videos } from '../../data/library';
         </button>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10" id="videoGrid">
-        {videos.map((v) => (
-          <VideoCard video={v} />
+        {videos.map((v, i) => (
+          <VideoCard video={v} index={i} />
         ))}
       </div>
       <p class="mt-10 text-xs text-[var(--fg-dim)] font-mono">

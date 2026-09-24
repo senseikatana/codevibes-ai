@@ -60,7 +60,7 @@ export function productCardHTML(p: Product): string {
         <p class="text-sm text-[var(--fg-dim)] mb-4 leading-relaxed">"${p.why}"</p>
         <div class="flex items-center justify-between text-xs">
           <span class="font-mono text-[var(--fg-dim)] uppercase">Verified Purchase</span>
-          <a href="/picks" class="text-[var(--yellow)] hover:text-white transition flex items-center gap-1.5 font-semibold uppercase tracking-wider">
+          <a href="/picks/${p.slug}" class="text-[var(--yellow)] hover:text-white transition flex items-center gap-1.5 font-semibold uppercase tracking-wider">
             Buy <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
           </a>
         </div>

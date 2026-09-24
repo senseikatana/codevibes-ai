@@ -2,6 +2,7 @@
 // HTMX owns: video filtering, load-more, newsletter submit (HTML over the wire).
 // This file keeps only what HTMX can't do: FLIP slider animation, typewriter,
 // scroll progress, section-accent observer, chapters, back-to-top.
+import htmx from 'htmx.org/dist/htmx.min.js';
 
 // ===== Price slider with FLIP animation (client-only, no server roundtrip) =====
 function initPriceFilter() {
@@ -213,6 +214,88 @@ function initFilterChips() {
   });
 }
 
+// ===== Mobile menu (hamburger, below lg) =====
+function initMobileMenu() {
+  const button = document.getElementById('menuButton');
+  const menu = document.getElementById('mobileMenu');
+  const icon = document.getElementById('menuIcon');
+  if (!button || !menu || button.dataset.wired) return;
+  button.dataset.wired = '1';
+
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (icon) icon.className = open ? 'fas fa-xmark text-sm' : 'fas fa-bars text-sm';
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+
+  button.addEventListener('click', () => {
+    setOpen(!menu.classList.contains('open'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
+  });
+  menu.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setOpen(false);
+  });
+}
+
+// ===== Newsletter validation (mirrors the legacy terminal-style errors) =====
+// Runs on capture so invalid emails never reach HTMX; valid ones pass through.
+function initNewsletterValidation() {
+  const form = document.getElementById('newsletterForm');
+  const input = document.getElementById('emailInput');
+  const status = document.getElementById('subscribeStatus');
+  if (!form || !input || form.dataset.validationWired) return;
+  form.dataset.validationWired = '1';
+  form.addEventListener(
+    'submit',
+    (e) => {
+      const email = input.value.trim();
+      if (!email || !email.includes('@') || email.length < 5) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (status) {
+          status.textContent = '> ERROR: Please enter a valid email address.';
+          status.style.color = 'var(--accent)';
+        }
+      } else if (status) {
+        status.style.color = 'var(--yellow)';
+      }
+    },
+    true,
+  );
+}
+
+// ===== Astro View Transitions: re-wire after each client-side swap =====
+function initAstroTransitions() {
+  if (window.__killburnTransitionsWired) return;
+  window.__killburnTransitionsWired = true;
+  document.addEventListener('astro:after-swap', () => {
+    initPriceFilter();
+    initTypewriter();
+    observeAccentSections();
+    initChapters();
+    initFilterChips();
+    initNewsletterValidation();
+    initMobileMenu();
+    initHtmxFallbacks();
+    updateScroll();
+    // ClientRouter swaps don't notify htmx — reprocess new DOM explicitly.
+    if (htmx && typeof htmx.process === 'function') htmx.process(document.body);
+  });
+  document.addEventListener('astro:before-swap', () => {
+    // Never carry an open mobile menu across pages.
+    const menu = document.getElementById('mobileMenu');
+    if (menu && menu.classList.contains('open')) {
+      const btn = document.getElementById('menuButton');
+      if (btn) btn.click();
+    }
+  });
+}
+
 // ===== HTMX fallbacks (kept here so templates stay parser-clean) =====
 function initHtmxFallbacks() {
   if (window.__killburnHtmxFallbacksWired) return;
@@ -238,4 +321,7 @@ initTypewriter();
 initScrollChrome();
 initChapters();
 initFilterChips();
+initNewsletterValidation();
+initMobileMenu();
 initHtmxFallbacks();
+initAstroTransitions();

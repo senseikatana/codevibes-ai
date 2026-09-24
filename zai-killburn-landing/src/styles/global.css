@@ -1,3 +1,9 @@
+@import './fonts.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+/* katanakit ships unlayered utilities (.hidden, .flex, .text-*, .p-* ...)
+   that would beat Tailwind's responsive variants (unlayered > layered
+   in the cascade). Pin it to the weakest layer so Tailwind + main.css win. */
+@layer katanakit;
 @import 'tailwindcss';
-@import 'katanakit-css/dist/css/globals.min.css';
+@import 'katanakit-css/dist/css/globals.min.css' layer(katanakit);
 @import './main.css';

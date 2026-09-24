@@ -1,9 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
+import author from '../../content/author.json';
 ---
 
-<Layout title="Studio — KILBURN" description="One person. One opinion. A lot of cables. East London / Tokyo.">
+<Layout title="Studio — KILBURN" description={`${author.tagline} East London / Tokyo.`}>
   <PageHero
     kicker="/ 06 — About"
     title="One person. One opinion."
@@ -15,25 +16,15 @@ import PageHero from '../../components/PageHero.astro';
     <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-10">
       <div class="lg:col-span-5">
         <div class="aspect-[4/5] overflow-hidden bg-black relative">
-          <img
-            src="https://picsum.photos/seed/marcusbw/800/1000"
-            class="w-full h-full object-cover"
-            alt="Marcus Kilburn portrait"
-          />
+          <img src={author.portrait} class="w-full h-full object-cover" alt={`${author.name} portrait`} />
         </div>
         <div class="mt-4 grid grid-cols-3 gap-2 text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)]">
-          <div>
-            <div class="text-white mb-1">Marcus Kilburn</div>
-            <div>Founder / Host</div>
-          </div>
-          <div>
-            <div class="text-white mb-1">Est. 2019</div>
-            <div>London / Tokyo</div>
-          </div>
-          <div>
-            <div class="text-[var(--accent)] mb-1">6 yrs</div>
-            <div>412 videos</div>
-          </div>
+          {author.facts.map((f) => (
+            <div>
+              <div class="text-white mb-1">{f.k}</div>
+              <div>{f.v}</div>
+            </div>
+          ))}
         </div>
       </div>
       <div class="lg:col-span-7">
@@ -41,30 +32,13 @@ import PageHero from '../../components/PageHero.astro';
           Operating Principles
         </div>
         <div class="space-y-0 max-w-2xl">
-          <div class="py-4 border-b border-[var(--border)]">
-            <span class="font-display text-2xl text-[var(--accent)] mr-4">01</span>
-            <strong>If it's sponsored, it says so. Loudly.</strong>
-            <p class="text-sm text-[var(--fg-dim)] mt-1">
-              Three sponsors max per year. Always disclosed. Never the main video.
-            </p>
-          </div>
-          <div class="py-4 border-b border-[var(--border)]">
-            <span class="font-display text-2xl text-[var(--accent)] mr-4">02</span>
-            <strong>Three-week minimum testing window.</strong>
-            <p class="text-sm text-[var(--fg-dim)] mt-1">No first impressions passed off as reviews.</p>
-          </div>
-          <div class="py-4 border-b border-[var(--border)]">
-            <span class="font-display text-2xl text-[var(--accent)] mr-4">03</span>
-            <strong>Numbers over adjectives.</strong>
-            <p class="text-sm text-[var(--fg-dim)] mt-1">
-              "Fast" is meaningless. "47ms at 1kHz" I can defend.
-            </p>
-          </div>
-          <div class="py-4">
-            <span class="font-display text-2xl text-[var(--accent)] mr-4">04</span>
-            <strong>Wrong is fine. Lying isn't.</strong>
-            <p class="text-sm text-[var(--fg-dim)] mt-1">Corrections are public and pinned.</p>
-          </div>
+          {author.principles.map((p, i) => (
+            <div class={i < author.principles.length - 1 ? 'py-4 border-b border-[var(--border)]' : 'py-4'}>
+              <span class="font-display text-2xl text-[var(--accent)] mr-4">{p.n}</span>
+              <strong>{p.title}</strong>
+              <p class="text-sm text-[var(--fg-dim)] mt-1">{p.note}</p>
+            </div>
+          ))}
         </div>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/studio/equipment" class="btn-outline">

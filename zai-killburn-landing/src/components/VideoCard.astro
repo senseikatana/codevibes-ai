@@ -9,7 +9,7 @@ const { video: v, index = 0 } = Astro.props;
 
 <article class="video-card shuffling" style={`animation-delay: ${Math.min(index, 11) * 35}ms`}>
   <div class="video-card-thumb">
-    <img src={`https://picsum.photos/seed/${v.img}/640/360`} alt={v.title} loading="lazy" />
+    <img src={`/img/${v.img}-640x360.jpg`} alt={v.title} loading="lazy" />
     <div class="preview-tag">PREVIEWING</div>
     <div class="preview-progress"></div>
     <div class="absolute bottom-3 right-3 bg-black/85 text-white px-2 py-1 text-[11px] font-mono z-[2]">

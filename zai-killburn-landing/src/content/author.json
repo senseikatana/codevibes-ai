@@ -1,0 +1,38 @@
+{
+  "name": "Marcus Kilburn",
+  "role": "FOUNDER / HOST",
+  "tagline": "One person. One opinion. A lot of cables.",
+  "portrait": "/img/marcusbw-800x1000.jpg",
+  "facts": [
+    { "k": "MARCUS KILBURN", "v": "FOUNDER / HOST" },
+    { "k": "EST. 2019", "v": "LONDON / TOKYO" },
+    { "k": "6 YRS", "v": "412 VIDEOS" }
+  ],
+  "bio": [
+    "I started making videos in 2019 because I was tired of tech reviews that read like press releases. Six years and 412 videos later, that's still the only rule: if I wouldn't say it to a friend over coffee, it doesn't go in the script.",
+    "Every product on this site was either bought retail, borrowed from a friend, or returned after testing. No review units. No sponsored first impressions. No \"this changes everything\" thumbnails for products that don't.",
+    "The studio is in East London. The editing happens in Tokyo. The opinions are entirely my own and frequently wrong, which I think is fine."
+  ],
+  "principles": [
+    {
+      "n": "01",
+      "title": "If it's sponsored, it says so. Loudly.",
+      "note": "Three sponsors max per year. Always disclosed. Never the main video."
+    },
+    {
+      "n": "02",
+      "title": "Three-week minimum testing window.",
+      "note": "No \"first impressions\" passed off as reviews. If I haven't lived with it, I won't grade it."
+    },
+    {
+      "n": "03",
+      "title": "Numbers over adjectives.",
+      "note": "\"Fast\" is meaningless. \"47ms latency measured at 1kHz\" is something I can defend."
+    },
+    {
+      "n": "04",
+      "title": "Wrong is fine. Lying isn't.",
+      "note": "When I get something wrong, I update the video and pin the correction. Errors are public."
+    }
+  ]
+}

@@ -1,3 +1,10 @@
+/* KILBURN assumes a 16px root (Tailwind default + legacy ZAI CSS).
+   katanakit-css sets html{font-size:62.5%} (10px root for its own scale),
+   which shrinks every rem on this site — restore 100% AFTER its import. */
+html {
+  font-size: 100%;
+}
+
 /* Registered custom property for smooth color transitions */
 @property --section-accent {
   syntax: '<color>';
@@ -697,4 +704,77 @@ body::before {
 /* Glow utility */
 .accent-glow {
   text-shadow: 0 0 32px rgba(255, 42, 42, 0.45);
+}
+
+/* Mobile menu overlay (below lg, toggled from main.js) */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.96);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem 2rem 3rem;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+}
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.mobile-menu-links a {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 2.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--fg);
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s;
+}
+.mobile-menu-links a .font-mono {
+  font-size: 0.8125rem;
+  color: var(--section-accent);
+}
+.mobile-menu.open .mobile-menu-links a {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.06s * var(--i) + 0.08s);
+}
+.mobile-menu-links a:hover {
+  color: var(--section-accent);
+}
+.mobile-menu .btn-primary {
+  align-self: flex-start;
+}
+.mobile-menu-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  color: var(--fg-mute);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-links a {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

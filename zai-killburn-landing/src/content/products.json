@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Audio-Technica M50x",
+    "price": 149,
+    "cat": "AUDIO",
+    "why": "Studio reference for 15 years. Still unbeaten.",
+    "img": "prod1"
+  },
+  {
+    "name": "Logitech MX Master 4",
+    "price": 119,
+    "cat": "INPUT",
+    "why": "The only mouse I recommend without caveats.",
+    "img": "prod2"
+  },
+  {
+    "name": "Røde PodMic USB",
+    "price": 199,
+    "cat": "AUDIO",
+    "why": "Better than mics twice the price. My daily.",
+    "img": "prod3"
+  },
+  {
+    "name": "Anker 737 Power Bank",
+    "price": 89,
+    "cat": "ACCESSORY",
+    "why": "Flown with this 40+ times. Indestructible.",
+    "img": "prod4"
+  },
+  {
+    "name": "Keychron Q1 Pro",
+    "price": 199,
+    "cat": "INPUT",
+    "why": "Best budget mechanical. End of debate.",
+    "img": "prod5"
+  },
+  {
+    "name": "Airthings Wave Plus",
+    "price": 249,
+    "cat": "HOME",
+    "why": "Know your air quality. Worth every cent.",
+    "img": "prod6"
+  },
+  {
+    "name": "Sony WH-1000XM6",
+    "price": 449,
+    "cat": "AUDIO",
+    "why": "Best noise cancelling. Period.",
+    "img": "prod7"
+  },
+  {
+    "name": "iPad Pro M4 11\"",
+    "price": 999,
+    "cat": "TABLET",
+    "why": "The only tablet worth $1000 in 2025.",
+    "img": "prod8"
+  },
+  {
+    "name": "Kinesis Advantage360",
+    "price": 649,
+    "cat": "INPUT",
+    "why": "Daily driver since 2023. Saved my wrists.",
+    "img": "prod9"
+  },
+  {
+    "name": "Apple Studio Display",
+    "price": 1599,
+    "cat": "DISPLAYS",
+    "why": "Controversial but I genuinely love mine.",
+    "img": "prod10"
+  },
+  {
+    "name": "LG C4 OLED 65\"",
+    "price": 1899,
+    "cat": "DISPLAYS",
+    "why": "Best TV for the money this year.",
+    "img": "prod11"
+  },
+  {
+    "name": "Sony A7CR",
+    "price": 1999,
+    "cat": "CAMERA",
+    "why": "Compact body, full-frame image quality.",
+    "img": "prod12"
+  }
+]

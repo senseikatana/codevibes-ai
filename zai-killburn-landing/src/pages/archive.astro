@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { videos } from '../data/library';
+---
+
+<Layout
+  title="Archive — KILBURN"
+  description="412 videos since 2019. Chronological, searchable, occasionally embarrassing."
+>
+  <PageHero
+    kicker="Content / Archive"
+    title="412 videos,"
+    accentWord="zero deleted."
+    accent="blue"
+    lede="The embarrassing ones stay up. That's the deal."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-4xl mx-auto divide-y divide-white/10 border-y border-[var(--border)]">
+      {videos.map((v) => (
+        <a
+          href={`/videos/ep-${v.id}`}
+          class="flex items-center gap-4 py-4 hover:bg-white/[0.03] px-2 transition"
+        >
+          <span class="font-mono text-xs text-[var(--fg-mute)] w-16">EP {v.id}</span>
+          <span class="flex-1 font-medium">{v.title}</span>
+          <span class="font-mono text-[11px] text-[var(--fg-dim)] hidden md:inline">{v.runtime}</span>
+          <span class="font-mono text-[11px] text-[var(--fg-dim)]">{v.views}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

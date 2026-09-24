@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+const tiers = [
+  ['Rushes', '$3/mo', 'Raw footage + failed takes. The stuff too rough for YouTube.'],
+  ['Bench Notes', '$7/mo', 'Spreadsheets behind every comparison + monthly private Q&A.'],
+  ['Producer', '$15/mo', 'Vote on what gets reviewed + name in credits. Cancel anytime.'],
+];
+---
+
+<Layout
+  title="Membership — KILBURN"
+  description="Raw footage, failed takes, spreadsheets and a private Q&A. Cancel anytime."
+>
+  <PageHero
+    kicker="/ 05 — Behind The Curtain"
+    title="The cuts that"
+    accentWord="didn't make it."
+    accent="blue"
+    lede="2,847 members · avg rating 4.9/5. Nothing locked behind FOMO — it's all stuff that wouldn't exist without support."
+  />
+  <section class="px-6 pb-24" id="tiers">
+    <div class="max-w-[1600px] mx-auto grid md:grid-cols-3 gap-4 max-w-5xl">
+      {tiers.map(([name, price, note]) => (
+        <div class="rec-card p-8 flex flex-col">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-2">{price}</div>
+          <div class="font-display text-3xl mb-3">{name}</div>
+          <p class="text-sm text-[var(--fg-dim)] mb-6 flex-1">{note}</p>
+          <a href="/newsletter" class="btn-primary justify-center">
+            Join {name}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

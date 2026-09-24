@@ -1,0 +1,37 @@
+---
+import type { Product } from '../data/library';
+interface Props {
+  product: Product;
+}
+const { product: p } = Astro.props;
+---
+
+<div class="rec-card" data-price={p.price} data-cat={p.cat}>
+  <div class="aspect-[4/3] overflow-hidden bg-black relative">
+    <img
+      src={`https://picsum.photos/seed/${p.img}/600/450`}
+      class="w-full h-full object-cover"
+      alt={p.name}
+      loading="lazy"
+    />
+    <div class="absolute top-3 left-3 bg-[var(--yellow)] text-black px-2 py-1 text-[10px] font-mono font-bold tracking-wider">
+      {p.cat}
+    </div>
+    <div class="absolute bottom-3 right-3 bg-black/90 text-white px-3 py-1.5 text-sm font-mono">
+      ${p.price.toLocaleString()}
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="font-display text-xl mb-2">{p.name}</h3>
+    <p class="text-sm text-[var(--fg-dim)] mb-4 leading-relaxed">"{p.why}"</p>
+    <div class="flex items-center justify-between text-xs">
+      <span class="font-mono text-[var(--fg-dim)] uppercase">Verified Purchase</span>
+      <a
+        href="/picks"
+        class="text-[var(--yellow)] hover:text-white transition flex items-center gap-1.5 font-semibold uppercase tracking-wider"
+      >
+        Buy <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+      </a>
+    </div>
+  </div>
+</div>

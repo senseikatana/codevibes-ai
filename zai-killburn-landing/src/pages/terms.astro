@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Layout
+  title="Terms — KILBURN"
+  description="Opinions are mine. Measurements are reproducible. Don't sue over taste."
+>
+  <PageHero
+    kicker="Legal / Terms"
+    title="Opinions mine,"
+    accentWord="numbers reproducible."
+    accent="red"
+    lede="Reviews are subjective; measurements follow the published methodology."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-2xl mx-auto article-body">
+      <h3>Content</h3>
+      <p>Videos and articles are opinion + measured data. Quoting with credit is fine; re-uploads aren't.</p>
+      <h3>Affiliates</h3>
+      <p>
+        Buy links may earn a commission — disclosed per page in <a href="/disclosures">disclosures</a>.
+      </p>
+    </div>
+  </section>
+</Layout>

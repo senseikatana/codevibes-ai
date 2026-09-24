@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+const eps = [
+  ['#41', 'The compact phone is dead. Long live the compact phone.', '48 min'],
+  ['#40', 'Q&A: why I still buy every unit retail', '36 min'],
+  ['#39', 'OLED burn-in, three years later', '52 min'],
+];
+---
+
+<Layout title="Podcast — KILBURN" description="The audio cutting-room floor. Weekly, unscripted.">
+  <PageHero
+    kicker="Content / Podcast"
+    title="Unscripted,"
+    accentWord="unfiltered."
+    accent="blue"
+    lede="Weekly. No chapters skipped, no takes redone."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-3xl mx-auto space-y-3">
+      {eps.map(([n, t, d]) => (
+        <div class="rec-card p-6 flex items-center gap-4">
+          <span class="w-12 h-12 shrink-0 bg-white text-black flex items-center justify-center">
+            <i class="fas fa-play text-xs"></i>
+          </span>
+          <div class="flex-1">
+            <div class="text-[10px] font-mono text-[var(--fg-dim)]">
+              {n} · {d}
+            </div>
+            <div class="font-display text-xl">{t}</div>
+          </div>
+        </div>
+      ))}
+      <a href="/rss.xml" class="btn-outline">
+        RSS feed
+      </a>
+    </div>
+  </section>
+</Layout>

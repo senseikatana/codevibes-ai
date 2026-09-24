@@ -1,0 +1,40 @@
+---
+import type { Video } from '../data/library';
+interface Props {
+  video: Video;
+}
+const { video: v } = Astro.props;
+---
+
+<article class="video-card">
+  <div class="video-card-thumb">
+    <img src={`https://picsum.photos/seed/${v.img}/640/360`} alt={v.title} loading="lazy" />
+    <div class="preview-tag">PREVIEWING</div>
+    <div class="preview-progress"></div>
+    <div class="absolute bottom-3 right-3 bg-black/85 text-white px-2 py-1 text-[11px] font-mono z-[2]">
+      {v.runtime}
+    </div>
+    {v.tag && (
+      <div class="absolute top-3 right-3 bg-[var(--accent)] text-black px-2 py-1 text-[10px] font-mono font-bold z-[3]">
+        {v.tag}
+      </div>
+    )}
+    <div class="absolute top-3 left-3 z-[3]">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-white bg-black/60 backdrop-blur px-2 py-1 border border-white/20">
+        EP {v.id}
+      </span>
+    </div>
+  </div>
+  <div class="mt-3">
+    <a href={`/videos/ep-${v.id}`}>
+      <h3 class="font-display text-lg leading-tight mb-2 hover:text-[var(--accent)] transition cursor-pointer">
+        {v.title}
+      </h3>
+    </a>
+    <div class="flex items-center gap-3 text-[11px] font-mono text-[var(--fg-dim)] uppercase tracking-wider">
+      <span>{v.date}</span>
+      <span>·</span>
+      <span>{v.views} views</span>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Layout title="Merch Store — KILBURN" description="Small-batch studio goods. When it's gone, it's gone.">
+  <PageHero
+    kicker="Support / Merch"
+    title="Small batch."
+    accentWord="No dropshipping."
+    accent="yellow"
+    lede="Studio goods, printed locally. Profits fund retail review units."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto grid md:grid-cols-3 gap-4 max-w-5xl">
+      {['"Numbers Over Adjectives" Tee', 'Bench Notes Notebook', 'Cable Hell Enamel Pin'].map((n, i) => (
+        <div class="rec-card p-8">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-2">
+            BATCH 0{i + 1}
+          </div>
+          <div class="font-display text-2xl mb-2">{n}</div>
+          <p class="text-sm text-[var(--fg-dim)]">Restocks when the queue clears. Members hear first.</p>
+        </div>
+      ))}
+    </div>
+    <div class="max-w-5xl mx-auto mt-8">
+      <a href="/membership" class="btn-outline">
+        Members hear first
+      </a>
+    </div>
+  </section>
+</Layout>

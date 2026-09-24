@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<Layout
+  title="Methodology — KILBURN Studio"
+  description="How things get tested: three weeks minimum, three readings averaged, retail units."
+>
+  <PageHero
+    kicker="Studio / Methodology"
+    title="Three weeks,"
+    accentWord="or it doesn't ship."
+    accent="blue"
+    lede="No first impressions passed off as reviews. Three readings averaged per data point."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-2xl mx-auto article-body">
+      <h3>Battery</h3>
+      <p>
+        21-day mixed-use log: 90 min video, 45 min navigation, 2h social, rest messaging/photo/browsing.
+        Standby drain tracked hourly. Gaming sessions (30 min sustained) reported separately — thermals
+        included.
+      </p>
+      <h3>Display</h3>
+      <p>
+        Sekonic C-800, three readings averaged. Peak brightness reported alongside sustained outdoor
+        brightness — the second number matters more.
+      </p>
+      <h3>Audio &amp; latency</h3>
+      <p>
+        Latency measured at 1kHz polling where applicable. "Fast" is banned from scripts until there's a
+        millisecond attached.
+      </p>
+      <h3>Corrections</h3>
+      <p>
+        When something's wrong, the video gets updated and the correction is pinned.{' '}
+        <a href="/studio/ethics">Ethics policy</a> has the rest.
+      </p>
+    </div>
+  </section>
+</Layout>

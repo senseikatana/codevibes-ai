@@ -1,0 +1,27 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  accentWord?: string;
+  lede?: string;
+  accent?: string;
+}
+const { kicker, title, accentWord, lede, accent = 'red' } = Astro.props;
+---
+
+<section class="pt-32 pb-12 px-6" data-accent={accent}>
+  <div class="max-w-[1600px] mx-auto max-w-3xl">
+    <div class="section-label mb-4">{kicker}</div>
+    <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mb-5" style="text-wrap: balance">
+      {title}
+      {accentWord && (
+        <>
+          <br />
+          <span style="color: var(--section-accent)">{accentWord}</span>
+        </>
+      )}
+    </h1>
+    {lede && <p class="text-[var(--fg-dim)] text-base md:text-lg">{lede}</p>}
+    <slot />
+  </div>
+</section>

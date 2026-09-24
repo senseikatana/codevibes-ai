@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { videos } from '../../data/library';
+const featured = videos.filter((v) => v.cat === 'review' || v.cat === 'deep');
+---
+
+<Layout
+  title="Written Reviews — KILBURN"
+  description="Deep-dive companions to the videos. Numbers over adjectives."
+>
+  <PageHero
+    kicker="/ 02 — Written Companion"
+    title="Read along,"
+    accentWord="while it plays."
+    accent="red"
+    lede="The video stays pinned, the article scrolls. Charts, benchmarks, opinions — no sponsor filter."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="/reviews/ep-247" class="rec-card p-8 block border-[var(--yellow)]">
+        <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-3">
+          Flagship Review · Ep. 247
+        </div>
+        <h2 class="font-display text-3xl mb-3">The Phone That Killed The Compact Flagship.</h2>
+        <p class="text-sm text-[var(--fg-dim)]">
+          Three weeks, eleven instruments, one conclusion about small phones. 4,200 words.
+        </p>
+      </a>
+      {featured
+        .filter((v) => v.id !== 247)
+        .map((v) => (
+          <a href={`/videos/ep-${v.id}`} class="rec-card p-8 block">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-3">
+              Ep. {v.id} · {v.cat}
+            </div>
+            <h2 class="font-display text-2xl mb-3">{v.title}</h2>
+            <p class="text-sm text-[var(--fg-dim)]">
+              {v.views} views · {v.runtime}
+            </p>
+          </a>
+        ))}
+    </div>
+  </section>
+</Layout>

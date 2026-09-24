@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import { videos } from '../../data/library';
+---
+
+<Layout title="Videos — KILBURN" description="Every KILBURN video. Chronological, searchable, no filter.">
+  <PageHero
+    kicker="/ 01 — The Library"
+    title="Every video."
+    accentWord="No filter."
+    accent="blue"
+    lede="412 videos since 2019. Filter by category — served as HTML fragments by Astro, swapped in by HTMX."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="flex gap-2 overflow-x-auto pb-3 mb-10 no-scrollbar">
+        <button
+          class="filter-chip active"
+          data-filter="all"
+          hx-get="/api/videos/all"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          All
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="review"
+          hx-get="/api/videos/review"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          Reviews
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="comparison"
+          hx-get="/api/videos/comparison"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          Comparisons
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="news"
+          hx-get="/api/videos/news"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          News &amp; Takes
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="deep"
+          hx-get="/api/videos/deep"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          Deep Dives
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="setup"
+          hx-get="/api/videos/setup"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          Setups
+        </button>
+        <button
+          class="filter-chip"
+          data-filter="bts"
+          hx-get="/api/videos/bts"
+          hx-target="#videoGrid"
+          hx-swap="innerHTML"
+          hx-indicator="#videoGrid"
+        >
+          Behind The Scenes
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10" id="videoGrid">
+        {videos.map((v) => (
+          <VideoCard video={v} />
+        ))}
+      </div>
+      <p class="mt-10 text-xs text-[var(--fg-dim)] font-mono">
+        TIP: these filters are HTMX — the server returns HTML cards, no JSON, no client templating.
+      </p>
+    </div>
+  </section>
+</Layout>

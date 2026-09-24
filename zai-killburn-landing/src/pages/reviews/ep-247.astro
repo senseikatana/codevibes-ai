@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="The Phone That Killed The Compact Flagship — KILBURN"
+  description="Three weeks with the Aspect Mini Pro. Deep-dive companion, Ep. 247."
+>
+  <section class="pt-32 pb-12 px-6" data-accent="red">
+    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16">
+      <div class="lg:sticky lg:top-24 lg:self-start">
+        <div class="video-player-shell">
+          <div class="video-player-screen">
+            <img src="https://picsum.photos/seed/reviewvid/1280/720" alt="Video still" />
+            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur px-3 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 z-10">
+              <span class="live-dot"></span>Reading Mode · Video Pinned
+            </div>
+            <div class="absolute top-4 right-4 bg-black/80 backdrop-blur px-3 py-2 text-[10px] font-mono text-white z-10">
+              06:43 / 18:24
+            </div>
+          </div>
+          <div class="video-controls">
+            <div class="video-progress">
+              <div class="video-progress-fill"></div>
+            </div>
+            <div class="flex items-center justify-between text-white text-xs font-mono">
+              <span>06:43 / 18:24</span>
+              <span>Ep. 247</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-3">
+            Chapters
+          </div>
+          <div class="space-y-1">
+            <button class="chapter active">
+              <span>00:00 — Intro: the small phone problem</span>
+              <i class="fas fa-play text-[10px] text-[var(--accent)]"></i>
+            </button>
+            <button class="chapter text-[var(--fg-dim)]">
+              <span>02:14 — Build &amp; in-hand feel</span>
+              <span class="text-[10px] text-[var(--fg-mute)] font-mono">02:14</span>
+            </button>
+            <button class="chapter text-[var(--fg-dim)]">
+              <span>05:48 — The display reality check</span>
+              <span class="text-[10px] text-[var(--fg-mute)] font-mono">05:48</span>
+            </button>
+            <button class="chapter text-[var(--fg-dim)]">
+              <span>08:32 — Battery: three-week data</span>
+              <span class="text-[10px] text-[var(--fg-mute)] font-mono">08:32</span>
+            </button>
+            <button class="chapter text-[var(--fg-dim)]">
+              <span>12:19 — Cameras in low light</span>
+              <span class="text-[10px] text-[var(--fg-mute)] font-mono">12:19</span>
+            </button>
+            <button class="chapter text-[var(--fg-dim)]">
+              <span>15:41 — Verdict &amp; alternatives</span>
+              <span class="text-[10px] text-[var(--fg-mute)] font-mono">15:41</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <article class="article-body max-w-2xl">
+        <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-4">
+          Deep-Dive Companion · 4,200 words · 12 min read
+        </div>
+        <h1 class="font-display text-3xl md:text-5xl mb-7 leading-[1.02]">
+          Three weeks. Eleven instruments. One conclusion about small phones.
+        </h1>
+        <p class="drop-cap">
+          There's a particular kind of disappointment that comes from a phone that's almost right. The Aspect
+          Mini Pro is the most frustrating device I've tested this year — not because it's bad, but because
+          it's <em>so close</em> to being the answer to a question we've been asking for half a decade: can a
+          small phone still be a flagship?
+        </p>
+        <div class="pull-quote">
+          "It's not that the phone is perfect — it's that the compromises are finally in the right places.
+          Mostly."
+        </div>
+        <h3>Build Quality &amp; In-Hand Feel</h3>
+        <p>
+          At 168g with a titanium frame, it's the first compact since the iPhone 13 Mini that doesn't feel
+          like a concession. My thumb reaches the top corner. The phone disappears into a jeans pocket.
+        </p>
+        <h3>The Display: A Reality Check</h3>
+        <p>
+          On paper: 6.1" LTPO, 1–120Hz, 2400 nits peak. Measured with a Sekonic C-800, sustained outdoor
+          brightness runs ~15% under the iPhone 15 Pro. Peak numbers mislead; sustained brightness is what you
+          feel in sunlight.
+        </p>
+        <h3>The Battery Question</h3>
+        <p>
+          21 days averaged <strong>6 hours 42 minutes</strong> screen-on time with 1.8%/h standby drain.
+          Genshin for 30 minutes costs 22% — physics wins in a chassis this small. For non-gamers: a
+          non-issue.
+        </p>
+        <h3>The Verdict</h3>
+        <p>
+          Not perfect — dimmer outdoors than the best, weaker low-light than Pixel/iPhone, $899 against bigger
+          rivals. And yet I keep reaching for it, because it disappears. If you've waited for a small phone
+          that doesn't suck, this is it.
+        </p>
+        <p class="text-[var(--fg-dim)] text-sm italic mt-12 pt-6 border-t border-[var(--border)]">
+          Purchased retail. No review unit, no loaner, no sponsor.{' '}
+          <a href="/disclosures" class="underline">
+            Full disclosures
+          </a>
+          .
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/videos/ep-247" class="btn-primary">
+            Watch the video <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+          <a href="/reviews" class="btn-outline">
+            All reviews
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>

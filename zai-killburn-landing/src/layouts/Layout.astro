@@ -1,0 +1,280 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'KILBURN — Tech Reviews Without the Marketing Filter',
+  description = 'Tech reviews without the marketing filter. One human, one opinion, 412 videos and counting.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.11/dist/htmx.min.js"
+      integrity="sha384-2OatzQy1H+Zd/IIrjr1TcuDGqLXeHhbooAyJY1KdQMKnr4LZ22k31GBLdYKHmVjg"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body hx-boost="false">
+    <div class="scroll-progress-bar" id="scrollProgress"></div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/60 border-b border-white/5">
+      <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
+          <div
+            class="w-9 h-9 flex items-center justify-center font-display text-black text-xl transition-colors"
+            style="background: var(--section-accent)"
+          >
+            K
+          </div>
+          <div class="flex flex-col leading-none">
+            <span class="font-display text-xl tracking-tight">KILBURN</span>
+            <span class="text-[10px] font-mono text-[var(--fg-dim)] tracking-widest">TECH / EST.2019</span>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <a
+            href="/videos"
+            class="hover:text-white text-[var(--fg-dim)] transition flex items-center gap-1.5"
+          >
+            <span class="font-mono text-xs text-[var(--fg-mute)]">01</span>Videos
+          </a>
+          <a
+            href="/reviews"
+            class="hover:text-white text-[var(--fg-dim)] transition flex items-center gap-1.5"
+          >
+            <span class="font-mono text-xs text-[var(--fg-mute)]">02</span>Reviews
+          </a>
+          <a href="/picks" class="hover:text-white text-[var(--fg-dim)] transition flex items-center gap-1.5">
+            <span class="font-mono text-xs text-[var(--fg-mute)]">03</span>Picks
+          </a>
+          <a
+            href="/studio"
+            class="hover:text-white text-[var(--fg-dim)] transition flex items-center gap-1.5"
+          >
+            <span class="font-mono text-xs text-[var(--fg-mute)]">04</span>Studio
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a
+            href="/archive"
+            class="hidden md:flex items-center gap-2 text-sm text-[var(--fg-dim)] hover:text-white transition px-3 py-2 border border-transparent hover:border-[var(--border)]"
+            aria-label="Archive"
+          >
+            <i class="fas fa-search text-xs"></i>
+            <span class="font-mono">/</span>
+          </a>
+          <a href="/newsletter" class="btn-primary text-xs">
+            Subscribe <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="px-6 pt-16 pb-8 border-t border-[var(--border)]">
+      <div class="max-w-[1600px] mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
+          <div class="col-span-2">
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="w-9 h-9 flex items-center justify-center font-display text-black text-xl"
+                style="background: var(--section-accent)"
+              >
+                K
+              </div>
+              <div>
+                <div class="font-display text-xl">KILBURN</div>
+                <div class="text-[10px] font-mono text-[var(--fg-dim)] tracking-widest">
+                  EST. 2019 · LONDON
+                </div>
+              </div>
+            </div>
+            <p class="text-sm text-[var(--fg-dim)] max-w-sm mb-6">
+              Tech reviews without the marketing filter. One human, one opinion, 412 videos and counting.
+            </p>
+            <div class="flex gap-3">
+              <a
+                href="/videos"
+                class="w-10 h-10 border border-[var(--border)] flex items-center justify-center hover:border-white hover:bg-white hover:text-black transition"
+                aria-label="YouTube"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a
+                href="/studio"
+                class="w-10 h-10 border border-[var(--border)] flex items-center justify-center hover:border-white hover:bg-white hover:text-black transition"
+                aria-label="X"
+              >
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a
+                href="/studio"
+                class="w-10 h-10 border border-[var(--border)] flex items-center justify-center hover:border-white hover:bg-white hover:text-black transition"
+                aria-label="Instagram"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="/membership"
+                class="w-10 h-10 border border-[var(--border)] flex items-center justify-center hover:border-white hover:bg-white hover:text-black transition"
+                aria-label="Patreon"
+              >
+                <i class="fab fa-patreon"></i>
+              </a>
+              <a
+                href="/rss.xml"
+                class="w-10 h-10 border border-[var(--border)] flex items-center justify-center hover:border-white hover:bg-white hover:text-black transition"
+                aria-label="RSS"
+              >
+                <i class="fas fa-rss"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-4">
+              Content
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="/videos" class="hover:text-[var(--accent)] transition">
+                  Latest Videos
+                </a>
+              </li>
+              <li>
+                <a href="/reviews" class="hover:text-[var(--accent)] transition">
+                  Written Reviews
+                </a>
+              </li>
+              <li>
+                <a href="/picks" class="hover:text-[var(--accent)] transition">
+                  Buying Guides
+                </a>
+              </li>
+              <li>
+                <a href="/podcast" class="hover:text-[var(--accent)] transition">
+                  Podcast
+                </a>
+              </li>
+              <li>
+                <a href="/archive" class="hover:text-[var(--accent)] transition">
+                  Archive
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-4">
+              Studio
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="/studio" class="hover:text-[var(--accent)] transition">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="/studio/equipment" class="hover:text-[var(--accent)] transition">
+                  Equipment
+                </a>
+              </li>
+              <li>
+                <a href="/studio/methodology" class="hover:text-[var(--accent)] transition">
+                  Methodology
+                </a>
+              </li>
+              <li>
+                <a href="/studio/ethics" class="hover:text-[var(--accent)] transition">
+                  Ethics Policy
+                </a>
+              </li>
+              <li>
+                <a href="/contact" class="hover:text-[var(--accent)] transition">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--fg-dim)] mb-4">
+              Support
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="/membership" class="hover:text-[var(--accent)] transition">
+                  Patreon
+                </a>
+              </li>
+              <li>
+                <a href="/newsletter" class="hover:text-[var(--accent)] transition">
+                  Newsletter
+                </a>
+              </li>
+              <li>
+                <a href="/merch" class="hover:text-[var(--accent)] transition">
+                  Merch Store
+                </a>
+              </li>
+              <li>
+                <a href="/rss.xml" class="hover:text-[var(--accent)] transition">
+                  RSS Feed
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-[var(--fg-dim)] font-mono">
+          <div class="flex items-center gap-4">
+            <span>© 2025 KILBURN MEDIA LTD</span>
+            <span class="hidden md:inline">·</span>
+            <span class="hidden md:inline">CO. NO. 11824719</span>
+          </div>
+          <div class="flex items-center gap-4 flex-wrap">
+            <a href="/privacy" class="hover:text-white transition uppercase">
+              Privacy
+            </a>
+            <a href="/terms" class="hover:text-white transition uppercase">
+              Terms
+            </a>
+            <a href="/disclosures" class="hover:text-white transition uppercase">
+              Disclosures
+            </a>
+            <span class="flex items-center gap-2" style="color: var(--section-accent)">
+              <span class="live-dot"></span>ALL SYSTEMS OPERATIONAL
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

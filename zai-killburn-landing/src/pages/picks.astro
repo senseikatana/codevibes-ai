@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/library';
+const sorted = [...products].sort((a, b) => a.price - b.price);
+const cats = ['ALL', ...Array.from(new Set(products.map((p) => p.cat)))];
+---
+
+<Layout
+  title="What I'd Buy — KILBURN"
+  description="Products bought with my own money. Drag the slider on the homepage or browse everything here."
+>
+  <PageHero
+    kicker="/ 03 — What I'd Buy"
+    title="Money where"
+    accentWord="my mouth is."
+    accent="yellow"
+    lede="Everything here was bought retail — not loaners, not sponsor deals. For the live price slider, head to the homepage."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="flex gap-2 flex-wrap mb-8 text-xs font-mono">
+        <span class="text-[var(--fg-dim)] uppercase mr-2 self-center">Filter:</span>
+        {cats.map((c) => (
+          <a
+            href="/picks"
+            class={`px-3 py-1 ${c === 'ALL' ? 'bg-[var(--yellow)] text-black font-bold' : 'border border-[var(--border)] hover:border-white transition'}`}
+          >
+            {c}
+          </a>
+        ))}
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="recGrid">
+        {sorted.map((p) => (
+          <ProductCard product={p} />
+        ))}
+      </div>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/#recommendations" class="btn-outline">
+          Try the live slider on home
+        </a>
+        <a href="/disclosures" class="btn-outline">
+          How picks are funded
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

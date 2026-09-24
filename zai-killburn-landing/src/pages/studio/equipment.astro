@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+const gear = [
+  ['Sony FX3', 'CAMERA', 'Main angle. 4K60, S-Log3, graded to Rec.709.'],
+  ['Sekonic C-800', 'METER', 'Display + lighting measurements. Calibrated Jan 2025.'],
+  ['Røde NT-USB + PodMic', 'AUDIO', 'Voiceover chain. Treated room in London.'],
+  ['LG C4 65" + Studio Display', 'REFERENCE', 'Grading + readability checks.'],
+  ['Framework 16', 'BENCH', 'Repairable workhorse for latency + battery logs.'],
+];
+---
+
+<Layout
+  title="Equipment — KILBURN Studio"
+  description="The cameras, meters and benches behind every measurement."
+>
+  <PageHero
+    kicker="Studio / Equipment"
+    title="The bench"
+    accentWord="behind the numbers."
+    accent="blue"
+    lede="If a number is on this site, one of these measured it."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-[1600px] mx-auto grid md:grid-cols-2 gap-4 max-w-4xl">
+      {gear.map(([name, cat, note]) => (
+        <div class="rec-card p-6">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-2">{cat}</div>
+          <div class="font-display text-2xl mb-2">{name}</div>
+          <p class="text-sm text-[var(--fg-dim)]">{note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

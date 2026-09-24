@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Layout title="Contact — KILBURN" description="Tips, corrections, review suggestions. Read personally.">
+  <PageHero
+    kicker="Studio / Contact"
+    title="Tips and"
+    accentWord="corrections welcome."
+    accent="red"
+    lede="Everything gets read. Corrections get pinned, tips get verified, review requests go in the queue."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-2xl mx-auto grid gap-4">
+      <a href="mailto:tips@kilburn.tv" class="rec-card p-6 block">
+        <div class="font-display text-2xl mb-1">tips@kilburn.tv</div>
+        <p class="text-sm text-[var(--fg-dim)]">Product tips + embargoed briefings.</p>
+      </a>
+      <a href="mailto:corrections@kilburn.tv" class="rec-card p-6 block">
+        <div class="font-display text-2xl mb-1">corrections@kilburn.tv</div>
+        <p class="text-sm text-[var(--fg-dim)]">Got something wrong? Fastest way to a pinned fix.</p>
+      </a>
+      <a href="/studio" class="rec-card p-6 block">
+        <div class="font-display text-2xl mb-1">No PR pitches</div>
+        <p class="text-sm text-[var(--fg-dim)]">"This changes everything" decks go straight to archive.</p>
+      </a>
+    </div>
+  </section>
+</Layout>

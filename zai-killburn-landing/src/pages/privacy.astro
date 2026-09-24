@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Layout
+  title="Privacy — KILBURN"
+  description="No trackers that matter. No data sold. Unsubscribe in one click."
+>
+  <PageHero
+    kicker="Legal / Privacy"
+    title="No creepy"
+    accentWord="stuff."
+    accent="red"
+    lede="Newsletter emails stay with the newsletter. Analytics are aggregate. Nothing is sold."
+  />
+  <section class="px-6 pb-24">
+    <div class="max-w-2xl mx-auto article-body">
+      <h3>Newsletter</h3>
+      <p>Email stored only to send issues. One-click unsubscribe, deletion on request.</p>
+      <h3>Site</h3>
+      <p>No third-party trackers for ads. Images load from picsum placeholders in this demo build.</p>
+      <h3>Contact</h3>
+      <p>
+        <a href="/contact">Ask for your data</a> any time — you'll get an answer from a human.
+      </p>
+    </div>
+  </section>
+</Layout>

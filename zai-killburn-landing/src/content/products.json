@@ -4,83 +4,119 @@
     "price": 149,
     "cat": "AUDIO",
     "why": "Studio reference for 15 years. Still unbeaten.",
-    "img": "prod1"
+    "img": "prod1",
+    "slug": "audio-technica-m50x",
+    "priceCents": 14900,
+    "currency": "usd"
   },
   {
     "name": "Logitech MX Master 4",
     "price": 119,
     "cat": "INPUT",
     "why": "The only mouse I recommend without caveats.",
-    "img": "prod2"
+    "img": "prod2",
+    "slug": "logitech-mx-master-4",
+    "priceCents": 11900,
+    "currency": "usd"
   },
   {
     "name": "Røde PodMic USB",
     "price": 199,
     "cat": "AUDIO",
     "why": "Better than mics twice the price. My daily.",
-    "img": "prod3"
+    "img": "prod3",
+    "slug": "rode-podmic-usb",
+    "priceCents": 19900,
+    "currency": "usd"
   },
   {
     "name": "Anker 737 Power Bank",
     "price": 89,
     "cat": "ACCESSORY",
     "why": "Flown with this 40+ times. Indestructible.",
-    "img": "prod4"
+    "img": "prod4",
+    "slug": "anker-737-power-bank",
+    "priceCents": 8900,
+    "currency": "usd"
   },
   {
     "name": "Keychron Q1 Pro",
     "price": 199,
     "cat": "INPUT",
     "why": "Best budget mechanical. End of debate.",
-    "img": "prod5"
+    "img": "prod5",
+    "slug": "keychron-q1-pro",
+    "priceCents": 19900,
+    "currency": "usd"
   },
   {
     "name": "Airthings Wave Plus",
     "price": 249,
     "cat": "HOME",
     "why": "Know your air quality. Worth every cent.",
-    "img": "prod6"
+    "img": "prod6",
+    "slug": "airthings-wave-plus",
+    "priceCents": 24900,
+    "currency": "usd"
   },
   {
     "name": "Sony WH-1000XM6",
     "price": 449,
     "cat": "AUDIO",
     "why": "Best noise cancelling. Period.",
-    "img": "prod7"
+    "img": "prod7",
+    "slug": "sony-wh-1000xm6",
+    "priceCents": 44900,
+    "currency": "usd"
   },
   {
     "name": "iPad Pro M4 11\"",
     "price": 999,
     "cat": "TABLET",
     "why": "The only tablet worth $1000 in 2025.",
-    "img": "prod8"
+    "img": "prod8",
+    "slug": "ipad-pro-m4-11",
+    "priceCents": 99900,
+    "currency": "usd"
   },
   {
     "name": "Kinesis Advantage360",
     "price": 649,
     "cat": "INPUT",
     "why": "Daily driver since 2023. Saved my wrists.",
-    "img": "prod9"
+    "img": "prod9",
+    "slug": "kinesis-advantage360",
+    "priceCents": 64900,
+    "currency": "usd"
   },
   {
     "name": "Apple Studio Display",
     "price": 1599,
     "cat": "DISPLAYS",
     "why": "Controversial but I genuinely love mine.",
-    "img": "prod10"
+    "img": "prod10",
+    "slug": "apple-studio-display",
+    "priceCents": 159900,
+    "currency": "usd"
   },
   {
     "name": "LG C4 OLED 65\"",
     "price": 1899,
     "cat": "DISPLAYS",
     "why": "Best TV for the money this year.",
-    "img": "prod11"
+    "img": "prod11",
+    "slug": "lg-c4-oled-65",
+    "priceCents": 189900,
+    "currency": "usd"
   },
   {
     "name": "Sony A7CR",
     "price": 1999,
     "cat": "CAMERA",
     "why": "Compact body, full-frame image quality.",
-    "img": "prod12"
+    "img": "prod12",
+    "slug": "sony-a7cr",
+    "priceCents": 199900,
+    "currency": "usd"
   }
 ]
